@@ -33,12 +33,23 @@ module.exports = {
         options: { transpileOnly: true },
       },
       {
-        test: /\.(png|jpg|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(png|jpg|woff|woff2|eot|ttf)$/,
         use: [
           {
             loader: "url-loader",
             options: {
               limit: 8192,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "svg-url-loader",
+            options: {
+              limit: 10000,
             },
           },
         ],

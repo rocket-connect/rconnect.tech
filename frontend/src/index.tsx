@@ -1,7 +1,8 @@
 import { createRoot } from "react-dom/client";
+import "typeface-roboto";
 import "./index.css";
-import { Router } from "./Router";
+import { App } from "./App";
 
 const root = createRoot(document.querySelector("#root"));
 
-root.render(<Router />);
+root.render(<App />);
