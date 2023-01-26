@@ -5,7 +5,7 @@ export type LinkColor = "white" | "lightgrey" | "darkblue" | "yellow";
 export function Link(
   props: React.PropsWithChildren<{
     content: string;
-    href: string;
+    href: string | "email";
     lightGrey?: boolean;
     color: LinkColor;
   }>
@@ -16,10 +16,16 @@ export function Link(
     textColor = "text-white";
   }
 
+  let href = props.href;
+
+  if (href === "email") {
+    href = "mailto:launch@rocketconnect.co.uk";
+  }
+
   return (
     <a
       className={`${textColor} italic underline decoration-rocket-connect-lightblue underline-offset-8`}
-      href={props.href}
+      href={href}
     >
       {props.content}
     </a>

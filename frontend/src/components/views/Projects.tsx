@@ -2,10 +2,11 @@ import { github, spreadzword } from "../utils/images";
 import { Divider } from "../utils/Divider";
 
 const trustedBy = [
-  { logo: github },
-  { logo: spreadzword },
+  { logo: github, url: "https://github.com/rocket-connect" },
+  { logo: spreadzword, url: "https://spreadzword.com" },
   {
     logo: github,
+    url: "https://github.com/rocket-connect",
   },
 ];
 
@@ -19,7 +20,9 @@ export function Projects() {
       </div>
       <div className="flex align-center justify-between py-5">
         {trustedBy.map((item) => (
-          <img className="h-12 my-5" src={item.logo} />
+          <a href={item.url}>
+            <img className="h-12 my-5" src={item.logo} />
+          </a>
         ))}
       </div>
     </Divider>

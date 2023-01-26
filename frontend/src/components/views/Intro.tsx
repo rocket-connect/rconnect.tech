@@ -20,7 +20,7 @@ export function Intro() {
               <Link
                 color="white"
                 content="Contact"
-                href="shj"
+                href="email"
                 lightGrey={true}
               ></Link>
             </p>

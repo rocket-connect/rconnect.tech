@@ -10,10 +10,6 @@ export function Header() {
           <div className="w-8">
             <Logo />
           </div>
-
-          <div className="header-nav w-30 py-2">
-            <Nav />
-          </div>
         </div>
       </Container>
     </div>

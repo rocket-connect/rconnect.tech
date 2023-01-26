@@ -4,15 +4,15 @@ import { githubWhite, linkedin, twitter } from "../utils/images";
 
 const socials = [
   {
-    url: "https://www.linkedin.com/company/rocket-connect/",
+    url: "https://www.linkedin.com/company/rocketconnect/",
     logo: linkedin,
   },
   {
-    url: "https://twitter.com/rocketconnect",
+    url: "https://www.twitter.com/rkt_connect",
     logo: twitter,
   },
   {
-    url: "https//github.com/rocket-connect",
+    url: "https://www.github.com/rocket-connect",
     logo: githubWhite,
   },
 ];
@@ -50,7 +50,9 @@ export function Contact() {
               </p>
               <div className="flex align-center justify-between py-10 mx-auto w-2/3">
                 {socials.map((item) => (
-                  <img className="h-12 my-5" src={item.logo} />
+                  <a href={item.url}>
+                    <img className="h-12 my-5" src={item.logo} />
+                  </a>
                 ))}
               </div>
             </div>

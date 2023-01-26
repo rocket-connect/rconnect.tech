@@ -59,8 +59,8 @@ export function HowWeCanHelpYou() {
           <p className="mt-5 text-2xl text-center">
             <Link
               color="white"
-              content="Services"
-              href="shj"
+              content="Contact"
+              href="email"
               lightGrey={true}
             ></Link>
           </p>
