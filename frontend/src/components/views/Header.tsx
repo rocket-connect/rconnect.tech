@@ -1,13 +1,13 @@
-import { Container } from "./Container";
-import { Logo } from "./Logo";
-import { Nav } from "./Nav";
+import { Container } from "../utils/Container";
+import { Logo } from "../utils/Logo";
+import { Nav } from "../utils/Nav";
 
 export function Header() {
   return (
-    <div className="bg-rocket-connect-lightgrey w-full py-3">
+    <div className="bg-white w-full py-3 fixed z-10">
       <Container>
         <div className="flex justify-between content-center">
-          <div className="header-logo w-8">
+          <div className="w-8">
             <Logo />
           </div>
 
