@@ -136,7 +136,6 @@
     1857px 292px #fff, 274px 451px #fff, 230px 1639px #fff, 1404px 729px #fff,
     368px 1503px #fff, 1138px 1018px #fff, 1950px 1763px #fff, 144px 1078px #fff,
     641px 1230px #fff;
-  animation: animStar 120s linear infinite;
 }
 .star0:after {
   content: " ";
@@ -322,13 +321,4 @@
     394px 27px #fff, 1031px 607px #fff, 1705px 569px #fff, 109px 1831px #fff,
     1033px 1504px #fff, 722px 140px #fff, 392px 1494px #fff, 1263px 989px #fff,
     641px 1230px #fff;
-}
-
-@keyframes animStar {
-  from {
-    transform: translateX(0px);
-  }
-  to {
-    transform: translateX(-2000px);
-  }
 }
