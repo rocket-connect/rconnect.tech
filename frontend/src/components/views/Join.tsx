@@ -4,7 +4,7 @@ import { Link } from "../utils/Link";
 export function Join() {
   return (
     <div className="bg-rocket-connect-lightgrey w-full">
-      <div className="py-10">
+      <div className="py-20">
         <Container>
           <h2 className="font-bold text-center text-rocket-connect-darkblue text-5xl">
             Join our mission!

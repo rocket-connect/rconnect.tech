@@ -20,7 +20,7 @@ const socials = [
 export function Contact() {
   return (
     <div className="bg-rocket-connect-darkblue w-full">
-      <div className="py-10">
+      <div className="py-20">
         <Container>
           <h2 className="font-bold text-white text-5xl">Contact us</h2>
           <p className="mt-5">

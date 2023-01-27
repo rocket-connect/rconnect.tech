@@ -24,7 +24,7 @@ const services = [
 export function HowWeCanHelpYou() {
   return (
     <div className="bg-rocket-connect-darkblue w-full">
-      <div className="py-10">
+      <div className="py-20">
         <Container>
           <h2 className="font-bold text-center text-white text-5xl text-rocket-connect-lightgrey">
             How we can help you
@@ -37,7 +37,7 @@ export function HowWeCanHelpYou() {
               launch@rocketconnect.co.uk
             </a>
           </p>
-          <div className="mt-10 flex align-center justify-between py-10">
+          <div className="flex align-center justify-between py-20">
             {services.map((item) => (
               <div className="text-white flex flex-col">
                 <h3 className="font-bold text-center text-white text-4xl text-rocket-connect-lightgrey">
@@ -47,7 +47,7 @@ export function HowWeCanHelpYou() {
                 <p className="mt-10 text-center italic max-w-xs text-2xl text-rocket-connect-lightgrey">
                   {item.info}
                 </p>
-                <img className="h-32 my-20" src={item.img} alt={item.title} />
+                <img className="h-36 my-20" src={item.img} alt={item.title} />
               </div>
             ))}
           </div>
