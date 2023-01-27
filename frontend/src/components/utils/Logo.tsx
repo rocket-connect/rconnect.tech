@@ -1,6 +1,5 @@
-// @ts-ignore
-import LogoIcon from "../../../public/logo.svg";
+import { logo } from "../utils/images";
 
 export function Logo() {
-  return <img src={LogoIcon} alt="logo" />;
+  return <img src={logo} alt="logo" />;
 }

@@ -1,9 +1,4 @@
-// @ts-ignore
-import neo4j from "../../../public/neo4j.svg";
-// @ts-ignore
-import prisma from "../../../public/prisma.svg";
-// @ts-ignore
-import gqlVis from "../../../public/graphql-visualizer.svg";
+import { neo4j, prisma, gqlVis } from "../utils/images";
 import { Divider } from "../utils/Divider";
 
 const trustedBy = [

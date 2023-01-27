@@ -1,10 +1,5 @@
 import { Container } from "../utils/Container";
-// @ts-ignore
-import relationsIcon from "../../../public/relations-icon.svg";
-// @ts-ignore
-import openSourceIcon from "../../../public/opensource-icon.svg";
-// @ts-ignore
-import teamIcon from "../../../public/team-icon.svg";
+import { relationsIcon, openSourceIcon, teamIcon } from "../utils/images";
 import { Link } from "../utils/Link";
 import { Dot } from "../utils/Dot";
 
