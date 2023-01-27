@@ -5,7 +5,7 @@ import { Dot } from "../utils/Dot";
 
 const services = [
   {
-    title: "Developer relations",
+    title: "DevRel",
     img: relationsIcon,
     info: "Leverage our network to boost your presence.",
   },
