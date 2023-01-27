@@ -12,7 +12,7 @@ const services = [
   {
     title: "Developer relations",
     img: relationsIcon,
-    info: "Leverage our network to boost your community presence.",
+    info: "Leverage our network to boost your presence.",
   },
   {
     title: "Open source",
@@ -20,7 +20,7 @@ const services = [
     info: "Expand your reach by developing software with us.",
   },
   {
-    title: "Extension to your team",
+    title: "Join your team",
     img: teamIcon,
     info: "Let's work together, we can join your engineering team.",
   },
@@ -34,7 +34,7 @@ export function HowWeCanHelpYou() {
           <h2 className="font-bold text-center text-white text-5xl text-rocket-connect-lightgrey">
             How we can help you
           </h2>
-          <p className="mt-5 text-center">
+          <p className="mt-5 text-center text-2xl">
             <a
               className="text-rocket-connect-lightblue"
               href="mailto:launch@rocketconnect.co.uk"
@@ -42,14 +42,14 @@ export function HowWeCanHelpYou() {
               launch@rocketconnect.co.uk
             </a>
           </p>
-          <div className="flex align-center justify-between py-10">
+          <div className="mt-10 flex align-center justify-between py-10">
             {services.map((item) => (
               <div className="text-white flex flex-col">
-                <h3 className="font-bold text-center text-white text-3xl text-rocket-connect-lightgrey">
+                <h3 className="font-bold text-center text-white text-4xl text-rocket-connect-lightgrey">
                   {item.title}
                   {Dot()}
                 </h3>
-                <p className="mt-5 text-center italic max-w-xs text-rocket-connect-lightgrey">
+                <p className="mt-10 text-center italic max-w-xs text-2xl text-rocket-connect-lightgrey">
                   {item.info}
                 </p>
                 <img className="h-32 my-20" src={item.img} alt={item.title} />

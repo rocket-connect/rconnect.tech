@@ -13,7 +13,7 @@ export function Intro() {
               The home of software solutions
             </h1>
             <p className="text-rocket-connect-lightgrey mt-5 text-white text-2xl italic">
-              Rocket Connects goal is to create software and tools for the
+              Rocket Connect's goal is to create software and tools for the
               benefit of society.
             </p>
             <p className="mt-5 text-2xl">
