@@ -139,8 +139,6 @@
 }
 .star0:after {
   content: " ";
-  position: absolute;
-  left: 2000px;
   width: 1px;
   height: 1px;
   background: transparent;
