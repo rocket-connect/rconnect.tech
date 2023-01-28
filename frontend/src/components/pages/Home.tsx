@@ -8,7 +8,7 @@ import { Footer } from "../views/Footer";
 
 export function Home() {
   return (
-    <div>
+    <section id="home">
       <Intro />
       <TrustedBy />
       <HowWeCanHelpYou />
@@ -16,6 +16,6 @@ export function Home() {
       <Join />
       <Contact />
       <Footer />
-    </div>
+    </section>
   );
 }
