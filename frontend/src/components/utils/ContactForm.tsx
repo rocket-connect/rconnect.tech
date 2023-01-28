@@ -90,7 +90,7 @@ export function ContactForm() {
           disabled={loading || sent}
           className="mt-5 italic bg-rocket-connect-lightgrey p-3 submit w-full xl:w-1/5 py-2 underline decoration-rocket-connect-lightblue underline-offset-8"
         >
-          {loading ? "Sending..." : "Send"}
+          {Boolean(loading && !sent) ? "Sending..." : "Send"}
           {Boolean(sent && !loading) && "Sent!"}
         </button>
       </div>
