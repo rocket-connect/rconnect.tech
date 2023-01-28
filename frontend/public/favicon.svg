@@ -4,12 +4,18 @@
 	 viewBox="0 0 103.3 99.7" style="enable-background:new 0 0 103.3 99.7;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FFFFFF;stroke:#FFFFFF;stroke-miterlimit:10;}
+	.st1{fill:#FFD76E;}
+	.st2{fill:#27BDC3;}
+	.st3{fill:#1A2735;}
 </style>
-<g id="Layer_1-2">
-	<path class="st0" d="M35.5,0.5h32.3c19.3,0,35,15.7,35,35v28.7c0,19.3-15.7,35-35,35H35.5c-19.3,0-35-15.7-35-35V35.5
-		C0.5,16.2,16.2,0.5,35.5,0.5z"/>
-	
-		<image style="overflow:visible;enable-background:new    ;" width="1131" height="710" xlink:href="38A99DC3DEC92084.png"  transform="matrix(0.1171 0 0 0.1188 -14.0326 6.6093)">
-	</image>
+<rect x="0.2" y="0" class="st0" width="102.7" height="98.9"/>
+<g id="d">
+	<rect x="18" y="63.6" class="st1" width="24" height="29.3"/>
+	<rect x="46.8" y="7.6" class="st2" width="35.8" height="35.8"/>
+	<g>
+		<path class="st3" d="M49.1,63.7H37.3v26.4H22.4V17.9h26.8c8.5,0,15.1,1.9,19.8,5.7c4.6,3.8,6.9,9.2,6.9,16.1c0,4.9-1.1,9-3.2,12.3
+			C70.6,55.4,67.4,58,63,60l15.6,29.5v0.7h-16L49.1,63.7z M37.3,51.7h12c3.7,0,6.6-1,8.7-2.9c2.1-1.9,3.1-4.5,3.1-7.9
+			c0-3.4-1-6.1-2.9-8c-1.9-2-4.9-2.9-8.9-2.9h-12V51.7z"/>
+	</g>
 </g>
 </svg>
