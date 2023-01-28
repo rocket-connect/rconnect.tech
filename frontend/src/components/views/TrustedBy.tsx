@@ -13,13 +13,13 @@ export function TrustedBy() {
   return (
     <Divider>
       <div className="flex align-center justify-center">
-        <p className="text-center italic text-rocket-connect-darkblue">
-          Our team have been trusted by leading organizations
+        <p className="text-center text-xs italic text-rocket-connect-darkblue">
+          Our team have been trusted by leading organizations.
         </p>
       </div>
-      <div className="flex align-center justify-between py-5">
+      <div className="flex align-center justify-between py-2">
         {trustedBy.map((item) => (
-          <img className="h-6 md:h-8 xl:h-12 my-5" src={item.logo} />
+          <img className="h-4 md:h-6 xl:h-8 my-2" src={item.logo} />
         ))}
       </div>
     </Divider>
