@@ -8,7 +8,7 @@ export function Header() {
       <Container>
         <div className="flex justify-between content-center">
           <div className="w-5">
-            <a href="#home">
+            <a href="/">
               <Logo />
             </a>
           </div>
