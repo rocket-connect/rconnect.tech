@@ -15,6 +15,6 @@ app.get("*", expressStaticGzip(config.STATIC_FOLDER, {}));
 app.use("*", expressStaticGzip(config.STATIC_FOLDER, {}));
 
 export async function start() {
-  await app.listen(config.PORT);
-  console.log("Server Online ", config.PORT);
+  await app.listen(config.HTTP_PORT);
+  console.log("Server Online ", config.HTTP_PORT);
 }

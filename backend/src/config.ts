@@ -4,7 +4,7 @@ dotenv.config();
 export const STATIC_FOLDER =
   (process.env.STATIC_FOLDER as string) || "../frontend/dist";
 
-export const PORT = (process.env.PORT as string) || "3000";
+export const HTTP_PORT = (process.env.HTTP_PORT as string) || "3000";
 
 export const EMAIL_HOST = process.env.EMAIL_HOST as string;
 
