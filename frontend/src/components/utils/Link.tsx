@@ -1,6 +1,11 @@
 import React from "react";
 
-export type LinkColor = "white" | "lightgrey" | "darkblue" | "yellow";
+export type LinkColor =
+  | "white"
+  | "lightgrey"
+  | "darkblue"
+  | "yellow"
+  | "z-word-dark";
 
 export function Link(
   props: React.PropsWithChildren<{
@@ -11,9 +16,15 @@ export function Link(
   }>
 ) {
   let textColor = `text-rocket-connect-${props.color}`;
+  let underlineColor = `decoration-rocket-connect-lightblue`;
 
   if (props.color === "white") {
     textColor = "text-white";
+  }
+
+  if (props.color === "z-word-dark") {
+    textColor = "text-z-word-dark";
+    underlineColor = "decoration-z-word-dark";
   }
 
   let href = props.href;
@@ -24,7 +35,7 @@ export function Link(
 
   return (
     <a
-      className={`${textColor} italic underline decoration-rocket-connect-lightblue underline-offset-8`}
+      className={`${textColor} italic underline ${underlineColor} underline-offset-8`}
       href={href}
     >
       {props.content}

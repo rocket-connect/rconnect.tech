@@ -22,3 +22,7 @@ export { default as neo4j } from "../../../public/neo4j.svg";
 export { default as prisma } from "../../../public/prisma.svg";
 // @ts-ignore
 export { default as gqlVis } from "../../../public/graphql-visualizer.svg";
+// @ts-ignore
+export { default as zWordDark } from "../../../public/z-word-dark.svg";
+// @ts-ignore
+export { default as zDark } from "../../../public/z-dark.svg";

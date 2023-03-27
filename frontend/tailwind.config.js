@@ -7,6 +7,7 @@ module.exports = {
         ["rocket-connect-lightblue"]: "#00C0C6",
         ["rocket-connect-lightgrey"]: "#E4E4E4",
         ["rocket-connect-yellow"]: "#FED86E",
+        ["z-word-dark"]: "#231F20",
       },
     },
   },

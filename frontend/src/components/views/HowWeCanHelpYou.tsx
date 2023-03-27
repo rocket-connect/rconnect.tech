@@ -48,7 +48,7 @@ export function HowWeCanHelpYou() {
                   <p className="mt-10 text-center italic mx-auto w-40 text-rocket-connect-lightgrey">
                     {item.info}
                   </p>
-                  <img className="h-32 my-20" src={item.img} alt={item.title} />
+                  <img className="h-32 mt-20" src={item.img} alt={item.title} />
 
                   {Boolean(i !== services.length - 1) && (
                     <hr className="xl:hidden w-4/6 mx-auto mb-20"></hr>
@@ -56,12 +56,6 @@ export function HowWeCanHelpYou() {
                 </div>
               ))}
             </div>
-            <Link
-              color="white"
-              content="Contact"
-              href="email"
-              lightGrey={true}
-            ></Link>
           </Container>
         </div>
       </div>
