@@ -14,9 +14,9 @@ export function ContactForm() {
       try {
         const body = {
           // @ts-ignore
-          email: e.target.elements.name.value as string,
+          email: e.target.elements.email.value as string,
           // @ts-ignore
-          name: e.target.elements.email.value as string,
+          name: e.target.elements.name.value as string,
           // @ts-ignore
           message: e.target.elements.message.value as string,
         };
