@@ -30,7 +30,7 @@ export async function handler(req: Request<{}>, res: any) {
       to: req.body.email,
       from: config.EMAIL_SENDER_ADDRESS,
       subject: "Rocket Connect Contact",
-      text: `Thank you for contacting us, we will get back to you as soon as possible.`,
+      text: `Thank you for contacting us ${req.body.email}, we will get back to you as soon as possible.`,
       cc: [config.EMAIL_SENDER_ADDRESS, "launch@rocketconnect.co.uk"],
     });
 
