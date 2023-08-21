@@ -126,10 +126,7 @@ export function Header() {
                   />
                 </svg>
               </button>
-              <div
-                className={`w-full md:block md:w-auto md:px-10`}
-                id="navbar-dropdown"
-              >
+              <div className={`w-full md:block md:w-auto`} id="navbar-dropdown">
                 <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0">
                   <NavItem href="#">Home</NavItem>
                   <NavItem href="#contact">Contact</NavItem>
