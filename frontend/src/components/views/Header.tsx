@@ -135,13 +135,6 @@ export function Header() {
                   <NavItem href="#contact">Contact</NavItem>
                   {!isSafari ? (
                     <>
-                      <DropdownItem title="Socials">
-                        {socials.map((social) => (
-                          <NavItem key={social.text} href={social.url}>
-                            {social.text}
-                          </NavItem>
-                        ))}
-                      </DropdownItem>
                       <DropdownItem title="Services">
                         {services.map((service) => (
                           <NavItem
@@ -149,6 +142,13 @@ export function Header() {
                             href={`#${service.link}`}
                           >
                             {service.title}
+                          </NavItem>
+                        ))}
+                      </DropdownItem>
+                      <DropdownItem title="Socials">
+                        {socials.map((social) => (
+                          <NavItem key={social.text} href={social.url}>
+                            {social.text}
                           </NavItem>
                         ))}
                       </DropdownItem>
