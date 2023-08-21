@@ -24,22 +24,19 @@ export function TrustedBy() {
       <div className="w-full">
         <div className="py-10">
           <Container>
-            <div className="mx-auto">
-              <p className="text-center md:text-xl italic text-rocket-connect-darkblue">
-                Our team have been trusted by leading organizations.
-              </p>
-              <div className="flex flex-wrap items-center justify-between mt-10 mx-10 gap-10">
-                {trustedBy.map((item, index) => (
-                  <a href={item.link} about={item.text}>
-                    <img
-                      key={index}
-                      className="h-6 my-2"
-                      src={item.logo}
-                      alt={item.text}
-                    />
-                  </a>
-                ))}
-              </div>
+            <p className="text-center md:text-xl italic text-rocket-connect-darkblue">
+              Our team has been trusted by leading organizations.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mt-10">
+              {trustedBy.map((item, index) => (
+                <a href={item.link} about={item.text} key={index}>
+                  <img
+                    className="h-6 mx-auto"
+                    src={item.logo}
+                    alt={item.text}
+                  />
+                </a>
+              ))}
             </div>
           </Container>
         </div>
