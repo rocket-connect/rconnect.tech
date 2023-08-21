@@ -1,8 +1,6 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Container } from "../utils/Container";
 import { Logo } from "../utils/Logo";
-import { services } from "./Services";
-import { socials } from "./Contact";
 
 interface NavItemProps {
   href: string;
@@ -35,47 +33,6 @@ function NavItem({ href, children, dropdownId }: NavItemProps) {
 interface DropdownItemProps {
   title: string;
   children: ReactNode[];
-}
-
-function DropdownItem({ title, children }: DropdownItemProps) {
-  const dropdownId = `dropdown${title.replace(" ", "")}`;
-
-  return (
-    <li className="font-bold">
-      <button
-        id={`${dropdownId}Link`}
-        data-dropdown-toggle={dropdownId}
-        className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-rocket-connect-darkblue rounded hover:bg-rocket-connect-lightgrey hover:text-rocket-connect-lightblue md:hover:bg-transparent md:border-0 md:p-0 md:w-auto"
-      >
-        {title}{" "}
-        <svg
-          className="w-2.5 h-2.5 ml-2.5 text-rocket-connect-darkblue"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="m1 1 4 4 4-4"
-          />
-        </svg>
-      </button>
-      <div
-        id={dropdownId}
-        className={`z-10 font-normal hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-64`}
-      >
-        <ul className={`p-5 text-sm text-gray-700 flex flex-col gap-5`}>
-          {children.map((child: any) => {
-            return React.cloneElement(child, { dropdownId });
-          })}
-        </ul>
-      </div>
-    </li>
-  );
 }
 
 export function Header() {
@@ -119,21 +76,9 @@ export function Header() {
               id="navbar-dropdown"
             >
               <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:flex-row md:space-x-8 md:mt-0">
+                <NavItem href="#home">Home</NavItem>
                 <NavItem href="#contact">Contact</NavItem>
-                <DropdownItem title="Services">
-                  {services.map((service) => (
-                    <NavItem key={service.title} href={`#${service.link}`}>
-                      {service.title}
-                    </NavItem>
-                  ))}
-                </DropdownItem>
-                <DropdownItem title="Socials">
-                  {socials.map((social) => (
-                    <NavItem key={social.text} href={social.url}>
-                      {social.text}
-                    </NavItem>
-                  ))}
-                </DropdownItem>
+                <NavItem href="#services">Services</NavItem>
               </ul>
             </div>
           </div>
