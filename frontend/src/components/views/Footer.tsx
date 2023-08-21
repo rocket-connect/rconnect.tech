@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <div className="bg-rocket-connect-lightgrey w-full">
+    <div className="bg-white w-full">
       <p className="text-center text-xs font-bold text-rocket-connect-darkblue p-3">
         Rocket Connect Ltd is registered in the UK:{" "}
         <a

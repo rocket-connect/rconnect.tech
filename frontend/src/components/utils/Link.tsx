@@ -24,7 +24,7 @@ export function Link(
 
   return (
     <a
-      className={`${textColor} italic underline decoration-rocket-connect-lightblue underline-offset-8`}
+      className={`${textColor} font-bold underline decoration-rocket-connect-darkblue underline-offset-8`}
       href={href}
     >
       {props.content}

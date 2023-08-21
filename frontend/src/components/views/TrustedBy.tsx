@@ -1,27 +1,43 @@
 import { neo4j, prisma, gqlVis } from "../utils/images";
-import { Divider } from "../utils/Divider";
+import { Container } from "../utils/Container";
 
 const trustedBy = [
   { logo: neo4j },
   { logo: prisma },
-  {
-    logo: gqlVis,
-  },
+  { logo: gqlVis },
+  { logo: neo4j }, // Duplicate
+  { logo: prisma }, // Duplicate
+  { logo: gqlVis }, // Duplicate
 ];
 
 export function TrustedBy() {
   return (
-    <Divider>
-      <div className="flex align-center justify-center">
-        <p className="text-center text-xs italic text-rocket-connect-darkblue">
-          Our team have been trusted by leading organizations.
-        </p>
+    <section
+      key="Trusted"
+      id="trusted"
+      about="Companies that trust Rocket Connect"
+    >
+      <div className="w-full">
+        <div className="py-10">
+          <Container>
+            <div className="mx-auto">
+              <p className="text-center md:text-xl italic text-rocket-connect-darkblue">
+                Our team have been trusted by leading organizations.
+              </p>
+              <div className="flex flex-wrap items-center justify-between mt-20 mx-auto gap-10">
+                {trustedBy.map((item, index) => (
+                  <img
+                    key={index}
+                    className="h-6 my-2"
+                    src={item.logo}
+                    alt={`Logo ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </Container>
+        </div>
       </div>
-      <div className="flex align-center justify-between py-2">
-        {trustedBy.map((item) => (
-          <img className="h-4 md:h-6 xl:h-8 my-2" src={item.logo} />
-        ))}
-      </div>
-    </Divider>
+    </section>
   );
 }
