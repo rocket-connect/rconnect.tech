@@ -1,13 +1,13 @@
-import { neo4j, prisma, gqlVis } from "../utils/images";
+import { neo4j, prisma, gqlVis, cityjs, bobsled, pabau } from "../utils/images";
 import { Container } from "../utils/Container";
 
 const trustedBy = [
   { logo: neo4j },
   { logo: prisma },
   { logo: gqlVis },
-  { logo: neo4j }, // Duplicate
-  { logo: prisma }, // Duplicate
-  { logo: gqlVis }, // Duplicate
+  { logo: cityjs },
+  { logo: bobsled },
+  { logo: pabau },
 ];
 
 export function TrustedBy() {

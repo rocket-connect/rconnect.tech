@@ -24,3 +24,9 @@ export { default as neo4j } from "../../../public/neo4j.svg";
 export { default as prisma } from "../../../public/prisma.svg";
 // @ts-ignore
 export { default as gqlVis } from "../../../public/graphql-visualizer.svg";
+// @ts-ignore
+export { default as cityjs } from "../../../public/cityjs.png";
+// @ts-ignore
+export { default as bobsled } from "../../../public/bobsled.svg";
+// @ts-ignore
+export { default as pabau } from "../../../public/pabau.svg";
