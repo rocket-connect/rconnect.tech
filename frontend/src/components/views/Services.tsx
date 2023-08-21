@@ -58,7 +58,7 @@ export function Services() {
             <h2 className="font-semibold text-center text-4xl lg:text-4xl text-rocket-connect-lightgrey">
               Services
             </h2>
-            <div className="flex flex-col lg:w-7/8 lg:mx-auto py-10 gap-10 lg:gap-20">
+            <div className="flex flex-col lg:w-7/8 lg:mx-auto py-10 gap-10 lg:gap-20 lg:px-20">
               {services.map((item, index) => (
                 <section
                   key={item.title}
@@ -81,11 +81,13 @@ export function Services() {
                         alt={item.title}
                       />
                     </div>
-                    <div className="lg:ml-auto lg:mt-20 flex-1 mx-auto w-4/5 lg:w-full lg:text-left text-rocket-connect-lightgrey">
+                    <div className="lg:ml-auto lg:mt-20 flex-1 w-4/5  mx-auto lg:w-full lg:text-left text-rocket-connect-lightgrey">
                       <ul className="flex flex-col list-disc gap-10">
                         {item.points.map((point, index) => (
                           <li key={index}>
-                            <p className="lg:text-xl">{point}</p>
+                            <p className="lg:text-xl tracking-wider font-light spacing-largest">
+                              {point}
+                            </p>
                           </li>
                         ))}
                       </ul>
