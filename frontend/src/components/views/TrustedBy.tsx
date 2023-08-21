@@ -24,7 +24,7 @@ export function TrustedBy() {
               <p className="text-center md:text-xl italic text-rocket-connect-darkblue">
                 Our team have been trusted by leading organizations.
               </p>
-              <div className="flex flex-wrap items-center justify-between mt-20 mx-auto gap-10">
+              <div className="flex flex-wrap items-center justify-between mt-10 mx-auto gap-10">
                 {trustedBy.map((item, index) => (
                   <img
                     key={index}
