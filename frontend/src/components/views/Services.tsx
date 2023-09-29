@@ -1,10 +1,5 @@
 import { Container } from "../utils/Container";
-import {
-  apiIcon,
-  relationsIcon,
-  openSourceIcon,
-  teamIcon,
-} from "../utils/images";
+import { apiIcon, relationsIcon, openSourceIcon } from "../utils/images";
 
 export const services = [
   {
@@ -28,16 +23,6 @@ export const services = [
     img: openSourceIcon,
   },
   {
-    title: "Join Your Team",
-    link: "join-your-team",
-    points: [
-      "Enhance projects, scale seamlessly, and integrate effectively through the proficiency of our skilled engineers.",
-      "Collaborate closely with us as we craft solutions, tackle challenges, and ensure smooth synchronization with your systems.",
-      "Learn closely with our team as we exchange ideas, collectively pursuing excellence and leveraging our learnings for shared success.",
-    ],
-    img: teamIcon,
-  },
-  {
     title: "Developer Relations",
     link: "developer-relations",
     points: [
@@ -58,7 +43,7 @@ export function Services() {
             <h2 className="font-semibold text-center text-4xl lg:text-4xl text-rocket-connect-lightgrey">
               Services
             </h2>
-            <div className="flex flex-col lg:w-7/8 lg:mx-auto py-10 gap-10 lg:gap-20 lg:px-20">
+            <div className="flex flex-col w-full xl:w-5/6 xl:mx-auto py-10 gap-10 lg:px-10">
               {services.map((item, index) => (
                 <section
                   key={item.title}
@@ -76,7 +61,7 @@ export function Services() {
                         {item.title}
                       </h3>
                       <img
-                        className="w-3/5 lg:w-64 mx-auto mt-none s:mt-auto"
+                        className="w-3/5 sm:w-2/5 xl:w-64 mx-auto mt-none s:mt-auto"
                         src={item.img}
                         alt={item.title}
                       />
