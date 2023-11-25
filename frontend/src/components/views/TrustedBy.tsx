@@ -36,12 +36,12 @@ const trustedBy = [
     text: "Graphql Visualizer",
     link: "https://graphqlvisualizer.com",
   },
-  { logo: pabau, text: "Pabau", link: "https://pabau.com" },
   {
     logo: gqlBangkok,
     text: "GraphQL Bangkok",
     link: "https://www.meetup.com/graphql-bangkok",
   },
+  { logo: pabau, text: "Pabau", link: "https://pabau.com" },
   {
     logo: debuggerIcon,
     text: "GraphQL Debugger",
