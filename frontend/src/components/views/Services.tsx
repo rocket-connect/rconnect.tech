@@ -55,7 +55,7 @@ export function Services() {
                       />
                     </div>
                     <div className="md:mt-20 flex-1 mx-auto md:text-left text-rocket-connect-lightgrey">
-                      <p className="sm:text-lg tracking-wider spacing-largest">
+                      <p className="text-lg tracking-wider spacing-largest">
                         {item.text}
                       </p>
                     </div>

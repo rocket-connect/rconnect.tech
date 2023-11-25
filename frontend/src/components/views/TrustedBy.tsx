@@ -59,7 +59,7 @@ export function TrustedBy() {
       <div className="w-full">
         <div className="py-10">
           <Container>
-            <p className="text-center md:text-xl italic text-rocket-connect-darkblue">
+            <p className="text-center text-lg italic text-rocket-connect-darkblue">
               Our team has been trusted by leading organizations.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 mt-10">
