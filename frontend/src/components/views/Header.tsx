@@ -12,7 +12,7 @@ export function Header() {
               <span className="w-6 sm:w-8">
                 <Logo />
               </span>
-              <span className="ml-5 self-center font-bold whitespace-nowrap text-rocket-connect-darkblue">
+              <span className="ml-5 hidden md:block self-center font-bold whitespace-nowrap text-rocket-connect-darkblue">
                 Rocket Connect
               </span>
             </a>
