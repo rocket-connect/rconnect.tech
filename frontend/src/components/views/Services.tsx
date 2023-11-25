@@ -54,8 +54,8 @@ export function Services() {
                         alt={item.title}
                       />
                     </div>
-                    <div className="md:mt-20 flex-1 mx-auto md:text-left text-rocket-connect-lightgrey">
-                      <p className="text-lg tracking-wider spacing-largest">
+                    <div className="md:mt-20 flex-1 mx-auto text-rocket-connect-lightgrey">
+                      <p className="text-lg text-center md:text-left tracking-wider spacing-largest">
                         {item.text}
                       </p>
                     </div>
