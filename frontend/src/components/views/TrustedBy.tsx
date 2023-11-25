@@ -66,7 +66,7 @@ export function TrustedBy() {
               {trustedBy.map((item, index) => (
                 <a href={item.link} about={item.text} key={index}>
                   <img
-                    className="h-8 mx-auto"
+                    className="h-6 mx-auto"
                     src={item.logo}
                     alt={item.text}
                   />
