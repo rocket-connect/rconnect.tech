@@ -5,19 +5,19 @@ export const services = [
   {
     title: "API Engineering",
     link: "api-engineering",
-    text: "Our team crafts efficient and Typesafe Node.js APIs using cutting-edge technologies to ensure scalability and high performance. We specialize in both REST and GraphQL standards, providing tailored solutions to meet your project's unique requirements. Our expertise extends to integrating with any of your databases, other backend systems, and authentication providers.",
+    text: "Our team crafts efficient and Typesafe Node.js APIs using cutting-edge technologies to ensure scalability and high performance. We specialize in both REST and GraphQL standards, providing tailored solutions to meet your project's unique requirements.",
     img: apiIcon,
   },
   {
     title: "Library Development",
     link: "library-development",
-    text: "We are active contributors to open-source communities, aiming to enrich the development ecosystem with innovative solutions. Our team takes pride in creating and maintaining our own open-source projects, which can be found on platforms like GitHub. We leverage our collective expertise to develop libraries that streamline development processes, ensuring that our contributions drive progress.",
+    text: "We are active contributors to open-source communities, aiming to enrich the development ecosystem with innovative solutions. Our team takes pride in creating and maintaining our own open-source projects, which can be found on platforms like GitHub.",
     img: openSourceIcon,
   },
   {
     title: "Developer Relations",
     link: "developer-relations",
-    text: "Our engagement with the developer community is reflected in our participation in conferences, workshops, and industry events. We are committed to fostering knowledge exchange, learning from peers, and sharing insights, which helps us stay abreast of the latest trends.",
+    text: "Our engagement with the developer community is reflected in our participation in conferences, workshops, and industry events. We are committed to fostering knowledge exchange, learning from peers, and sharing insights, which helps us stay ahead.",
     img: relationsIcon,
   },
 ];
