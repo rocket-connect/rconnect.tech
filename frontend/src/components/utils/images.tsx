@@ -21,6 +21,8 @@ export { default as neo4j } from "../../../public/neo4j.svg";
 // @ts-ignore
 export { default as prisma } from "../../../public/prisma.svg";
 // @ts-ignore
+export { default as hasura } from "../../../public/hasura.svg";
+// @ts-ignore
 export { default as gqlVis } from "../../../public/graphql-visualizer.svg";
 // @ts-ignore
 export { default as cityjs } from "../../../public/cityjs.png";
@@ -28,3 +30,13 @@ export { default as cityjs } from "../../../public/cityjs.png";
 export { default as bobsled } from "../../../public/bobsled.svg";
 // @ts-ignore
 export { default as pabau } from "../../../public/pabau.svg";
+// @ts-ignore
+export { default as meta } from "../../../public/meta.svg";
+// @ts-ignore
+export { default as gqlBangkok } from "../../../public/graphql-bangkok.svg";
+// @ts-ignore
+export { default as gqlLondon } from "../../../public/graphql-london.svg";
+// @ts-ignore
+export { default as gqlSingapore } from "../../../public/graphql-singapore.svg";
+// @ts-ignore
+export { default as debuggerIcon } from "../../../public/debugger.svg";
