@@ -1,16 +1,23 @@
 import { ContactForm } from "../utils/ContactForm";
 import { Container } from "../utils/Container";
-import { githubWhite, linkedin } from "../utils/images";
+import {
+  githubWhite,
+  githubDark,
+  linkedinWhite,
+  linkedinDark,
+} from "../utils/images";
 
 export const socials = [
   {
     url: "https://www.linkedin.com/company/rocketconnect/",
-    logo: linkedin,
+    logoWhite: linkedinWhite,
+    logoDark: linkedinDark,
     text: "LinkedIn",
   },
   {
     url: "https://www.github.com/rocket-connect",
-    logo: githubWhite,
+    logoWhite: githubWhite,
+    logoDark: githubDark,
     text: "GitHub",
   },
 ];
@@ -52,7 +59,7 @@ export function Contact() {
                   <a key={index} href={item.url} className="hover:opacity-75">
                     <img
                       className="h-8 lg:h-12 my-5"
-                      src={item.logo}
+                      src={item.logoWhite}
                       alt="Social Logo"
                     />
                   </a>

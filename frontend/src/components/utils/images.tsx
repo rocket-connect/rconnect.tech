@@ -3,11 +3,11 @@ export { default as github } from "../../../public/github.svg";
 // @ts-ignore
 export { default as githubWhite } from "../../../public/github-white.svg";
 // @ts-ignore
-export { default as linkedin } from "../../../public/linkedin-white.svg";
+export { default as githubDark } from "../../../public/github-dark.svg";
 // @ts-ignore
-export { default as twitter } from "../../../public/twitter.svg";
+export { default as linkedinWhite } from "../../../public/linkedin-white.svg";
 // @ts-ignore
-export { default as spreadzword } from "../../../public/spreadzword.svg";
+export { default as linkedinDark } from "../../../public/linkedin-dark.svg";
 // @ts-ignore
 export { default as logo } from "../../../public/logo.svg";
 // @ts-ignore
