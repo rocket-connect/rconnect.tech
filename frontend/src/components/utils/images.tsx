@@ -46,3 +46,5 @@ export { default as bangkokImg } from "../../../public/bangkok-img.jpg";
 export { default as singaporeImg } from "../../../public/singapore-img.jpg";
 // @ts-ignore
 export { default as puneImg } from "../../../public/pune-img.jpeg";
+// @ts-ignore
+export { default as businessConnectionsIcon } from "../../../public/business-connections-icon.svg";

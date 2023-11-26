@@ -1,5 +1,10 @@
 import { Container } from "../utils/Container";
-import { apiIcon, relationsIcon, openSourceIcon } from "../utils/images";
+import {
+  apiIcon,
+  relationsIcon,
+  openSourceIcon,
+  businessConnectionsIcon,
+} from "../utils/images";
 
 export const services = [
   {
@@ -19,6 +24,12 @@ export const services = [
     link: "developer-relations",
     text: "Our engagement with the developer community is reflected in our participation in conferences, workshops, and industry events. We are committed to fostering knowledge exchange, learning from peers, and sharing insights, which helps us stay ahead.",
     img: relationsIcon,
+  },
+  {
+    title: "Business Connections",
+    link: "business-connections",
+    text: "Our expertise extends beyond technical realms. We facilitate valuable business connections, helping you forge strategic partnerships and collaborations. With our vast network, we open doors to opportunities that drive your business growth.",
+    img: businessConnectionsIcon,
   },
 ];
 
