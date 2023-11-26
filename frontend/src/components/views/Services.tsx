@@ -22,7 +22,7 @@ export const services = [
   {
     title: "Developer Relations",
     link: "developer-relations",
-    text: "Our engagement with the developer community is reflected in our participation in conferences, workshops, and industry events. We are committed to fostering knowledge exchange, learning from peers, and sharing insights, which helps us stay ahead.",
+    text: "Our engagement with the developer community is reflected in our participation in conferences, workshops, and industry events. We are committed to fostering knowledge exchange, learning from peers, and sharing insights.",
     img: relationsIcon,
   },
   {
