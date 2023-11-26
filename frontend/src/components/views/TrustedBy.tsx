@@ -11,6 +11,9 @@ import {
   gqlLondon,
   hasura,
   debuggerIcon,
+  bangkokImg,
+  singaporeImg,
+  puneImg,
 } from "../utils/images";
 import { Container } from "../utils/Container";
 
@@ -49,6 +52,24 @@ const trustedBy = [
   },
 ];
 
+const realLifeImages = [
+  {
+    img: bangkokImg,
+    text: "GraphQL Bangkok",
+    link: "https://www.meetup.com/graphql-bangkok",
+  },
+  {
+    img: singaporeImg,
+    text: "GraphQL Singapore",
+    link: "https://www.meetup.com/graphql-sg",
+  },
+  {
+    img: puneImg,
+    text: "DevTools Pune",
+    link: "https://guild.host/events/devtools-pune-november-l34x7a",
+  },
+];
+
 export function TrustedBy() {
   return (
     <section
@@ -71,6 +92,22 @@ export function TrustedBy() {
                     alt={item.text}
                   />
                 </a>
+              ))}
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-10 mt-10">
+              {realLifeImages.map((item, index) => (
+                <div key={index} className="flex flex-col flex-1 gap-3">
+                  <img className="w-full" src={item.img} alt={item.text} />
+                  <p className="text-center">
+                    <a
+                      className="italic underline hover:opacity-75"
+                      href={item.link}
+                    >
+                      {item.text}
+                    </a>
+                  </p>
+                </div>
               ))}
             </div>
           </Container>

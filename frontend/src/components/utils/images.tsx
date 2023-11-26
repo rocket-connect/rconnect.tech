@@ -40,3 +40,9 @@ export { default as gqlLondon } from "../../../public/graphql-london.svg";
 export { default as gqlSingapore } from "../../../public/graphql-singapore.svg";
 // @ts-ignore
 export { default as debuggerIcon } from "../../../public/debugger.svg";
+// @ts-ignore
+export { default as bangkokImg } from "../../../public/bangkok-img.jpg";
+// @ts-ignore
+export { default as singaporeImg } from "../../../public/singapore-img.jpg";
+// @ts-ignore
+export { default as puneImg } from "../../../public/pune-img.jpeg";
