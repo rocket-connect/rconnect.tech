@@ -87,6 +87,7 @@ export function TrustedBy() {
               {trustedBy.map((item, index) => (
                 <a href={item.link} about={item.text} key={index}>
                   <img
+                    loading="lazy"
                     className="h-6 mx-auto"
                     src={item.logo}
                     alt={item.text}
@@ -98,7 +99,12 @@ export function TrustedBy() {
             <div className="flex flex-col md:flex-row gap-10 mt-10">
               {realLifeImages.map((item, index) => (
                 <div key={index} className="flex flex-col flex-1 gap-3">
-                  <img className="w-full" src={item.img} alt={item.text} />
+                  <img
+                    loading="lazy"
+                    className="w-full"
+                    src={item.img}
+                    alt={item.text}
+                  />
                   <p className="text-center">
                     <a
                       className="italic underline hover:opacity-75"
