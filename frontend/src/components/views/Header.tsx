@@ -13,7 +13,7 @@ export function Header() {
                 <Logo />
               </span>
               <span className="ml-5 hidden md:block self-center font-bold whitespace-nowrap text-rocket-connect-darkblue">
-                rconnect.tech
+                connect.tech
               </span>
             </a>
 
