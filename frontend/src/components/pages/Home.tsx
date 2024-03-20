@@ -10,7 +10,6 @@ export function Home() {
       <Intro />
       <Services />
       <TrustedBy />
-      <Contact />
       <Footer />
     </section>
   );
