@@ -3,7 +3,7 @@ import { Logo } from "../utils/Logo";
 
 export function Header() {
   return (
-    <div className="bg-white w-full py-2 bg-rocket-connect-lightgrey">
+    <div className="bg-white w-full py-2">
       <Container>
         <nav>
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
