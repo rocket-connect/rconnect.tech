@@ -7,7 +7,11 @@ export { default as githubDark } from "../../../public/github-dark.svg";
 // @ts-ignore
 export { default as linkedinWhite } from "../../../public/linkedin-white.svg";
 // @ts-ignore
+export { default as twitterDark } from "../../../public/twitter-dark.svg";
+// @ts-ignore
 export { default as linkedinDark } from "../../../public/linkedin-dark.svg";
+// @ts-ignore
+export { default as youtubeDark } from "../../../public/youtube-dark.svg";
 // @ts-ignore
 export { default as logo } from "../../../public/logo.svg";
 // @ts-ignore

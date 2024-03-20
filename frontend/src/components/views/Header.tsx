@@ -1,6 +1,5 @@
 import { Container } from "../utils/Container";
 import { Logo } from "../utils/Logo";
-import { socials } from "./Contact";
 
 export function Header() {
   return (
@@ -12,22 +11,10 @@ export function Header() {
               <span className="w-6 sm:w-8">
                 <Logo />
               </span>
-              <span className="ml-5 hidden md:block self-center font-bold whitespace-nowrap text-rocket-connect-darkblue">
+              <span className="ml-3 self-center font-bold whitespace-nowrap text-rocket-connect-darkblue">
                 connect.tech
               </span>
             </a>
-
-            <div className="flex gap-10">
-              {socials.map((item, index) => (
-                <a key={index} href={item.url} className="hover:opacity-75">
-                  <img
-                    className="h-6 sm:h-8"
-                    src={item.logoDark}
-                    alt="Social Logo"
-                  />
-                </a>
-              ))}
-            </div>
           </div>
         </nav>
       </Container>
