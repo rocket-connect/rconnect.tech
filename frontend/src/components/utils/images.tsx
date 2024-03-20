@@ -1,11 +1,7 @@
 // @ts-ignore
 export { default as github } from "../../../public/github.svg";
 // @ts-ignore
-export { default as githubWhite } from "../../../public/github-white.svg";
-// @ts-ignore
 export { default as githubDark } from "../../../public/github-dark.svg";
-// @ts-ignore
-export { default as linkedinWhite } from "../../../public/linkedin-white.svg";
 // @ts-ignore
 export { default as twitterDark } from "../../../public/twitter-dark.svg";
 // @ts-ignore
@@ -44,11 +40,5 @@ export { default as gqlLondon } from "../../../public/graphql-london.svg";
 export { default as gqlSingapore } from "../../../public/graphql-singapore.svg";
 // @ts-ignore
 export { default as debuggerIcon } from "../../../public/debugger.svg";
-// @ts-ignore
-export { default as bangkokImg } from "../../../public/bangkok-img.jpg";
-// @ts-ignore
-export { default as singaporeImg } from "../../../public/singapore-img.jpg";
-// @ts-ignore
-export { default as puneImg } from "../../../public/pune-img.jpeg";
 // @ts-ignore
 export { default as businessConnectionsIcon } from "../../../public/business-connections-icon.svg";
