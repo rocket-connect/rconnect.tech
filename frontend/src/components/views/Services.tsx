@@ -1,18 +1,11 @@
 import { Container } from "../utils/Container";
 import {
-  apiIcon,
   relationsIcon,
   openSourceIcon,
   businessConnectionsIcon,
 } from "../utils/images";
 
 export const services = [
-  {
-    title: "API Engineering",
-    link: "api-engineering",
-    text: "Our team crafts efficient and Typesafe Node.js APIs using cutting-edge technologies to ensure scalability and high performance. We specialize in both REST and GraphQL standards, providing tailored solutions to meet your project's unique requirements.",
-    img: apiIcon,
-  },
   {
     title: "Library Development",
     link: "library-development",

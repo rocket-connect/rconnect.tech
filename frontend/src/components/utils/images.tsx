@@ -15,8 +15,6 @@ export { default as relationsIcon } from "../../../public/relations-icon.svg";
 // @ts-ignore
 export { default as openSourceIcon } from "../../../public/opensource-icon.svg";
 // @ts-ignore
-export { default as apiIcon } from "../../../public/api-icon.svg";
-// @ts-ignore
 export { default as neo4j } from "../../../public/neo4j.svg";
 // @ts-ignore
 export { default as prisma } from "../../../public/prisma.svg";

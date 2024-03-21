@@ -15,7 +15,7 @@ export function Intro() {
           <div className="flex mx-auto gap-10 pb-24">
             {socials.map((item, index) => (
               <a key={index} href={item.url} className="hover:opacity-75">
-                <img className="h-8" src={item.logoDark} alt="Social Logo" />
+                <img className="h-10" src={item.logoDark} alt="Social Logo" />
               </a>
             ))}
           </div>
