@@ -1,5 +1,5 @@
 {
-  "name": "rocketconnect.co.uk-backend",
+  "name": "backend",
   "main": "./src/index.ts",
   "scripts": {
     "start": "NODE_ENV=production node ./dist/index.js",

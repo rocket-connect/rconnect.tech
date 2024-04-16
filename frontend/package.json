@@ -1,5 +1,5 @@
 {
-  "name": "rocketconnect.co.uk-frontend",
+  "name": "frontend",
   "main": "./src/index.ts",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
