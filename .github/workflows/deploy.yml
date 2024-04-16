@@ -19,7 +19,7 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd rocketconnect.co.uk
+            cd rconnect.tech
             git reset --hard
             git pull origin main
             cd ./frontend
