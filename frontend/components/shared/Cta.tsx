@@ -1,12 +1,19 @@
-import { Button } from "../Button";
+import { MoveRight } from "lucide-react";
+import { Button } from "../ui/button";
 import { Container } from "./Container";
+import Link from "next/link";
 
 export const Cta = () => {
   return (
     <div className="w-full bg-gradient-to-b from-white to-[#FCFCFF]  border-b border-[#E6E6FF] py-12">
       <Container className="flex flex-col gap-4 items-center justify-center text-center">
         <h2 className="text-2xl lg:text-4xl font-bold">Connect with us now!</h2>
-        <Button href="/contact">Contact us</Button>
+        <Link href="/contact">
+          <Button>
+            Contact us
+            <MoveRight className="w-5 h-5 ml-2 group-hover:animate-bounce transition-all ease-in	" />
+          </Button>
+        </Link>
       </Container>
     </div>
   );

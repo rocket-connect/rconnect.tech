@@ -1,6 +1,7 @@
-import { Button } from "./Button";
-import { Container } from "./shared/Container";
+import { Button } from "../ui/button";
+import { Container } from "../shared/Container";
 import Image from "next/image";
+import Link from "next/link";
 
 interface CommunityProps {
   content: {
@@ -58,12 +59,9 @@ export const CommunitySection = ({ content }: CommunityProps) => {
             </a>
           ))}
           <div className="w-full">
-            <Button
-              href="https://www.youtube.com/@rocket-connect"
-              className="w-full"
-            >
-              Watch more
-            </Button>
+            <Link href="https://www.youtube.com/@rocket-connect">
+              <Button className="w-full">Watch more</Button>
+            </Link>
           </div>
         </div>
       </div>

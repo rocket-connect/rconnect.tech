@@ -1,7 +1,7 @@
-import { CommunitySection } from "@/components/CommunitySection";
-import { Hero } from "@/components/Hero";
-import { ServicesSection } from "@/components/ServicesSection";
-import { SocialProofSection } from "@/components/SocialProofSection";
+import { CommunitySection } from "@/components/templates/CommunitySection";
+import { Hero } from "@/components/shared/Hero";
+import { ServicesSection } from "@/components/templates/ServicesSection";
+import { SocialProofSection } from "@/components/templates/SocialProofSection";
 import { Cta } from "@/components/shared/Cta";
 import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
@@ -13,7 +13,7 @@ export default function Home() {
     <Main>
       <Header />
       <Hero content={home.hero} />
-      <SocialProofSection content={home.socialProof} />
+      <SocialProofSection />
       <ServicesSection content={home.services} />
       <CommunitySection content={home.community} />
       <Cta />

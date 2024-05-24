@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Container } from "./shared/Container";
-
+import { Container } from "../shared/Container";
+import { socialProof } from "../../content/socialproof";
 interface SocialProofProps {
-  content: {
+  content?: {
     title: string;
     logos: {
       image: string;
@@ -11,7 +11,9 @@ interface SocialProofProps {
   };
 }
 
-export const SocialProofSection = ({ content }: SocialProofProps) => {
+export const SocialProofSection = ({
+  content = socialProof,
+}: SocialProofProps) => {
   return (
     <Container className="gap-8">
       <h2 className="text-md font-bold text-center text-[#607388]">

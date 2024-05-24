@@ -13,7 +13,7 @@ interface CardsProps {
 
 export const ServicesCard = ({ cards }: CardsProps) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
       {cards.map((card: any, index: number) => (
         <Card key={"servicescard-" + index} card={card} />
       ))}
@@ -36,8 +36,8 @@ const Card = ({ card }: any) => {
         />
       </div>
       <div className="flex flex-col gap-2 items-start justify-center text-left p-6">
-        <h3 className="text-xl font-medium">{card.name}</h3>
-        <p>{card.content}</p>
+        <h3 className="text-xl font-medium truncate w-full">{card.name}</h3>
+        <p className="line-clamp-3">{card.content}</p>
       </div>
     </div>
   );

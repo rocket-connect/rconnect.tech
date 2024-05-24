@@ -2,7 +2,6 @@ export const header = {
   logo: { image: "/images/logo/rconnect-wordmark.svg", href: "/" },
   links: [
     { label: "Services", href: "/services" },
-    { label: "Products", href: "/products" },
     { label: "Community", href: "/community" },
     { label: "Contact us", href: "/contact" },
   ],
