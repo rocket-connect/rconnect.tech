@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 import { ServicesCard } from "./ServicesCard";
 import { Container } from "../shared/Container";
+import Link from "next/link";
 
 interface sectionProps {
   content: {
@@ -18,7 +19,9 @@ export const ServicesSection = ({ content }: sectionProps) => {
           {content.title}
         </h2>
         <ServicesCard cards={content.list} />
-        <Button href={content.cta.href}>{content.cta.label}</Button>
+        <Link href={content.cta.href}>
+          <Button>{content.cta.label}</Button>
+        </Link>
       </Container>
     </div>
   );

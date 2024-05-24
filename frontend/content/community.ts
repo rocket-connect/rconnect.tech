@@ -7,7 +7,7 @@ export const community = {
         { word: "open source", color: "#8F9DA7" },
       ],
     },
-    cta: { label: "Contact us", href: "" },
+    cta: { label: "Contact us", href: "/contact" },
   },
   activity: {
     title: "Our Activities",
