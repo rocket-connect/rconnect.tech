@@ -1,4 +1,4 @@
-name: Node Github CI
+name: preview.rconnect.tech
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - new-site
 
 jobs:
-  deploy:
+  deploy-preview:
     runs-on: ubuntu-latest
 
     steps:
