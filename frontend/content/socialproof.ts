@@ -15,14 +15,6 @@ export const socialProof = {
       href: "https://www.hasura.com/",
     },
     {
-      image: "/images/company-logos/graphql/graphql-london.svg",
-      href: "https://guild.host/graphql-london/events",
-    },
-    {
-      image: "/images/company-logos/graphql/graphql-singapore.svg",
-      href: "https://www.meetup.com/graphql-sg/",
-    },
-    {
       image: "/images/company-logos/cityjsconf.png",
       href: "https://cityjsconf.org/",
     },
@@ -35,16 +27,12 @@ export const socialProof = {
       href: "https://graphqlvisualizer.com/",
     },
     {
-      image: "/images/company-logos/graphql/graphql-bangkok.svg",
-      href: "https://www.meetup.com/graphql-bangkok/",
-    },
-    {
       image: "/images/company-logos/pabau.svg",
       href: "https://pabau.com/",
     },
     {
-      image: "/images/company-logos/debugger.svg",
-      href: "https://www.graphql-debugger.com/",
+      image: "/images/company-logos/devtools-asia.svg",
+      href: "https://guild.host/devtools-asia/network",
     },
   ],
 };
