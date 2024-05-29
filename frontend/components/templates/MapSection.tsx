@@ -36,8 +36,8 @@ export default function Map({ content }: MapProp) {
           <div className="rounded-xl overflow-hidden hidden lg:block">
             <MapContainer
               preferCanvas={true}
-              center={[5, 110]}
-              zoom={3}
+              center={[5, 80]}
+              zoom={2.2}
               zoomControl={false}
               scrollWheelZoom={false}
               dragging={false}
