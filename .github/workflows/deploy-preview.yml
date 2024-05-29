@@ -21,7 +21,7 @@ jobs:
             source ~/.nvm/nvm.sh
             cd ./preview/rconnect.tech
             git reset --hard
-            git pull origin main
+            git pull origin new-site
             cd ./frontend
             npm install
             npm run build
