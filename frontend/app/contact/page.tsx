@@ -18,6 +18,11 @@ export default function Services() {
     <Main>
       <Header />
       <Hero content={contact.hero} />
+
+      <h3 className="text-3xl lg:text-4xl text-center font-bold !leading-tigh">
+        Contact Us
+      </h3>
+
       <div className="w-full py-8">
         <div className="max-w-2xl bg-[#FCFCFF] bg-[#1F344A] border border-[#E6E6FF] dark:border-[#546C87] p-8 mx-auto rounded-lg flex flex-col gap-4 items-center">
           <Input placeholder="Your name" />
