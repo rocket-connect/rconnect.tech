@@ -3,6 +3,7 @@ export const header = {
   links: [
     { label: "Services", href: "/services" },
     { label: "Community", href: "/community" },
+    { label: "About Us", href: "/about" },
     { label: "Contact us", href: "/contact" },
   ],
   socials: [
