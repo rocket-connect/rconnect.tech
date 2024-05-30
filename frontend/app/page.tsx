@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Main>
       <Header />
-      <Hero content={home.hero} />
+      <Hero content={home.hero} cta={true} />
       <SocialProofSection />
       <ServicesSection content={home.services} />
       <CommunitySection content={home.community} />

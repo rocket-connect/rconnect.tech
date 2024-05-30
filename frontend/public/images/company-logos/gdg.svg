@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 769.71 214.45">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0086f8;
+      }
+
+      .cls-2 {
+        fill: #ffbc00;
+      }
+
+      .cls-3 {
+        fill: #ff4131;
+      }
+
+      .cls-4 {
+        fill: #009e51;
+      }
+
+      .cls-5 {
+        fill: #676c72;
+        font-family: PTSans-Regular, 'PT Sans';
+        font-size: 149.57px;
+      }
+    </style>
+  </defs>
+  <g id="Capa_1" data-name="Capa 1">
+    <rect class="cls-3" x="-9.31" y="35.03" width="212.71" height="73.59" rx="36.79" ry="36.79" transform="translate(-22.91 58.14) rotate(-30)"/>
+    <path class="cls-2" d="M247.71,196.79c9.75,16.89,31.35,22.68,48.24,12.93l123.04-71.04c16.89-9.75,22.68-31.35,12.93-48.24l-1.48-2.56c-9.75-16.89-31.35-22.68-48.24-12.93l-123.04,71.04c-16.89,9.75-22.68,31.35-12.93,48.24"/>
+    <path class="cls-4" d="M248.44,20.22c-9.75,16.89-3.96,38.49,12.93,48.24l123.04,71.04c16.89,9.75,38.49,3.96,48.24-12.93l1.48-2.56c9.75-16.89,3.96-38.49-12.93-48.24L298.16,4.74c-16.89-9.75-38.49-3.96-48.24,12.93"/>
+    <text class="cls-5" transform="translate(481.79 163.57)"><tspan x="0" y="0">GDG</tspan></text>
+    <rect class="cls-1" x="-9.1" y="104.24" width="212.71" height="73.59" rx="36.79" ry="36.79" transform="translate(83.54 -29.73) rotate(30)"/>
+  </g>
+</svg>

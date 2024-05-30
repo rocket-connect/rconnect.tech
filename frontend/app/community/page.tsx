@@ -20,7 +20,7 @@ export default function Services() {
   return (
     <Main>
       <Header />
-      <Hero content={community.hero} />
+      <Hero content={community.hero} cta={true} />
       <SocialProofSection />
       <LazyMap content={community.activity} />
       <DirectorySection content={community.directory} />

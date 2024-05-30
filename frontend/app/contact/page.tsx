@@ -11,14 +11,13 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-
-const content = { h1: { title: "We connect people through open source" } };
+import { contact } from "@/content/contact";
 
 export default function Services() {
   return (
     <Main>
       <Header />
-      <Hero content={content} cta={false} />
+      <Hero content={contact.hero} />
       <div className="w-full py-8">
         <div className="max-w-2xl bg-[#FCFCFF] border border-[#E6E6FF] p-8 mx-auto rounded-lg flex flex-col gap-4 items-center">
           <Input placeholder="Your name" />

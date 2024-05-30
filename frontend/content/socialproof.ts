@@ -34,5 +34,9 @@ export const socialProof = {
       image: "/images/company-logos/devtools-asia.svg",
       href: "https://guild.host/devtools-asia/network",
     },
+    {
+      image: "/images/company-logos/gdg.svg",
+      href: "https://developers.google.com/community/gdg",
+    },
   ],
 };

@@ -6,7 +6,12 @@ import Link from "next/link";
 interface sectionProps {
   content: {
     title: string;
-    list: { name: string; content: string; image: string; href: string }[];
+    list: {
+      name: string;
+      content: string;
+      image: string;
+      href: string;
+    }[];
     cta: { label: string; href: string };
   };
 }

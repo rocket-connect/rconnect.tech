@@ -14,6 +14,7 @@ export const DirectorySection = ({ content }: { content: any }) => {
     <div className="w-full py-12">
       <Container className="gap-8 overflow-hidden">
         <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
+        <p>{content.info}</p>
         <Carousel
           opts={{
             align: "start",

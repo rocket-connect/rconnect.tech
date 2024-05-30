@@ -32,6 +32,7 @@ export default function Map({ content }: MapProp) {
     <div className="w-full py-16">
       <Container className="gap-8">
         <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
+        <p>{content.info}</p>
         <div className=" grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="rounded-xl overflow-hidden hidden lg:block">
             <MapContainer
@@ -93,14 +94,13 @@ export default function Map({ content }: MapProp) {
               )}
             </div>
             <p className="text-center text-[#838793] py-4">
-              You’ve reach the end of the list. Looking to work with us and host
-              an event?
               <Link href={"/contact"} className="underline hover:opacity-70">
                 Contact us now
               </Link>
             </p>
           </div>
         </div>
+        <p>{content.offering}</p>
       </Container>
     </div>
   );

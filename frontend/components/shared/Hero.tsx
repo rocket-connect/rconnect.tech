@@ -16,7 +16,7 @@ interface HeroProps {
   cta?: boolean;
 }
 
-export const Hero = ({ content, cta = true }: HeroProps) => {
+export const Hero = ({ content, cta = false }: HeroProps) => {
   const pattern = new RegExp(
     `(${content.h1?.wordsToColor
       ?.map((item: { word: string }) => item.word)

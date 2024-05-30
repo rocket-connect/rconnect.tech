@@ -1,16 +1,19 @@
 export const community = {
   hero: {
     h1: {
-      title: "Building great communities around great people and tools",
+      title: "We connect people Through communities",
       wordsToColor: [
         { word: "connect", color: "#24BEE1" },
-        { word: "open source", color: "#8F9DA7" },
+        { word: "communities", color: "#8F9DA7" },
       ],
     },
     cta: { label: "Contact us", href: "/contact" },
   },
   activity: {
     title: "Our Activities",
+    info: "Our team and network extend across the globe, reaching experts and resources from every corner of the world. We offer community management and foster deeper relationships, ensuring your company connects with the right people and benefits from unparalleled support and engagement. Explore our activities below to see what our team is up to.",
+    offering:
+      "We offer our expertise in helping your organization reach your target audience and promote your brand. By leveraging our extensive network and in-person team, you can gain significant exposure and connect with key industry players. Hire our team to represent your company, speak on your behalf, or utilize our network to amplify your message. Additionally, you can sponsor our activities to benefit from increased visibility and engagement with your target audience. Partner with us to enhance your brand's reach and impact.",
     locations: [
       {
         eventName: "GraphQL London",
@@ -80,6 +83,7 @@ export const community = {
   },
   directory: {
     title: "Communities",
+    info: "We start, foster, sponsor, and facilitate several communities in tech across the globe. You can leverage our existing communities for your efforts, connecting with vibrant tech groups and gaining access to a diverse and engaged audience. Collaborate with us to elevate your brand and make a meaningful impact in the tech world.",
     events: [
       {
         eventName: "Dev Tools Bali",
