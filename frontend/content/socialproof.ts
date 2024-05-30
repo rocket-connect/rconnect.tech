@@ -15,20 +15,12 @@ export const socialProof = {
       href: "https://www.hasura.com/",
     },
     {
-      image: "/images/company-logos/cityjsconf.png",
-      href: "https://cityjsconf.org/",
-    },
-    {
       image: "/images/company-logos/bobsled.svg",
       href: "https://www.bobsled.co/",
     },
     {
       image: "/images/company-logos/graphql-visualizer.svg",
       href: "https://graphqlvisualizer.com/",
-    },
-    {
-      image: "/images/company-logos/pabau.svg",
-      href: "https://pabau.com/",
     },
     {
       image: "/images/company-logos/devtools-asia.svg",
@@ -41,6 +33,10 @@ export const socialProof = {
     {
       image: "/images/company-logos/hubql-logomark-dark.svg",
       href: "https://www.hubql.com",
+    },
+    {
+      image: "/images/company-logos/oursky.svg",
+      href: "https://www.oursky.com/",
     },
   ],
 };
