@@ -19,7 +19,7 @@ export const CommunitySection = ({ content }: CommunityProps) => {
   return (
     <Container className="gap-8">
       <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="w-full col-span-2">
           <iframe
             src={content.featured.embed}
@@ -34,7 +34,7 @@ export const CommunitySection = ({ content }: CommunityProps) => {
             <p>{content.featured.desc}</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 grid-rows-5 gap-4">
+        <div className="grid grid-cols-1 grid-rows-5 gap-8">
           {content.videos.map((video, index) => (
             <a
               key={"vdo-" + index}
