@@ -38,5 +38,9 @@ export const socialProof = {
       image: "/images/company-logos/gdg.svg",
       href: "https://developers.google.com/community/gdg",
     },
+    {
+      image: "/images/company-logos/hubql-logomark-dark.svg",
+      href: "https://www.hubql.com",
+    },
   ],
 };

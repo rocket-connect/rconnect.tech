@@ -39,11 +39,11 @@ export const CommunitySection = ({ content }: CommunityProps) => {
             <a
               key={"vdo-" + index}
               href={video.href}
-              className="w-full grid grid-cols-2 gap-4 items-center "
+              className="group w-full grid grid-cols-2 gap-4 items-center "
             >
               <Image
                 src={video.image}
-                className="aspect-video w-full rounded-lg"
+                className="aspect-video w-full rounded-lg object-cover group-hover:scale-105 transition-all ease-in"
                 alt=""
                 width={200}
                 height={100}

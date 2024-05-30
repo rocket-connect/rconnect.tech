@@ -5,7 +5,18 @@
 :root {
   --foreground: #1A2735;
   --background: #FFFFFF;
+  --foreground-invert: #FFFFFF;
 
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #FFFFFF;
+    --background: #1A2735;
+    --foreground-invert: #1A2735;
+  --background-invert: #1A2735;
+  }
 }
 
 body {

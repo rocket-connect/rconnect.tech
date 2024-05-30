@@ -69,7 +69,7 @@ export default function Map({ content }: MapProp) {
             </MapContainer>
           </div>
           <div className="w-full h-full flex flex-col items-center jusitfy-start">
-            <div className="w-full flex flex-col border border-[#E6E6FF] rounded-xl bg-[#F1F6FA] h-fit">
+            <div className="w-full flex flex-col border border-[#E6E6FF] rounded-xl bg-[#F1F6FA] dark:bg-[#1F344A] dark:border-[#546C87] h-fit overflow-hidden">
               {content.locations.map(
                 (
                   location: {
@@ -85,7 +85,7 @@ export default function Map({ content }: MapProp) {
                     href={location.href}
                     target="_blank"
                   >
-                    <div className="w-full py-4 px-6 text-xl font-bold flex flex-row items-center justify-between hover:bg-[#EEEEFB] cursor-pointer">
+                    <div className="w-full py-4 px-6 text-xl font-bold flex flex-row items-center justify-between hover:bg-[#EEEEFB] hover:bg-[#546C87] cursor-pointer">
                       {location.eventName}
                       <ArrowRight className="-rotate-45 stroke-[#838793]" />
                     </div>

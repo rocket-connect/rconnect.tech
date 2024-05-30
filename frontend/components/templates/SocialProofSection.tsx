@@ -24,7 +24,7 @@ export const SocialProofSection = ({
           <div key={"logo-" + index} className="w-[100px] h-[40px]">
             <a
               href={logo.href}
-              className="inline-block w-[100px] h-[40px]"
+              className="inline-block w-[100px] h-[40px] hover:scale-105 transition-all ease-in"
               target="_blank"
             >
               <Image
@@ -32,7 +32,7 @@ export const SocialProofSection = ({
                 width={100}
                 height={40}
                 alt=""
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain aspect-video py-1 dark:invert-[100%] dark:brightness-[0%]"
               />
             </a>
           </div>

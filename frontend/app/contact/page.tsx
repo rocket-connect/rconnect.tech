@@ -19,7 +19,7 @@ export default function Services() {
       <Header />
       <Hero content={contact.hero} />
       <div className="w-full py-8">
-        <div className="max-w-2xl bg-[#FCFCFF] border border-[#E6E6FF] p-8 mx-auto rounded-lg flex flex-col gap-4 items-center">
+        <div className="max-w-2xl bg-[#FCFCFF] bg-[#1F344A] border border-[#E6E6FF] dark:border-[#546C87] p-8 mx-auto rounded-lg flex flex-col gap-4 items-center">
           <Input placeholder="Your name" />
           <Input placeholder="Your email" />
           <Textarea placeholder="Your message" />

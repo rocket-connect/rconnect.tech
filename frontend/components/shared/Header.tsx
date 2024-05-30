@@ -2,15 +2,9 @@ import { header } from "@/content/header";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./Container";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Menu } from "lucide-react";
+import { Logo } from "./Logo";
 
 export const Header = () => {
   return (
@@ -18,7 +12,7 @@ export const Header = () => {
       <div className="w-full flex flex-row gap-4 justify-between items-center">
         <div className="flex gap-12 items-center">
           <Link href={header.logo.href}>
-            <Image src={header.logo.image} width={160} height={44} alt="" />
+            <Logo />
           </Link>
           {header.links.map((link, index) => (
             <Link

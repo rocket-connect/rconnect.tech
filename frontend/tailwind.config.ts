@@ -11,10 +11,12 @@ const config: Config = {
       colors: {
         foreground: {
           main: "var(--foreground)",
+          invert: "var(--foreground-invert)",
         },
         background: {
           main: "var(--background)",
           accent: "var(--foreground)",
+          invert: "var(--background-invert)",
         },
       },
       backgroundImage: {
