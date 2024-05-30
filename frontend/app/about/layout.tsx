@@ -5,7 +5,7 @@ import "../globals.css";
 const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Services | Rconnect.tech",
+  title: "About Us | Rconnect.tech",
   description: "We connect people through open source.",
 };
 
