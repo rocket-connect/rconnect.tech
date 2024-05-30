@@ -13,18 +13,21 @@ import { DirectorySection } from "@/components/templates/DirectorySection";
 
 const LazyMap = dynamic(() => import("@/components/templates/MapSection"), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
+  loading: () => <p className="mt-5">Loading...</p>,
 });
 
-export default function Services() {
+export default function Community() {
   return (
     <Main>
       <Header />
       <Hero content={community.hero} cta={true} />
-      <SocialProofSection />
+      <h3 className="text-3xl lg:text-4xl text-center font-bold !leading-tigh">
+        Community
+      </h3>
       <LazyMap content={community.activity} />
       <DirectorySection content={community.directory} />
       <CommunitySection content={community.featuredVideos} />
+      <SocialProofSection />
       <Cta />
       <Footer />
     </Main>

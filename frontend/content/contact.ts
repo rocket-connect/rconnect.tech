@@ -1,10 +1,10 @@
 export const contact = {
   hero: {
     h1: {
-      title: "We would really love to Hear from you",
+      title: "We connect people Through open source",
       wordsToColor: [
-        { word: "love", color: "#24BEE1" },
-        { word: "you", color: "#8F9DA7" },
+        { word: "connect", color: "#24BEE1" },
+        { word: "open source", color: "#8F9DA7" },
       ],
     },
   },

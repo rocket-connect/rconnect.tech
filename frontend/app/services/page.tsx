@@ -13,7 +13,9 @@ export default function Services() {
     <Main>
       <Header />
       <Hero content={services.hero} cta={true} />
-      <SocialProofSection />
+      <h3 className="text-3xl lg:text-4xl text-center font-bold !leading-tigh">
+        Services
+      </h3>
       {services.services.list.map((service, index) => (
         <TwoColumn key={"servicecol-" + index} index={index}>
           <div className="flex flex-col gap-4">
@@ -28,17 +30,17 @@ export default function Services() {
           </div>
           <div className="w-1/2 h-full flex flex-col gap-8 justify-center">
             <div className="flex flex-col gap-4">
-              <h2 className="font-bold text-2xl">{service.name}</h2>
+              <h4 className="font-bold text-2xl">{service.name}</h4>
               <p>{service.content}</p>
             </div>
             <div className="flex flex-col gap-4">
-              <h4 className="font-bold">{service.subContent.name}</h4>
+              <h5 className="font-bold">{service.subContent.name}</h5>
               <p>{service.subContent.content}</p>
             </div>
           </div>
         </TwoColumn>
       ))}
-
+      <SocialProofSection />
       <Cta />
       <Footer />
     </Main>
