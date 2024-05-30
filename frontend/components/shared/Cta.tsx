@@ -7,7 +7,9 @@ export const Cta = () => {
   return (
     <div className="w-full bg-gradient-to-b from-white dark:from-background-main to-[#FCFCFF] dark:to-[#1F344A] border-b border-[#E6E6FF] dark:border-[#1F344A] py-12">
       <Container className="flex flex-col gap-4 items-center justify-center text-center">
-        <h2 className="text-2xl lg:text-4xl font-bold">Connect with us now!</h2>
+        <h2 className="text-2xl lg:text-4xl font-bold">
+          <span className="text-[#24BEE1]">Connect</span> with us now!
+        </h2>
         <Link href="/contact">
           <Button>
             Contact us
