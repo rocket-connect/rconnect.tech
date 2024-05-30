@@ -18,19 +18,24 @@ export const footer = {
           href: "https://www.linkedin.com/company/rocketconnect/",
         },
         { label: "Twitter", href: "https://x.com/rconnect_tech" },
+        { label: "Github", href: "https://github.com/rocket-connect" },
       ],
     },
     {
       name: "Services",
       links: [
-        { label: "Library Development", href: "/#service-section" },
-        { label: "Developer Relations", href: "/#service-section" },
-        { label: "Business Connections", href: "/#service-section" },
+        { label: "Open Source Development", href: "/services" },
+        { label: "Community Management", href: "/services" },
+        { label: "Developer Relations", href: "/services" },
+        { label: "Software Training", href: "/services" },
       ],
     },
     {
       name: "About",
-      links: [{ label: "Contact us", href: "/contact-us" }],
+      links: [
+        { label: "About Us", href: "/about" },
+        { label: "Contact us", href: "/contact-us" },
+      ],
     },
   ],
 };
