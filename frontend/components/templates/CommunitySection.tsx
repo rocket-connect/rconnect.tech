@@ -2,6 +2,7 @@ import { Button } from "../ui/button";
 import { Container } from "../shared/Container";
 import Image from "next/image";
 import Link from "next/link";
+import { community } from "@/content/community";
 
 interface CommunityProps {
   content: {
@@ -18,7 +19,10 @@ interface CommunityProps {
 export const CommunitySection = ({ content }: CommunityProps) => {
   return (
     <Container className="gap-8">
-      <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
+      <div className="mr-auto flex flex-col gap-4">
+        <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
+        <p>{community.intro}</p>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="w-full col-span-2">
           <iframe

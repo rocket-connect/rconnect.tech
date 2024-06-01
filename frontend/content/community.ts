@@ -9,6 +9,8 @@ export const community = {
     },
     cta: { label: "Contact us", href: "/contact" },
   },
+  intro:
+    "Join us in connecting people through open source! Our mission is to enhance the open-source ecosystem and foster community engagement, grounded in our values. Partner with us to access our extensive network and expertise. Together, we can build something great, amplify your brand, and make a meaningful impact.",
   activity: {
     title: "Our Activities",
     info: "Our team and network extend across the globe, reaching experts and resources from every corner of the world. We offer community management and foster deeper relationships, ensuring your company connects with the right people and benefits from unparalleled support and engagement. Explore our activities below to see what our team is up to.",

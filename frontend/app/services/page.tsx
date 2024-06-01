@@ -16,6 +16,7 @@ export default function Services() {
       <h3 className="text-3xl lg:text-4xl text-center font-bold !leading-tigh">
         Services
       </h3>
+      <p className="text-center w-1/2 mt-8">{services.intro}</p>
       {services.services.list.map((service, index) => (
         <TwoColumn key={"servicecol-" + index} index={index}>
           <div className="flex flex-col gap-4">

@@ -5,7 +5,6 @@ import { SocialProofSection } from "@/components/templates/SocialProofSection";
 import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
 import { Main } from "@/components/shared/Main";
-import { services } from "@/content/services";
 import { community } from "@/content/community";
 import { CommunitySection } from "@/components/templates/CommunitySection";
 import { Cta } from "@/components/shared/Cta";
@@ -24,6 +23,7 @@ export default function Community() {
       <h3 className="text-3xl lg:text-4xl text-center font-bold !leading-tigh">
         Community
       </h3>
+      <p className="text-center w-1/2 mt-8">{community.intro}</p>
       <LazyMap content={community.activity} />
       <DirectorySection content={community.directory} />
       <CommunitySection content={community.featuredVideos} />
