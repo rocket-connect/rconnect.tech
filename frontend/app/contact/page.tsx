@@ -31,7 +31,7 @@ export default function Contact() {
           <p className="text-center italic">{contact.imageDescription}</p>
         </div>
         <div className="w-full md:w-1/2 mx-auto md:mx-0">
-          <div className="max-w-2xl bg-[#FCFCFF] bg-[#1F344A] border border-[#E6E6FF] dark:border-[#546C87] p-8 mx-auto rounded-lg flex flex-col gap-4 items-center">
+          <div className="max-w-2xl border border-[#E6E6FF] rounded-xl bg-[#F1F6FA] dark:bg-[#1F344A] dark:border-[#546C87] p-8 mx-auto rounded-lg flex flex-col gap-4 items-center">
             <Input placeholder="Your name" />
             <Input placeholder="Your email" />
             <Textarea placeholder="Your message" />
