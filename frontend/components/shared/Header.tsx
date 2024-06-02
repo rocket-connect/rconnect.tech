@@ -54,7 +54,7 @@ const MobileMenu = () => {
                 <Link
                   key={"menulink-" + index}
                   href={link.href}
-                  className="w-full hover:underline underline-offset-4 font-medium py-2 text-left"
+                  className="w-full hover:underline underline-offset-4 font-medium py-2 text-left dark:text-[#1A2735]"
                 >
                   {link.label}
                 </Link>
