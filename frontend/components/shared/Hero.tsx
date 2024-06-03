@@ -31,7 +31,7 @@ export const Hero = ({ content, cta = false }: HeroProps) => {
     <div className="w-full pt-12 pb-8">
       <Container className="flex flex-col items-start lg:items-center gap-2 max-w-5xl">
         {content.tag && (
-          <h3 className="w-full text-md text-left lg:text-center font-bold text-sky-500 uppercase tracking-widest">
+          <h3 className="w-full text-md text-left lg:text-center font-bold text-[#24BEE1] uppercase tracking-widest">
             {content.tag}
           </h3>
         )}
