@@ -13,7 +13,7 @@ export const Footer = () => {
             <Link href={footer.logo.href}>
               <Logo />
             </Link>
-            <p className="text-xl">{footer.logo.title}</p>
+            <p className="text-lg pl-2">{footer.logo.title}</p>
           </div>
           {footer.menu.map((category, index) => (
             <div
@@ -25,7 +25,7 @@ export const Footer = () => {
                 <Link
                   key={"footerlink-" + index}
                   href={link.href}
-                  className="text-lg hover:underline underline-offset-4"
+                  className="text-base hover:underline underline-offset-4"
                 >
                   {link.label}
                 </Link>
