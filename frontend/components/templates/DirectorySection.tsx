@@ -11,17 +11,17 @@ import Image from "next/image";
 
 export const DirectorySection = ({ content }: { content: any }) => {
   return (
-    <div className="w-full py-12">
-      <Container className="gap-8 overflow-hidden">
+    <div className="w-full py-8">
+      <Container className="gap-8 overflow-hidden xl:overflow-visible">
         <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
-        <p>{content.info}</p>
+        <p className="max-w-xl">{content.info}</p>
         <Carousel
           opts={{
             align: "start",
           }}
           className="w-full"
         >
-          <CarouselContent>
+          <CarouselContent className="w-full">
             {content.events.map(
               (
                 event: {
@@ -34,7 +34,7 @@ export const DirectorySection = ({ content }: { content: any }) => {
                 },
                 index: number
               ) => (
-                <CarouselItem key={"direvent" + index} className="lg:basis-1/4">
+                <CarouselItem key={"direvent" + index} className="basis-1/1 ">
                   <div className="relative w-[300px] h-[450px] bg-zinc-400 p-8 rounded-xl flex flex-col justify-between overflow-hidden border border-[#E6E6FF] dark:border-[#546C87]">
                     <div className="ml-auto relative z-20 flex flex-col gap-2 items-end">
                       {event.youtube !== "" && (

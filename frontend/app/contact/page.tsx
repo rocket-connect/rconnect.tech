@@ -15,11 +15,7 @@ export default function Contact() {
     <Main>
       <Header />
       <Hero content={contact.hero} />
-      <h3 className="text-3xl lg:text-4xl text-center font-bold !leading-tigh">
-        Contact Us
-      </h3>
-      <p className="text-center w-1/2 mt-8">{contact.intro}</p>
-      <div className="container flex flex-col md:flex-row flex-col-reverse p-16 w-full align-center justify-center mx-auto gap-8">
+      <div className="container flex flex-col md:flex-row flex-col-reverse p-0 lg:p-16 w-full align-center justify-center mx-auto gap-8">
         <div className="flex flex-col my-auto mx-auto md:mx-0 gap-4">
           <Image
             src={contact.image}
@@ -31,7 +27,7 @@ export default function Contact() {
           <p className="text-center italic">{contact.imageDescription}</p>
         </div>
         <div className="w-full md:w-1/2 mx-auto md:mx-0">
-          <div className="max-w-2xl border border-[#E6E6FF] rounded-xl bg-[#F1F6FA] dark:bg-[#1F344A] dark:border-[#546C87] p-8 mx-auto rounded-lg flex flex-col gap-4 items-center">
+          <div className="lg:max-w-2xl border border-[#E6E6FF] lg:rounded-lg bg-[#F1F6FA] dark:bg-[#1F344A] dark:border-[#546C87] p-4 lg:p-8 mx-auto flex flex-col gap-4 items-center">
             <Input placeholder="Your name" />
             <Input placeholder="Your email" />
             <Textarea placeholder="Your message" />

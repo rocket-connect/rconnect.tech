@@ -3,25 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --foreground: #1A2735;
-  --background: #FFFFFF;
-  --foreground-invert: #FFFFFF;
-
-
+  --foreground: #1a2735;
+  --background: #ffffff;
+  --foreground-invert: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground: #FFFFFF;
-    --background: #1A2735;
-    --foreground-invert: #1A2735;
-  --background-invert: #1A2735;
+    --foreground: #ffffff;
+    --background: #1a2735;
+    --foreground-invert: #1a2735;
+    --background-invert: #1a2735;
   }
 }
 
 body {
   color: var(--foreground);
-  background:var(--background)
+  background: var(--background);
 }
 
 @layer utilities {

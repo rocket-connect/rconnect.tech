@@ -13,13 +13,9 @@ export default function Services() {
     <Main>
       <Header />
       <Hero content={services.hero} cta={true} />
-      <h3 className="text-3xl lg:text-4xl text-center font-bold !leading-tigh">
-        Services
-      </h3>
-      <p className="text-center w-1/2 mt-8">{services.intro}</p>
       {services.services.list.map((service, index) => (
         <TwoColumn key={"servicecol-" + index} index={index}>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             <Image
               src={service.image}
               width={609}
@@ -29,7 +25,7 @@ export default function Services() {
             />
             <p className="text-center italic">{service.imageDescription}</p>
           </div>
-          <div className="w-1/2 h-full flex flex-col gap-8 justify-center">
+          <div className="w-full lg:w-1/2 h-full flex flex-col gap-8 justify-center">
             <div className="flex flex-col gap-4">
               <h4 className="font-bold text-2xl">{service.name}</h4>
               <p>{service.content}</p>

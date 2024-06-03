@@ -1,5 +1,5 @@
 export const socialProof = {
-  title: "Our team has been trusted by leading organizations:",
+  title: "Our team has been trusted by leading organizations",
   logos: [
     { image: "/images/company-logos/neo4j.svg", href: "https://neo4j.com/" },
     {

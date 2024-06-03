@@ -23,7 +23,7 @@ export const CommunitySection = ({ content }: CommunityProps) => {
         <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
         <p>{community.intro}</p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="w-full flex flex-col lg:grid lg:grid-cols-3 gap-8">
         <div className="w-full col-span-2">
           <iframe
             src={content.featured.embed}
@@ -38,12 +38,12 @@ export const CommunitySection = ({ content }: CommunityProps) => {
             <p>{content.featured.desc}</p>
           </div>
         </div>
-        <div className="grid grid-cols-1 grid-rows-5 gap-8">
+        <div className="w-full h-fit flex flex-col lg:grid lg:grid-cols-1 lg:grid-rows-5 gap-8">
           {content.videos.map((video, index) => (
             <a
               key={"vdo-" + index}
               href={video.href}
-              className="group w-full grid grid-cols-2 gap-4 items-center "
+              className="group w-full grid grid-cols-1 lg:grid-cols-2 gap-4 items-center "
             >
               <Image
                 src={video.image}
@@ -62,7 +62,7 @@ export const CommunitySection = ({ content }: CommunityProps) => {
               </div>
             </a>
           ))}
-          <div className="w-full">
+          <div className="w-full ">
             <Link href="https://www.youtube.com/@rocket-connect">
               <Button className="w-full">Watch more</Button>
             </Link>

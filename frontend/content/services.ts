@@ -8,9 +8,10 @@ export const services = {
       ],
     },
     cta: { label: "Contact us", href: "/contact" },
+    tag: "Services",
+    intro:
+      "We connect people through open source by enhancing the ecosystem and fostering community engagement. Our services include Open Source Development, Community Management, Developer Relations, and Software Training. Contact us to collaborate and build something great together!",
   },
-  intro:
-    "We connect people through open source by enhancing the ecosystem and fostering community engagement. Our services include Open Source Development, Community Management, Developer Relations, and Software Training. Contact us to collaborate and build something great together!",
   services: {
     title: "Services",
     list: [

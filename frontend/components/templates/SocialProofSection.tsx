@@ -15,11 +15,11 @@ export const SocialProofSection = ({
   content = socialProof,
 }: SocialProofProps) => {
   return (
-    <Container className="gap-8">
-      <h2 className="text-md font-bold text-center text-[#607388]">
+    <Container className="gap-8 pb-8">
+      <h2 className="text-lg lg:text-md font-bold text-center lg:text-center text-[#607388]">
         {content.title}
       </h2>
-      <div className="w-full flex flex-row flex-wrap gap-x-24 gap-y-4 items-center justify-center">
+      <div className="w-full grid grid-cols-3 lg:flex lg:flex-row lg:flex-wrap gap-x-4 lg:gap-x-24 gap-y-2 lg:gap-y-4 items-center justify-center">
         {content.logos.map((logo, index) => (
           <div key={"logo-" + index} className="w-[100px] h-[40px]">
             <a
