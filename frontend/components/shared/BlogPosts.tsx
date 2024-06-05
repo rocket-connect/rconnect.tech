@@ -28,7 +28,7 @@ const BlogPosts = ({ allPosts }: { allPosts: any }) => {
         {displayedPosts.map((blog: any) => (
           <li
             key={blog.slug}
-            className="border rounded-xl hover:bg-zinc-50 hover:scale-[1.01] transition-all ease-in hover:shadow-lg overflow-hidden"
+            className="border border-[#E6E6FF] dark:border-[#546C87] bg-[#F1F6FA] dark:bg-[#1F344A] rounded-xl hover:bg-[#EEEEFB] hover:bg-[#546C87] hover:scale-[1.01] transition-all ease-in hover:shadow-lg overflow-hidden hover:dark:text-[#1A2735]"
           >
             <Link href={`/blog/${blog.slug}`}>
               <Image
@@ -43,8 +43,10 @@ const BlogPosts = ({ allPosts }: { allPosts: any }) => {
                   {blog.meta.title}
                 </h3>
                 <div className="flex items-center gap-2 text-slate-500 text-sm mt-3 font-medium">
-                  <div className="uppercase">{blog.meta.category}</div> ·{" "}
-                  <div>{blog.formattedDate}</div>
+                  <div className="uppercase text-[#FFBF14]">
+                    {blog.meta.category}
+                  </div>{" "}
+                  · <div>{blog.formattedDate}</div>
                 </div>
                 <div className="line-clamp-2">{blog.meta.description}</div>
               </div>
