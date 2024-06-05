@@ -28,7 +28,7 @@ const BlogPosts = ({ allPosts }: { allPosts: any }) => {
         {displayedPosts.map((blog: any) => (
           <li
             key={blog.slug}
-            className="border border-[#E6E6FF] dark:border-[#546C87] bg-[#F1F6FA] dark:bg-[#1F344A] rounded-xl hover:bg-[#EEEEFB] hover:bg-[#546C87] hover:scale-[1.01] transition-all ease-in hover:shadow-lg overflow-hidden hover:dark:text-[#1A2735]"
+            className="border border-[#E6E6FF] dark:border-[#546C87] bg-[#F1F6FA] dark:bg-[#1F344A] rounded-xl hover:bg-[#1A2736] hover:dark:bg-[#EEEEFB] hover:text-[#EEEEFB] hover:dark:text-[#1A2735] hover:scale-[1.01] transition-all ease-in hover:shadow-lg overflow-hidden"
           >
             <Link href={`/blog/${blog.slug}`}>
               <Image
