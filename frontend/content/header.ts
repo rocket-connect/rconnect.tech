@@ -5,6 +5,7 @@ export const header = {
     { label: "Community", href: "/community" },
     { label: "About Us", href: "/about" },
     { label: "Contact us", href: "/contact" },
+    { label: "Blog", href: "/blog" },
   ],
   socials: [
     {

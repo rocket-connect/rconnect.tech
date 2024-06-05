@@ -59,7 +59,7 @@ export const Hero = ({ content, cta = false }: HeroProps) => {
         {cta && (
           <Link href={content.cta?.href ?? "/"} className="mt-4">
             <Button>
-              {content.cta?.label}{" "}
+              {content.cta?.label}
               <MoveRight className="w-5 h-5 ml-2 group-hover:animate-bounce transition-all ease-in	" />
             </Button>
           </Link>

@@ -6,7 +6,7 @@ import { Logo } from "./Logo";
 
 export const Footer = () => {
   return (
-    <div className="w-full border-t border-[#E6E6FF] dark:border-[#1F344A] pt-4 pb-24">
+    <div className="w-full border-t border-[#E6E6FF] dark:border-[#1F344A] pt-4 mt-auto pb-24">
       <Container>
         <div className="w-full flex flex-col lg:flex-row gap-12 items-start justify-between  flex-wrap">
           <div className="flex flex-col gap-2 flex-wrap">

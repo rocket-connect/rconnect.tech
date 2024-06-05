@@ -8,7 +8,7 @@ import { Logo } from "./Logo";
 
 export const Header = () => {
   return (
-    <Container className="py-2">
+    <Container className="py-2 lg:py-2">
       <div className="w-full flex flex-row gap-4 justify-between items-center">
         <div className="flex gap-12 items-center">
           <Link href={header.logo.href}>
