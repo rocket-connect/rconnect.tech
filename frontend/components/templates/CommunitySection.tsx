@@ -21,7 +21,6 @@ export const CommunitySection = ({ content }: CommunityProps) => {
     <Container className="gap-8">
       <div className="mr-auto flex flex-col gap-4">
         <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
-        <p>{community.intro}</p>
       </div>
       <div className="w-full flex flex-col lg:grid lg:grid-cols-3 gap-8">
         <div className="w-full col-span-2">

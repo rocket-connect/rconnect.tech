@@ -25,7 +25,6 @@ export const ServicesSection = ({ content }: sectionProps) => {
           <h2 id={"service-section"} className="text-3xl font-bold mr-auto">
             {content.title}
           </h2>
-          <p>{services.intro}</p>
         </div>
         <ServicesCard cards={content.list} />
         <Link href={content.cta.href}>
