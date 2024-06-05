@@ -7,6 +7,10 @@ import { Footer } from "@/components/shared/Footer";
 import { Container } from "@/components/shared/Container";
 import BlogPosts from "@/components/shared/BlogPosts";
 import { formatdate } from "@/lib/utils";
+import { Hero } from "@/components/shared/Hero";
+import { blog } from "@/content/blog";
+import { SocialProofSection } from "@/components/templates/SocialProofSection";
+import { Cta } from "@/components/shared/Cta";
 
 export default function Blog() {
   const blogDirectory = path.join(process.cwd(), "content/posts");
@@ -30,12 +34,14 @@ export default function Blog() {
   return (
     <Main>
       <Header />
+      <Hero content={blog.hero} cta={true} />
       <Container className="lg:py-2 mb-8">
-        <h1 className="font-bold text-xl px-4 mt-12 mb-2">Rconnect blog</h1>
         <section>
           <BlogPosts allPosts={blogs} />
         </section>
       </Container>
+      <SocialProofSection />
+      <Cta />
       <Footer />
     </Main>
   );
