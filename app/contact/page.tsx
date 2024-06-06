@@ -3,12 +3,10 @@ import { SocialProofSection } from "@/components/templates/SocialProofSection";
 import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
 import { Main } from "@/components/shared/Main";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { contact } from "@/content/contact";
 import Image from "next/image";
 import { Metadata } from "next";
+import ContactForm from "@/components/ui/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact us | Rconnect.tech",
@@ -34,12 +32,7 @@ export default function Contact() {
           </p>
         </div>
         <div className="w-full md:w-1/2 mx-auto md:mx-0">
-          <div className="lg:max-w-2xl border border-[#E6E6FF] lg:rounded-lg bg-[#F1F6FA] dark:bg-[#1F344A] dark:border-[#546C87] p-4 lg:p-8 mx-auto flex flex-col gap-4 items-center">
-            <Input placeholder="Your name" />
-            <Input placeholder="Your email" />
-            <Textarea placeholder="Your message" />
-            <Button>Send your message</Button>
-          </div>
+          <ContactForm />
         </div>
       </div>
       <SocialProofSection />

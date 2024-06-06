@@ -12,8 +12,8 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
     - name: Install dependencies
-      run: cd ./frontend && npm install
+      run: npm install
       shell: bash
     - name: Build project
-      run: cd ./frontend && npm run build
+      run: npm run build
       shell: bash

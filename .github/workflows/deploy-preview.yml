@@ -24,7 +24,6 @@ jobs:
             cd ./preview/rconnect.tech
             git reset --hard
             git pull origin new-site
-            cd ./frontend
             npm install
             npm run build
             pm2 restart preview
