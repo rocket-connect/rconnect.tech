@@ -10,6 +10,6 @@ export const blog = {
     cta: { label: "Contact us", href: "/contact" },
     tag: "Blog",
     intro:
-      "Rocket Connect puts people and connections at the forefront of its operations. Our goal is to connect people through our deep understanding of the world through open-source software. You may find us collaborating on popular GitHub repositories, speaking at your local tech conference, or connecting with somebody you know.",
+      "Welcome to the Rocket Connect Blog! Here, we share insights, stories, and updates from the forefront of technology, open-source innovation, and community building. Our mission is to connect people and ideas through cutting-edge software solutions, and this blog is your go-to resource for expert perspectives, industry trends, and behind-the-scenes looks at our projects. ",
   },
 };

@@ -48,7 +48,7 @@ const BlogPosts = ({ allPosts }: { allPosts: any }) => {
                   </div>{" "}
                   · <div>{blog.formattedDate}</div>
                 </div>
-                <div className="line-clamp-2">{blog.meta.description}</div>
+                <div className="line-clamp-3">{blog.meta.description}</div>
               </div>
             </Link>
           </li>

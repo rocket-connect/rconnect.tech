@@ -98,9 +98,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </div>
               <div className="text-slate-600">{formattedDate}</div>
             </div>
-            <h1 className="text-4xl pb-8 font-bold">
-              {props.frontMatter.title}
-            </h1>
+            <h1 className="text-4xl font-bold">{props.frontMatter.title}</h1>
             <MDXRemote source={props.content} components={components} />
           </article>
         </div>
