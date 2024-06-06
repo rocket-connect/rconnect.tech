@@ -1,4 +1,3 @@
-"use client";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/shared/Hero";
 import { SocialProofSection } from "@/components/templates/SocialProofSection";
@@ -9,6 +8,12 @@ import { community } from "@/content/community";
 import { CommunitySection } from "@/components/templates/CommunitySection";
 import { Cta } from "@/components/shared/Cta";
 import { DirectorySection } from "@/components/templates/DirectorySection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Community | Rocket Connect",
+  description: "We connect people through open source.",
+};
 
 const LazyMap = dynamic(() => import("@/components/templates/MapSection"), {
   ssr: false,

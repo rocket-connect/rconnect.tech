@@ -20,7 +20,9 @@ export const CommunitySection = ({ content }: CommunityProps) => {
   return (
     <Container className="gap-8">
       <div className="mr-auto flex flex-col gap-4">
-        <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
+        <h2 className="text-foreground-main dark:text-foreground-invert text-3xl font-bold mr-auto">
+          {content.title}
+        </h2>
       </div>
       <div className="w-full flex flex-col lg:grid lg:grid-cols-3 gap-8">
         <div className="w-full col-span-2">
@@ -33,8 +35,12 @@ export const CommunitySection = ({ content }: CommunityProps) => {
             className="aspect-video w-full rounded-xl"
           />
           <div className="py-6 flex flex-col gap-2">
-            <h3 className="text-2xl font-medium">{content.featured.title}</h3>
-            <p>{content.featured.desc}</p>
+            <h3 className="text-foreground-main dark:text-foreground-invert text-2xl font-medium">
+              {content.featured.title}
+            </h3>
+            <p className="text-foreground-main dark:text-foreground-invert">
+              {content.featured.desc}
+            </p>
           </div>
         </div>
         <div className="w-full h-fit flex flex-col lg:grid lg:grid-cols-1 lg:grid-rows-5 gap-8">
@@ -52,10 +58,10 @@ export const CommunitySection = ({ content }: CommunityProps) => {
                 height={100}
               />
               <div className="flex flex-col gap-2">
-                <h4 className="text-md font-medium line-clamp-2">
+                <h4 className="text-foreground-main dark:text-foreground-invert text-md font-medium line-clamp-2">
                   {video.title}
                 </h4>
-                <p className="line-clamp-3 text-sm leading-tight">
+                <p className="text-foreground-main dark:text-foreground-invert line-clamp-3 text-sm leading-tight">
                   {video.desc}
                 </p>
               </div>

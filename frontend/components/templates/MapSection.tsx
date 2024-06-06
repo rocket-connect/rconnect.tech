@@ -31,8 +31,12 @@ export default function Map({ content }: MapProp) {
   return (
     <div className="w-full py-16">
       <Container className="gap-8">
-        <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
-        <p className="max-w-xl">{content.info}</p>
+        <h2 className="text-foreground-main dark:text-foreground-invert text-3xl font-bold mr-auto">
+          {content.title}
+        </h2>
+        <p className="text-foreground-main dark:text-foreground-invert max-w-xl">
+          {content.info}
+        </p>
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12">
           <div className="rounded-xl overflow-hidden">
             <MapContainer
@@ -82,7 +86,7 @@ export default function Map({ content }: MapProp) {
                     href={location.href}
                     target="_blank"
                   >
-                    <div className="w-full py-4 px-6 text-xl font-bold flex flex-row items-center justify-between hover:bg-[#EEEEFB] hover:bg-[#546C87] cursor-pointer">
+                    <div className="text-foreground-main dark:text-foreground-invert w-full py-4 px-6 text-xl font-bold flex flex-row items-center justify-between bg-background-main dark:bg-background-invert hover:bg-hover-main dark:hover:bg-hover-invert cursor-pointer">
                       {location.eventName}
                       <ArrowRight className="-rotate-45 stroke-[#838793]" />
                     </div>
@@ -97,7 +101,9 @@ export default function Map({ content }: MapProp) {
             </p>
           </div>
         </div>
-        <p className="ml-auto max-w-xl">{content.offering}</p>
+        <p className="text-foreground-main dark:text-foreground-invert ml-auto max-w-xl">
+          {content.offering}
+        </p>
       </Container>
     </div>
   );

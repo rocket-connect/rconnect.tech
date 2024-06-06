@@ -31,11 +31,11 @@ export const Hero = ({ content, cta = false }: HeroProps) => {
     <div className="w-full pt-12 pb-8">
       <Container className="flex flex-col items-start lg:items-center gap-2 max-w-5xl">
         {content.tag && (
-          <h3 className="w-full text-md text-left lg:text-center font-bold text-[#24BEE1] uppercase tracking-widest">
+          <h3 className="w-full text-md text-left lg:text-center font-bold text-foreground-accent uppercase tracking-widest">
             {content.tag}
           </h3>
         )}
-        <h1 className="text-3xl lg:text-5xl text-left lg:text-center font-bold !leading-tight">
+        <h1 className="text-3xl lg:text-5xl text-left lg:text-center font-bold !leading-tight text-foreground-main dark:text-foreground-invert">
           {parts?.map((part, index) => {
             const wordObject = content.h1?.wordsToColor?.find(
               (item: { word: string }) =>
@@ -52,7 +52,7 @@ export const Hero = ({ content, cta = false }: HeroProps) => {
           })}
         </h1>
         {content.intro && (
-          <p className="text-left lg:text-center w-full mt-1 lg:px-8 text-lg">
+          <p className="text-foreground-main dark:text-foreground-invert text-left lg:text-center w-full mt-1 lg:px-8 text-lg">
             {content.intro}
           </p>
         )}

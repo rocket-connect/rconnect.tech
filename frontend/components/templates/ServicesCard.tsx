@@ -23,9 +23,9 @@ export const ServicesCard = ({ cards }: CardsProps) => {
 
 const Card = ({ card }: any) => {
   return (
-    <div className="border border-[#EFEFEF] dark:border-[#1F344A] shadow-sm rounded-xl overflow-hidden">
+    <div className="border border-[#EFEFEF] dark:border-[#1F344A] shadow-sm rounded-xl overflow-hidden  bg-background-main dark:bg-[#284360]">
       <div className="relative aspec-video w-full">
-        <div className="relative z-20 mix-blend-multiply bg-[#D1DBFF] dark:bg-[#1F344A] h-full" />
+        <div className="relative z-20 mix-blend-multiply bg-[#D1DBFF] dark:bg-[#284360] h-full" />
         <Image
           src={card.image}
           alt=""
@@ -36,8 +36,12 @@ const Card = ({ card }: any) => {
         />
       </div>
       <div className="flex flex-col gap-2 items-start justify-center text-left text-foreground-main p-6">
-        <h3 className="text-lg font-medium truncate w-full">{card.name}</h3>
-        <p className="line-clamp-3">{card.content}</p>
+        <h3 className="text-foreground-main dark:text-foreground-invert text-lg font-medium truncate w-full">
+          {card.name}
+        </h3>
+        <p className=" text-foreground-main dark:text-foreground-invert line-clamp-3">
+          {card.content}
+        </p>
       </div>
     </div>
   );

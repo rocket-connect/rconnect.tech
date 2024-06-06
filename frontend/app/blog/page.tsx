@@ -11,6 +11,12 @@ import { Hero } from "@/components/shared/Hero";
 import { blog } from "@/content/blog";
 import { SocialProofSection } from "@/components/templates/SocialProofSection";
 import { Cta } from "@/components/shared/Cta";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog | Rconnect.tech",
+  description: "We connect people through open source.",
+};
 
 export default function Blog() {
   const blogDirectory = path.join(process.cwd(), "content/posts");

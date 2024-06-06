@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "group inline-flex gap-4 items-center justify-center  w-fit rounded-full bg-background-accent text-foreground-invert stroke-foreground-invert",
+          "group inline-flex gap-4 items-center justify-center  w-fit rounded-full bg-background-invert dark:bg-background-main text-foreground-invert dark:text-foreground-main stroke-foreground-invert",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:

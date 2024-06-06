@@ -11,7 +11,7 @@ import { Main } from "@/components/shared/Main";
 import { Container } from "@/components/shared/Container";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { cn, formatdate } from "@/lib/utils";
+import { categoryColor, cn, formatdate } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
@@ -63,43 +63,35 @@ export default async function Page({ params }: { params: { slug: string } }) {
   };
 
   const formattedDate = formatdate(props.frontMatter.date);
-
-  const categoryColors = () => {
-    switch (props.frontMatter.category) {
-      case "community":
-        return "text-sky-500";
-      case "engineering":
-        return "text-amber-500";
-      case "customer stories":
-        return "text-orange-500";
-      case "company news":
-        return "text-purple-500";
-      default:
-        return null;
-    }
-  };
-
+  const color = categoryColor(props.frontMatter.category);
   return (
     <Main>
       <Header />
       <Container className="lg:py-0">
         <div className="max-w-2xl mx-auto relative">
           <Link href={"/blog"}>
-            <div className="hidden lg:flex sticky left-0 top-24 -ml-24 bg-background-main border border-neutral-300 rounded-full items-center justify-center w-10 h-10 hover:scale-[1.03] hover:shadow-sm transition-all ease-in z-10">
-              <ChevronLeft className="w-6 h-6 stroke-neutral-500" />
+            <div className="hidden lg:flex sticky left-0 top-24 -ml-24 bg-background-main dark:bg-background-invert border border-slate-300 dark:border-slate-600 rounded-full items-center justify-center w-10 h-10 hover:scale-[1.03] hover:shadow-sm transition-all ease-in z-10">
+              <ChevronLeft className="w-6 h-6 stroke-slate-500 dark:stroke-slate-400" />
             </div>
           </Link>
-          <article className="prose prose-sm md:prose-base lg:prose-lg mx-auto  prose-ol:list-decimal prose-ul:list-disc">
-            <div className="w-full flex items-center gap-4">
+          <article>
+            <div className="w-full flex items-center gap-1 ">
               <div
-                className={cn("uppercase text-md font-bold", categoryColors())}
+                className={cn("uppercase text-md font-bold")}
+                style={{ color }}
               >
                 {props.frontMatter.category}
               </div>
-              <div className="text-slate-600">{formattedDate}</div>
+              <div className="text-slate-600 dark:text-slate-400">
+                · {formattedDate}
+              </div>
             </div>
-            <h1 className="text-4xl font-bold">{props.frontMatter.title}</h1>
-            <MDXRemote source={props.content} components={components} />
+            <h1 className="text-foreground-main dark:text-foreground-invert text-4xl font-bold">
+              {props.frontMatter.title}
+            </h1>
+            <div className="prose text-foreground-main dark:text-foreground-invert prose-sm md:prose-base lg:prose-lg mx-auto  prose-ol:list-decimal prose-ul:list-disc prose-headings:text-foreground-main dark:prose-headings:text-foreground-invert prose-a:text-bold prose-a:visited:text-foreground-main prose-a:dark:visited:text-foreground-invert prose-a:text-foreground-main dark:prose-a:text-foreground-invert">
+              <MDXRemote source={props.content} components={components} />
+            </div>
           </article>
         </div>
       </Container>

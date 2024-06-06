@@ -13,19 +13,23 @@ export const Footer = () => {
             <Link href={footer.logo.href}>
               <Logo />
             </Link>
-            <p className="text-lg pl-2">{footer.logo.title}</p>
+            <p className="text-foreground-main dark:text-foreground-invert text-lg pl-2">
+              {footer.logo.title}
+            </p>
           </div>
           {footer.menu.map((category, index) => (
             <div
               key={"footermenu-" + index}
               className="flex flex-col gap-3 flex-wrap"
             >
-              <span className="text-xl font-bold">{category.name}</span>
+              <span className="text-foreground-main dark:text-foreground-invert text-xl font-bold">
+                {category.name}
+              </span>
               {category.links.map((link, index) => (
                 <Link
                   key={"footerlink-" + index}
                   href={link.href}
-                  className="text-base hover:underline underline-offset-4"
+                  className="text-foreground-main dark:text-foreground-invert text-base hover:underline underline-offset-4"
                 >
                   {link.label}
                 </Link>
