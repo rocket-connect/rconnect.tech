@@ -1,13 +1,9 @@
+import { globals } from "./gobals";
+
 export const services = {
   hero: {
-    h1: {
-      title: "We connect people Through open source",
-      wordsToColor: [
-        { word: "connect", color: "#24BEE1" },
-        { word: "open source", color: "#8F9DA7" },
-      ],
-    },
-    cta: { label: "Contact us", href: "/contact" },
+    h1: globals.hero.h1,
+    cta: globals.hero.cta,
     tag: "Services",
     intro:
       "We connect people through open source by enhancing the ecosystem and fostering community engagement. Our services include Open Source Development, Community Management, Developer Relations, and Software Training. Contact us to collaborate and build something great together!",
