@@ -41,26 +41,14 @@ export const DirectorySection = ({ content }: { content: any }) => {
                 <CarouselItem key={"direvent" + index} className="basis-1/1 ">
                   <div className="relative w-[300px] h-[450px] bg-zinc-400 p-8 rounded-xl flex flex-col justify-between overflow-hidden border border-[#E6E6FF] dark:border-[#546C87]">
                     <div className="ml-auto relative z-20 flex flex-col gap-2 items-end">
-                      {event.youtube !== "" && (
-                        <a
-                          href={event.youtube}
-                          className=" flex gap-4 text-white hover:underline text-lg items-center"
-                          target="_blank"
-                        >
-                          Youtube
-                          <ArrowRight className="stroke-white -rotate-45" />
-                        </a>
-                      )}
-                      {event.meetup !== "" && (
-                        <a
-                          href={event.meetup}
-                          className="flex gap-4 text-white hover:underline text-lg items-center"
-                          target="_blank"
-                        >
-                          Meetup
-                          <ArrowRight className="stroke-white -rotate-45" />
-                        </a>
-                      )}
+                      <a
+                        href={event.href}
+                        className=" flex gap-4 text-white hover:underline text-lg items-center"
+                        target="_blank"
+                      >
+                        Learn More
+                        <ArrowRight className="stroke-white -rotate-45" />
+                      </a>
                     </div>
                     <Image
                       src={event.logo}
