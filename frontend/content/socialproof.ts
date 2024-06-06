@@ -38,5 +38,9 @@ export const socialProof = {
       image: "/images/company-logos/oursky.svg",
       href: "https://www.oursky.com/",
     },
+    {
+      image: "/images/company-logos/koding-akademi.svg",
+      href: "https://www.kodingakademi.id/",
+    },
   ],
 };
