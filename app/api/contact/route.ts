@@ -1,6 +1,6 @@
 import { createTransport } from "nodemailer";
 
-export const transporter = createTransport({
+const transporter = createTransport({
   // @ts-ignore - this is a bug in the types?
   host: process.env.EMAIL_HOST,
   secureConnection: false,
@@ -14,15 +14,7 @@ export const transporter = createTransport({
   },
 });
 
-export async function connect() {
-  console.log("Connecting to email");
-
-  await transporter.verify();
-
-  console.log("Email Connected");
-}
-
-export async function handler({
+async function handler({
   name,
   email,
   message,
@@ -43,8 +35,8 @@ export async function handler({
       ],
     });
   } catch (error) {
-    // @ts-ignore - this is a bug in the types?
-    res.status(500).end();
+    console.error("Error sending email", error);
+    throw new Error("Error sending email");
   }
 }
 
