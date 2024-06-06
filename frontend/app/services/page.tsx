@@ -33,7 +33,9 @@ export default function Services() {
           </div>
           <div className="w-full lg:w-1/2 h-full flex flex-col gap-8 justify-center">
             <div className="flex flex-col gap-4">
-              <h4 className="font-bold text-2xl">{service.name}</h4>
+              <h4 className="font-bold text-2xl" id={service.id}>
+                {service.name}
+              </h4>
               <p>{service.content}</p>
             </div>
             <div className="flex flex-col gap-4">

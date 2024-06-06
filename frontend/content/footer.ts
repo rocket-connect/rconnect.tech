@@ -24,10 +24,10 @@ export const footer = {
     {
       name: "Services",
       links: [
-        { label: "Open Source Development", href: "/services" },
-        { label: "Community Management", href: "/services" },
-        { label: "Developer Relations", href: "/services" },
-        { label: "Software Training", href: "/services" },
+        { label: "Open Source Development", href: "/services/#oss-dev" },
+        { label: "Community Management", href: "/services/#community-mgmt" },
+        { label: "Developer Relations", href: "/services/#dev-rel" },
+        { label: "Software Training", href: "/services/#software-training" },
       ],
     },
     {
