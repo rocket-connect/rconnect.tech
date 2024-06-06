@@ -2,6 +2,7 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -37,6 +38,8 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
       </body>
+
+      <GoogleAnalytics gaId="G-C14HJ0PDRJ" />
     </html>
   );
 }
