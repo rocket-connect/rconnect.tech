@@ -7,6 +7,12 @@ import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
 import { Main } from "@/components/shared/Main";
 import { home } from "@/content/home";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rocket Connect",
+  description: "We connect people through open source.",
+};
 
 export default function Home() {
   return (

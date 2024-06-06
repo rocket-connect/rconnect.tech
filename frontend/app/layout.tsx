@@ -1,12 +1,14 @@
-import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/shared/ThemeProvider";
+import { Metadata } from "next";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Rocket Connect",
-  description: "We connect people through open source.",
+  openGraph: {
+    images: "/images/blog-default-preview.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +26,17 @@ export default function RootLayout({
           sizes="<generated>"
         />
       </head>
-      <body className={rubik.className}>{children}</body>
+
+      <body className={rubik.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

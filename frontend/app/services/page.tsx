@@ -7,6 +7,12 @@ import { Header } from "@/components/shared/Header";
 import { Main } from "@/components/shared/Main";
 import { services } from "@/content/services";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Services | Rconnect.tech",
+  description: "We connect people through open source.",
+};
 
 export default function Services() {
   return (
@@ -21,7 +27,7 @@ export default function Services() {
               width={609}
               height={380}
               alt=""
-              className="rounded-xl"
+              className="rounded-xl object-cover object-top h-width aspect-video"
             />
             <p className="text-center italic">{service.imageDescription}</p>
           </div>

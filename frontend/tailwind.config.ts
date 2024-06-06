@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -11,12 +12,17 @@ const config: Config = {
       colors: {
         foreground: {
           main: "var(--foreground)",
+          accent: "var(--accent)",
           invert: "var(--foreground-invert)",
         },
         background: {
           main: "var(--background)",
           accent: "var(--foreground)",
           invert: "var(--background-invert)",
+        },
+        hover: {
+          main: "var(--hover)",
+          invert: "var(--hover-invert)",
         },
       },
       backgroundImage: {
@@ -41,6 +47,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;

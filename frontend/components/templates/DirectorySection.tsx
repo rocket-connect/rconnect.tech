@@ -13,8 +13,12 @@ export const DirectorySection = ({ content }: { content: any }) => {
   return (
     <div className="w-full py-8">
       <Container className="gap-8 overflow-hidden xl:overflow-visible">
-        <h2 className="text-3xl font-bold mr-auto">{content.title}</h2>
-        <p className="max-w-xl">{content.info}</p>
+        <h2 className="text-foreground-main dark:text-foreground-invert text-3xl font-bold mr-auto">
+          {content.title}
+        </h2>
+        <p className="text-foreground-main dark:text-foreground-invert max-w-xl">
+          {content.info}
+        </p>
         <Carousel
           opts={{
             align: "start",

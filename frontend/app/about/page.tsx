@@ -7,6 +7,15 @@ import { Header } from "@/components/shared/Header";
 import { Main } from "@/components/shared/Main";
 import { about } from "@/content/about";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us | Rconnect.tech",
+  description: "We connect people through open source.",
+  openGraph: {
+    images: "/images/blog-default-preview.jpg",
+  },
+};
 
 export default function About() {
   return (
@@ -21,7 +30,7 @@ export default function About() {
               width={609}
               height={380}
               alt=""
-              className="rounded-xl"
+              className="rounded-xl object-cover object-top h-width aspect-video"
             />
             <p className="text-center italic">{section.imageDescription}</p>
           </div>
