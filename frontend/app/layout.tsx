@@ -2,7 +2,7 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const rubik = Rubik({ subsets: ["latin"] });
 
@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   openGraph: {
     images: "/images/blog-default-preview.jpg",
   },
+};
+
+const googleId = {
+  analytics: "G-C14HJ0PDRJ",
+  tagManager: "GTM-P7N8PKGV",
 };
 
 export default function RootLayout({
@@ -39,7 +44,8 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
 
-      <GoogleAnalytics gaId="G-C14HJ0PDRJ" />
+      <GoogleAnalytics gaId={googleId.analytics} />
+      <GoogleTagManager gtmId={googleId.tagManager} />
     </html>
   );
 }
