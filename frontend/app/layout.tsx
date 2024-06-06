@@ -12,10 +12,12 @@ export const metadata: Metadata = {
   },
 };
 
-const googleId = {
+const previewGoogleAnalytics = {
   analytics: "G-C14HJ0PDRJ",
   tagManager: "GTM-P7N8PKGV",
 };
+
+const googleId = previewGoogleAnalytics;
 
 export default function RootLayout({
   children,
