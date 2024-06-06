@@ -86,7 +86,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 · {formattedDate}
               </div>
             </div>
-            <h1 className="text-foreground-main dark:text-foreground-invert text-4xl font-bold">
+            <h1 className="text-foreground-main dark:text-foreground-invert text-4xl font-bold mb-4">
               {props.frontMatter.title}
             </h1>
             <div className="prose text-foreground-main dark:text-foreground-invert prose-sm md:prose-base lg:prose-lg mx-auto  prose-ol:list-decimal prose-ul:list-disc prose-headings:text-foreground-main dark:prose-headings:text-foreground-invert prose-a:text-bold prose-a:visited:text-foreground-main prose-a:dark:visited:text-foreground-invert prose-a:text-foreground-main dark:prose-a:text-foreground-invert">
