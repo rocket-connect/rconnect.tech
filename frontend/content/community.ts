@@ -28,7 +28,7 @@ export const community = {
         city: "Bangalore",
         lattitude: 12.9716,
         longitude: 77.5946,
-        href: "https://youtu.be/GuFxkUg_IFc",
+        href: "/blog/graph-db-bangalore",
         color: "#ec4899",
       },
       {
@@ -36,7 +36,7 @@ export const community = {
         city: "Bangkok",
         lattitude: 13.756331,
         longitude: 100.501762,
-        href: "https://www.meetup.com/graphql-bangkok/",
+        href: "/blog/graphql-bangkok",
         color: "#ec4899",
       },
       {
@@ -44,7 +44,7 @@ export const community = {
         city: "Bali",
         lattitude: -8.340539,
         longitude: 115.091949,
-        href: "https://youtu.be/EmccUzvB-t8",
+        href: "/blog/devtools-bali",
         color: "#dc2626",
       },
       {
@@ -52,7 +52,7 @@ export const community = {
         city: "Bangkok",
         lattitude: 13.756331,
         longitude: 100.501762,
-        href: "https://youtu.be/RCoEUh7WLo0",
+        href: "/blog/devtools-bangkok",
         color: "#dc2626",
       },
       {

@@ -26,7 +26,7 @@ export const services = {
       {
         name: "Community Management",
         content:
-          "Our expertise in community management helps foster a vibrant and engaged developer community. We organize and facilitate discussions, support forums, and events to promote knowledge sharing and collaboration. With our vast international network, we have solutions to meet all your organization's community needs.",
+          "Our expertise in community management helps foster a vibrant and engaged developer communities. We organize and facilitate discussions, support forums, and events to promote knowledge sharing and collaboration. With our vast international network, we have solutions to meet all your organization's community needs.",
         image: "/images/community.jpg",
         imageDescription: "A packed room at a university in Bali.",
         href: "",
