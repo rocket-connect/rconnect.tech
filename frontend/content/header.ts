@@ -3,9 +3,9 @@ export const header = {
   links: [
     { label: "Services", href: "/services" },
     { label: "Community", href: "/community" },
-    { label: "About Us", href: "/about" },
-    { label: "Contact us", href: "/contact" },
+    { label: "About", href: "/about" },
     { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/contact" },
   ],
   socials: [
     {
