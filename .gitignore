@@ -105,3 +105,5 @@ dist
 
 .DS_Store
 settings.json
+
+.env.local

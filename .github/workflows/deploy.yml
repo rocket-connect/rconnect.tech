@@ -1,4 +1,4 @@
-name: Node Github CI
+name: rconnect.tech
 
 on:
   push:
@@ -6,10 +6,12 @@ on:
       - main
 
 jobs:
-  deploy:
+  deploy-preview:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-project
       - name: SSH and deploy node app
         uses: appleboy/ssh-action@master
         with:
@@ -19,13 +21,9 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            cd rconnect.tech
+            cd ./rconnect.tech
             git reset --hard
             git pull origin main
-            cd ./frontend
             npm install
             npm run build
-            cd ../backend
-            npm install
-            npm run build
-            pm2 restart website
+            pm2 restart rconnect.tech

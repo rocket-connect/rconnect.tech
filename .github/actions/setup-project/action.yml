@@ -1,0 +1,22 @@
+name: Setup Project
+
+inputs:
+  node-version:
+    required: false
+    default: 18
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+    - name: Install dependencies
+      run: npm install
+      shell: bash
+    - name: Lint project
+      run: npm run lint
+      shell: bash
+    - name: Build project
+      run: npm run build
+      shell: bash

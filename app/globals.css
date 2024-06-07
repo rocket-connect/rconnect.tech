@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #24bee1;
+  --foreground: #1a2735;
+  --foreground-invert: #ffffff;
+  --background: #ffffff;
+  --background-invert: #1a2735;
+  --hover: #f1f6fa;
+  --hover-invert: #284360;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.leaflet-div-icon {
+  background: transparent !important;
+  border: none !important;
+}
