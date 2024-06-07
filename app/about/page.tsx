@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'About Us | Rconnect.tech',
   description: about.hero.intro,
   openGraph: {
-    images: '/images/blog-default-preview.jpg',
+    images: '/images/blog-default-preview.png',
   },
 };
 
