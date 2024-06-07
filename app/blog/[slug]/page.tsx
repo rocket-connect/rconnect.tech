@@ -11,7 +11,7 @@ import { Main } from "@/components/shared/Main";
 import { Container } from "@/components/shared/Container";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import { categoryColor, cn, formatdate } from "@/lib/utils";
+import { categoryColor, cn, formatdate, metadataBase } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
@@ -26,10 +26,11 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: `${props.frontMatter.title} | Rconnect.tech`,
-    metadataBase: new URL("https://rconnect.tech/"),
+    title: `Blog | ${props.frontMatter.title}`,
+    description: props.frontMatter.description,
+    metadataBase,
     openGraph: {
-      images: ["/images/blog-default-preview.jpg", ...previousImages],
+      images: [props.frontMatter.hero, ...previousImages],
     },
   };
 }
@@ -64,6 +65,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   const formattedDate = formatdate(props.frontMatter.date);
   const color = categoryColor(props.frontMatter.category);
+
   return (
     <Main>
       <Header />

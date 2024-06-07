@@ -46,3 +46,6 @@ export function categoryColor(category: string) {
       return "#0ea5e9";
   }
 }
+export const metadataBase = new URL(
+  process.env.METADATA_BASE_URL || "http://localhost:3000"
+);
