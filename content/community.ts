@@ -72,12 +72,12 @@ export const community = {
         color: '#dc2626',
       },
       {
-        eventName: 'GraphQL Sydney',
-        city: 'Sydney',
-        lattitude: -33.8688,
-        longitude: 151.2093,
-        href: 'https://www.meetup.com/graphql-sydney/events/297415925/',
-        color: '#dc2626',
+        eventName: 'DevTools LA',
+        city: 'Los Angeles',
+        lattitude: 34.052235,
+        longitude: -118.243683,
+        href: '/blog/devtools-la',
+        color: '#ec4899',
       },
     ],
   },
@@ -85,6 +85,12 @@ export const community = {
     title: 'Communities',
     info: 'We start, foster, sponsor, and facilitate several communities in tech across the globe. You can leverage our existing communities for your efforts, connecting with vibrant tech groups and gaining access to a diverse and engaged audience. Collaborate with us to elevate your brand and make a meaningful impact in the tech world.',
     events: [
+      {
+        eventName: 'Dev Tools LA',
+        href: '/blog/devtools-la',
+        image: '/images/directory/devtools-la.jpg',
+        logo: '/images/event-logos/devtools-la.svg',
+      },
       {
         eventName: 'Dev Tools Bali',
         href: '/blog/devtools-bali',

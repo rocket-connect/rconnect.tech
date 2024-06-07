@@ -12,25 +12,22 @@ import { Container } from '@/components/shared/Container';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { categoryColor, cn, formatdate, metadataBase } from '@/lib/utils';
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
+import Image from 'next/image';
 
 type Props = {
   params: { slug: string };
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const props = await getPost(params);
-  const previousImages = (await parent).openGraph?.images || [];
 
   return {
     title: `Blog | ${props.frontMatter.title}`,
     description: props.frontMatter.description,
     metadataBase,
     openGraph: {
-      images: [props.frontMatter.hero, ...previousImages],
+      images: props.frontMatter.hero,
     },
   };
 }
@@ -83,6 +80,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <h1 className="mb-4 text-4xl font-bold text-foreground-main dark:text-foreground-invert">
               {props.frontMatter.title}
             </h1>
+            <Image
+              className="mb-4 rounded-xl"
+              alt={props.frontMatter.title}
+              width={800}
+              height={500}
+              src={props.frontMatter.hero as string}
+            />
             <div className="prose-a:text-bold prose prose-sm mx-auto text-foreground-main md:prose-base lg:prose-lg prose-headings:text-foreground-main prose-a:text-foreground-main prose-a:visited:text-foreground-main prose-ol:list-decimal prose-ul:list-disc dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-foreground-invert prose-a:dark:visited:text-foreground-invert">
               <MDXRemote source={props.content} components={components} />
             </div>
