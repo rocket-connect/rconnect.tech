@@ -7,6 +7,9 @@ import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 const rubik = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.METADATA_BASE_URL || "http://localhost:3000"
+  ),
   openGraph: {
     images: "/images/blog-default-preview.jpg",
   },

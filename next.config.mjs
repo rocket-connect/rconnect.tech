@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env: {
+    METADATA_BASE_URL: process.env.METADATA_BASE_URL,
+  },
   images: {
     remotePatterns: [
       {
