@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface CardProps {
   name: string;
@@ -14,9 +14,9 @@ interface CardsProps {
 
 export const ServicesCard = ({ cards }: CardsProps) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
       {cards.map((card: any, index: number) => (
-        <Card key={"servicescard-" + index} card={card} />
+        <Card key={'servicescard-' + index} card={card} />
       ))}
     </div>
   );
@@ -25,23 +25,23 @@ export const ServicesCard = ({ cards }: CardsProps) => {
 const Card = ({ card }: any) => {
   return (
     <Link href={card.href}>
-      <div className="border border-[#EFEFEF] dark:border-[#1F344A] shadow-sm rounded-xl overflow-hidden  bg-background-main dark:bg-[#284360] hover:text-[#EEEEFB] hover:dark:text-[#1A2735] hover:scale-[1.01] transition-all ease-in hover:shadow-lg hover:cursor-pointer">
-        <div className="relative aspec-video w-full">
-          <div className="relative z-20 mix-blend-multiply bg-[#D1DBFF] dark:bg-[#284360] h-full" />
+      <div className="overflow-hidden rounded-xl border border-[#EFEFEF] bg-background-main shadow-sm transition-all ease-in hover:scale-[1.01] hover:cursor-pointer hover:text-[#EEEEFB] hover:shadow-lg dark:border-[#1F344A] dark:bg-[#284360] hover:dark:text-[#1A2735]">
+        <div className="aspec-video relative w-full">
+          <div className="relative z-20 h-full bg-[#D1DBFF] mix-blend-multiply dark:bg-[#284360]" />
           <Image
             src={card.image}
             alt=""
             width={432}
             height={246}
-            className="relative z-10 w-full object-cover aspect-video"
+            className="relative z-10 aspect-video w-full object-cover"
             priority
           />
         </div>
-        <div className="flex flex-col gap-2 items-start justify-center text-left text-foreground-main p-6">
-          <h3 className="text-foreground-main dark:text-foreground-invert text-lg font-medium truncate w-full">
+        <div className="flex flex-col items-start justify-center gap-2 p-6 text-left text-foreground-main">
+          <h3 className="w-full truncate text-lg font-medium text-foreground-main dark:text-foreground-invert">
             {card.name}
           </h3>
-          <p className=" text-foreground-main dark:text-foreground-invert line-clamp-3">
+          <p className="line-clamp-3 text-foreground-main dark:text-foreground-invert">
             {card.content}
           </p>
         </div>

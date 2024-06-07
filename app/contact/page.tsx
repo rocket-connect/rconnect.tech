@@ -1,15 +1,15 @@
-import { Hero } from "@/components/shared/Hero";
-import { SocialProofSection } from "@/components/templates/SocialProofSection";
-import { Footer } from "@/components/shared/Footer";
-import { Header } from "@/components/shared/Header";
-import { Main } from "@/components/shared/Main";
-import { contact } from "@/content/contact";
-import Image from "next/image";
-import { Metadata } from "next";
-import ContactForm from "@/components/ui/contact-form";
+import { Hero } from '@/components/shared/Hero';
+import { SocialProofSection } from '@/components/templates/SocialProofSection';
+import { Footer } from '@/components/shared/Footer';
+import { Header } from '@/components/shared/Header';
+import { Main } from '@/components/shared/Main';
+import { contact } from '@/content/contact';
+import Image from 'next/image';
+import { Metadata } from 'next';
+import ContactForm from '@/components/ui/contact-form';
 
 export const metadata: Metadata = {
-  title: "Contact us | Rconnect.tech",
+  title: 'Contact us | Rconnect.tech',
   description: contact.hero.intro,
 };
 
@@ -18,20 +18,20 @@ export default function Contact() {
     <Main>
       <Header />
       <Hero content={contact.hero} />
-      <div className="container flex flex-col md:flex-row flex-col-reverse p-0 lg:p-16 w-full align-center justify-center mx-auto gap-8">
-        <div className="flex flex-col h-full items-center justify-center my-auto mx-auto md:mx-0 gap-4">
+      <div className="align-center container mx-auto flex w-full flex-col flex-col-reverse justify-center gap-8 p-0 md:flex-row lg:p-16">
+        <div className="mx-auto my-auto flex h-full flex-col items-center justify-center gap-4 md:mx-0">
           <Image
             src={contact.image}
             width={200}
             height={400}
             alt=""
-            className="rounded-xl object-cover w-full"
+            className="w-full rounded-xl object-cover"
           />
-          <p className="text-foreground-main dark:text-foreground-invert text-center italic">
+          <p className="text-center italic text-foreground-main dark:text-foreground-invert">
             {contact.imageDescription}
           </p>
         </div>
-        <div className="w-full md:w-1/2 mx-auto md:mx-0">
+        <div className="mx-auto w-full md:mx-0 md:w-1/2">
           <ContactForm />
         </div>
       </div>

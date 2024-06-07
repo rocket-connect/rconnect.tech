@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface LogoProp {
   className?: string;
@@ -11,7 +11,7 @@ export const Logo = ({ className }: LogoProp) => {
       height="44"
       viewBox="0 0 160 44"
       fill="none"
-      className={cn("fill-[#1A2735] dark:fill-white", className)}
+      className={cn('fill-[#1A2735] dark:fill-white', className)}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

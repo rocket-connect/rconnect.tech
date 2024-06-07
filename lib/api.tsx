@@ -1,12 +1,8 @@
-export async function contact(body: {
-  name: string;
-  email: string;
-  message: string;
-}) {
+export async function contact(body: { name: string; email: string; message: string }) {
   const response = await fetch(`/api/contact`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
   });

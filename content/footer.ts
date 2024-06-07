@@ -1,41 +1,41 @@
 export const footer = {
   logo: {
-    image: "/images/logo/rconnect-wordmark.svg",
-    href: "/",
-    title: "rconnect.tech",
+    image: '/images/logo/rconnect-wordmark.svg',
+    href: '/',
+    title: 'rconnect.tech',
   },
   menu: [
     {
-      name: "Product",
-      links: [{ label: "Debugger", href: "https://www.graphql-debugger.com/" }],
+      name: 'Product',
+      links: [{ label: 'Debugger', href: 'https://www.graphql-debugger.com/' }],
     },
     {
-      name: "Community",
+      name: 'Community',
       links: [
-        { label: "Youtube", href: "https://www.youtube.com/@rocket-connect" },
+        { label: 'Youtube', href: 'https://www.youtube.com/@rocket-connect' },
         {
-          label: "LinkedIn",
-          href: "https://www.linkedin.com/company/rocketconnect/",
+          label: 'LinkedIn',
+          href: 'https://www.linkedin.com/company/rocketconnect/',
         },
-        { label: "Twitter", href: "https://x.com/rconnect_tech" },
-        { label: "Github", href: "https://github.com/rocket-connect" },
+        { label: 'Twitter', href: 'https://x.com/rconnect_tech' },
+        { label: 'Github', href: 'https://github.com/rocket-connect' },
       ],
     },
     {
-      name: "Services",
+      name: 'Services',
       links: [
-        { label: "Open Source Development", href: "/services/#oss-dev" },
-        { label: "Community Management", href: "/services/#community-mgmt" },
-        { label: "Developer Relations", href: "/services/#dev-rel" },
-        { label: "Software Training", href: "/services/#software-training" },
+        { label: 'Open Source Development', href: '/services/#oss-dev' },
+        { label: 'Community Management', href: '/services/#community-mgmt' },
+        { label: 'Developer Relations', href: '/services/#dev-rel' },
+        { label: 'Software Training', href: '/services/#software-training' },
       ],
     },
     {
-      name: "About",
+      name: 'About',
       links: [
-        { label: "About Us", href: "/about" },
-        { label: "Contact us", href: "/contact-us" },
-        { label: "Blog", href: "/blog" },
+        { label: 'About Us', href: '/about' },
+        { label: 'Contact us', href: '/contact-us' },
+        { label: 'Blog', href: '/blog' },
       ],
     },
   ],

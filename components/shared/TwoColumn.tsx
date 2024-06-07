@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { Container } from "./Container";
+import { cn } from '@/lib/utils';
+import { Container } from './Container';
 
 interface TwoColumnProps {
   children: any;
@@ -12,8 +12,8 @@ export const TwoColumn = ({ children, index }: TwoColumnProps) => {
     <div className="w-full py-4 lg:py-12">
       <Container
         className={cn(
-          "flex gap-8 lg:gap-16 items-center text-foreground-main dark:text-foreground-invert",
-          isOdd ? "flex-col lg:flex-row-reverse" : "flex-col lg:flex-row"
+          'flex items-center gap-8 text-foreground-main dark:text-foreground-invert lg:gap-16',
+          isOdd ? 'flex-col lg:flex-row-reverse' : 'flex-col lg:flex-row',
         )}
       >
         {children}

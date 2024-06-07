@@ -1,6 +1,6 @@
-"use client";
-import { CheckIcon, CopyIcon } from "lucide-react";
-import React, { useState } from "react";
+'use client';
+import { CheckIcon, CopyIcon } from 'lucide-react';
+import React, { useState } from 'react';
 function AdminBar({ code, language }: { code: string; language: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -13,20 +13,20 @@ function AdminBar({ code, language }: { code: string; language: string }) {
   };
 
   return (
-    <div className="bg-gray-800 h-[40px] relative top-3 rounded-t-lg flex justify-between items-center px-4">
-      <span className="text-white text-sm">{language}</span>
+    <div className="relative top-3 flex h-[40px] items-center justify-between rounded-t-lg bg-gray-800 px-4">
+      <span className="text-sm text-white">{language}</span>
       <button
         onClick={copyToClipboard}
-        className="text-white text-sm bg-slate-700 px-2 py-1 rounded-md active:bg-slate-600 h-6 flex items-center"
+        className="flex h-6 items-center rounded-md bg-slate-700 px-2 py-1 text-sm text-white active:bg-slate-600"
       >
         {copied ? (
-          <div className="flex gap-2 items-center">
-            <CheckIcon className="w-3 h-3" />
+          <div className="flex items-center gap-2">
+            <CheckIcon className="h-3 w-3" />
             Code Copied!
           </div>
         ) : (
-          <div className="flex gap-2 items-center">
-            <CopyIcon className="w-3 h-3" />
+          <div className="flex items-center gap-2">
+            <CopyIcon className="h-3 w-3" />
             Copy
           </div>
         )}

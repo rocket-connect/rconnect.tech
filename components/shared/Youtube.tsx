@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const YouTube = ({ videoId }: { videoId: string }) => {
   const videoSrc = `https://www.youtube.com/embed/${videoId}`;
