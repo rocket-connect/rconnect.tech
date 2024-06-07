@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
 // START: Preserve spaces to avoid auto-sorting
-import "leaflet/dist/leaflet.css";
+import 'leaflet/dist/leaflet.css';
 
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
 
-import "leaflet-defaulticon-compatibility";
+import 'leaflet-defaulticon-compatibility';
 // END: Preserve spaces to avoid auto-sorting
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { renderToStaticMarkup } from "react-dom/server";
-import { divIcon } from "leaflet";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { Container } from "../shared/Container";
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { divIcon } from 'leaflet';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Container } from '../shared/Container';
 
 interface MapProp {
   content: any;
@@ -21,9 +21,9 @@ interface MapProp {
 export default function Map({ content }: MapProp) {
   const iconMarkup = renderToStaticMarkup(
     <span className="relative flex h-4 w-4">
-      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-      <span className="relative inline-flex rounded-full h-4 w-4 bg-sky-500"></span>
-    </span>
+      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+      <span className="relative inline-flex h-4 w-4 rounded-full bg-sky-500"></span>
+    </span>,
   );
   const customMarkerIcon = divIcon({
     html: iconMarkup,
@@ -31,19 +31,17 @@ export default function Map({ content }: MapProp) {
   return (
     <div className="w-full py-16">
       <Container className="gap-8">
-        <h2 className="text-foreground-main dark:text-foreground-invert text-3xl font-bold mr-auto">
+        <h2 className="mr-auto text-3xl font-bold text-foreground-main dark:text-foreground-invert">
           {content.title}
         </h2>
-        <p className="text-foreground-main dark:text-foreground-invert max-w-xl">
-          {content.info}
-        </p>
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12">
-          <div className="rounded-xl overflow-hidden">
+        <p className="max-w-xl text-foreground-main dark:text-foreground-invert">{content.info}</p>
+        <div className="flex flex-col gap-12 lg:grid lg:grid-cols-2">
+          <div className="overflow-hidden rounded-xl">
             <MapContainer
               preferCanvas={true}
               center={[5, 80]}
               zoom={2.2}
-              style={{ height: "500px", width: "600px" }}
+              style={{ height: '500px', width: '600px' }}
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -56,21 +54,21 @@ export default function Map({ content }: MapProp) {
                     longitude: number;
                     city: string;
                   },
-                  index: string
+                  index: string,
                 ) => (
                   <Marker
-                    key={"loc-" + index}
+                    key={'loc-' + index}
                     position={[location.lattitude, location.longitude]}
                     icon={customMarkerIcon}
                   >
                     <Popup>{location.city}</Popup>
                   </Marker>
-                )
+                ),
               )}
             </MapContainer>
           </div>
-          <div className="w-full h-full flex flex-col items-center jusitfy-start">
-            <div className="w-full flex flex-col border border-[#E6E6FF] rounded-xl bg-[#F1F6FA] dark:bg-[#1F344A] dark:border-[#546C87] h-fit overflow-hidden">
+          <div className="jusitfy-start flex h-full w-full flex-col items-center">
+            <div className="flex h-fit w-full flex-col overflow-hidden rounded-xl border border-[#E6E6FF] bg-[#F1F6FA] dark:border-[#546C87] dark:bg-[#1F344A]">
               {content.locations.map(
                 (
                   location: {
@@ -79,29 +77,25 @@ export default function Map({ content }: MapProp) {
                     longitude: number;
                     href: string;
                   },
-                  index: string
+                  index: string,
                 ) => (
-                  <a
-                    key={"evloc-" + index}
-                    href={location.href}
-                    target="_blank"
-                  >
-                    <div className="text-foreground-main dark:text-foreground-invert w-full py-4 px-6 text-xl font-bold flex flex-row items-center justify-between bg-background-main dark:bg-background-invert hover:bg-hover-main dark:hover:bg-hover-invert cursor-pointer">
+                  <a key={'evloc-' + index} href={location.href}>
+                    <div className="flex w-full cursor-pointer flex-row items-center justify-between bg-background-main px-6 py-4 text-xl font-bold text-foreground-main hover:bg-hover-main dark:bg-background-invert dark:text-foreground-invert dark:hover:bg-hover-invert">
                       {location.eventName}
                       <ArrowRight className="-rotate-45 stroke-[#838793]" />
                     </div>
                   </a>
-                )
+                ),
               )}
             </div>
-            <p className="text-center text-[#838793] py-4">
-              <Link href={"/contact"} className="underline hover:opacity-70">
+            <p className="py-4 text-center text-[#838793]">
+              <Link href={'/contact'} className="underline hover:opacity-70">
                 Contact us now
               </Link>
             </p>
           </div>
         </div>
-        <p className="text-foreground-main dark:text-foreground-invert ml-auto max-w-xl">
+        <p className="ml-auto max-w-xl text-foreground-main dark:text-foreground-invert">
           {content.offering}
         </p>
       </Container>

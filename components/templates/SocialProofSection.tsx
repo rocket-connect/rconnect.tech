@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Container } from "../shared/Container";
-import { socialProof } from "../../content/socialproof";
+import Image from 'next/image';
+import { Container } from '../shared/Container';
+import { socialProof } from '../../content/socialproof';
 interface SocialProofProps {
   content?: {
     title: string;
@@ -11,27 +11,24 @@ interface SocialProofProps {
   };
 }
 
-export const SocialProofSection = ({
-  content = socialProof,
-}: SocialProofProps) => {
+export const SocialProofSection = ({ content = socialProof }: SocialProofProps) => {
   return (
     <Container className="gap-8 pb-8">
-      <h2 className="text-lg lg:text-md font-bold text-center lg:text-center text-[#607388]">
+      <h2 className="lg:text-md text-center text-lg font-bold text-[#607388] lg:text-center">
         {content.title}
       </h2>
-      <div className="w-full grid grid-cols-3 lg:flex lg:flex-row lg:flex-wrap gap-x-4 lg:gap-x-24 gap-y-2 lg:gap-y-4 items-center justify-center">
+      <div className="grid w-full grid-cols-3 items-center justify-center gap-x-4 gap-y-2 lg:flex lg:flex-row lg:flex-wrap lg:gap-x-24 lg:gap-y-4">
         {content.logos.map((logo, index) => (
-          <div key={"logo-" + index} className="w-[100px] h-[40px]">
+          <div key={'logo-' + index} className="h-[40px] w-[100px]">
             <a
               href={logo.href}
-              className="relative inline-block w-[100px] h-[40px] hover:scale-105 transition-all ease-in"
-              target="_blank"
+              className="relative inline-block h-[40px] w-[100px] transition-all ease-in hover:scale-105"
             >
               <Image
                 src={logo.image}
                 fill
                 alt=""
-                className="w-full h-full object-contain aspect-video py-1 dark:invert-[100%] dark:brightness-[0%]"
+                className="aspect-video h-full w-full object-contain py-1 dark:brightness-[0%] dark:invert-[100%]"
               />
             </a>
           </div>

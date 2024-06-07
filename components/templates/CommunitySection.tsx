@@ -1,8 +1,7 @@
-import { Button } from "../ui/button";
-import { Container } from "../shared/Container";
-import Image from "next/image";
-import Link from "next/link";
-import { community } from "@/content/community";
+import { Button } from '../ui/button';
+import { Container } from '../shared/Container';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface CommunityProps {
   content: {
@@ -20,12 +19,12 @@ export const CommunitySection = ({ content }: CommunityProps) => {
   return (
     <Container className="gap-8">
       <div className="mr-auto flex flex-col gap-4">
-        <h2 className="text-foreground-main dark:text-foreground-invert text-3xl font-bold mr-auto">
+        <h2 className="mr-auto text-3xl font-bold text-foreground-main dark:text-foreground-invert">
           {content.title}
         </h2>
       </div>
-      <div className="w-full flex flex-col lg:grid lg:grid-cols-3 gap-8">
-        <div className="w-full col-span-2">
+      <div className="flex w-full flex-col gap-8 lg:grid lg:grid-cols-3">
+        <div className="col-span-2 w-full">
           <iframe
             src={content.featured.embed}
             title={content.featured.title}
@@ -34,8 +33,8 @@ export const CommunitySection = ({ content }: CommunityProps) => {
             allowFullScreen
             className="aspect-video w-full rounded-xl"
           />
-          <div className="py-6 flex flex-col gap-2">
-            <h3 className="text-foreground-main dark:text-foreground-invert text-2xl font-medium">
+          <div className="flex flex-col gap-2 py-6">
+            <h3 className="text-2xl font-medium text-foreground-main dark:text-foreground-invert">
               {content.featured.title}
             </h3>
             <p className="text-foreground-main dark:text-foreground-invert">
@@ -43,31 +42,31 @@ export const CommunitySection = ({ content }: CommunityProps) => {
             </p>
           </div>
         </div>
-        <div className="w-full h-fit flex flex-col lg:grid lg:grid-cols-1 lg:grid-rows-5 gap-8">
+        <div className="flex h-fit w-full flex-col gap-8 lg:grid lg:grid-cols-1 lg:grid-rows-5">
           {content.videos.map((video, index) => (
             <a
-              key={"vdo-" + index}
+              key={'vdo-' + index}
               href={video.href}
-              className="group w-full grid grid-cols-1 lg:grid-cols-2 gap-4 items-center "
+              className="group grid w-full grid-cols-1 items-center gap-4 lg:grid-cols-2"
             >
               <Image
                 src={video.image}
-                className="aspect-video w-full rounded-lg object-cover group-hover:scale-105 transition-all ease-in"
+                className="aspect-video w-full rounded-lg object-cover transition-all ease-in group-hover:scale-105"
                 alt=""
                 width={200}
                 height={100}
               />
               <div className="flex flex-col gap-2">
-                <h4 className="text-foreground-main dark:text-foreground-invert text-md font-medium line-clamp-2">
+                <h4 className="text-md line-clamp-2 font-medium text-foreground-main dark:text-foreground-invert">
                   {video.title}
                 </h4>
-                <p className="text-foreground-main dark:text-foreground-invert line-clamp-3 text-sm leading-tight">
+                <p className="line-clamp-3 text-sm leading-tight text-foreground-main dark:text-foreground-invert">
                   {video.desc}
                 </p>
               </div>
             </a>
           ))}
-          <div className="w-full ">
+          <div className="w-full">
             <Link href="https://www.youtube.com/@rocket-connect">
               <Button className="w-full">Watch more</Button>
             </Link>

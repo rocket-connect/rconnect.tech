@@ -1,27 +1,25 @@
-import { ArrowRight } from "lucide-react";
-import { Container } from "../shared/Container";
+import { ArrowRight } from 'lucide-react';
+import { Container } from '../shared/Container';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-} from "../ui/carousel";
-import Image from "next/image";
+} from '../ui/carousel';
+import Image from 'next/image';
 
 export const DirectorySection = ({ content }: { content: any }) => {
   return (
     <div className="w-full py-8">
       <Container className="gap-8 overflow-hidden xl:overflow-visible">
-        <h2 className="text-foreground-main dark:text-foreground-invert text-3xl font-bold mr-auto">
+        <h2 className="mr-auto text-3xl font-bold text-foreground-main dark:text-foreground-invert">
           {content.title}
         </h2>
-        <p className="text-foreground-main dark:text-foreground-invert max-w-xl">
-          {content.info}
-        </p>
+        <p className="max-w-xl text-foreground-main dark:text-foreground-invert">{content.info}</p>
         <Carousel
           opts={{
-            align: "start",
+            align: 'start',
           }}
           className="w-full"
         >
@@ -36,18 +34,17 @@ export const DirectorySection = ({ content }: { content: any }) => {
                   youtube: string;
                   meetup: string;
                 },
-                index: number
+                index: number,
               ) => (
-                <CarouselItem key={"direvent" + index} className="basis-1/1 ">
-                  <div className="relative w-[300px] h-[450px] bg-zinc-400 p-8 rounded-xl flex flex-col justify-between overflow-hidden border border-[#E6E6FF] dark:border-[#546C87]">
-                    <div className="ml-auto relative z-20 flex flex-col gap-2 items-end">
+                <CarouselItem key={'direvent' + index} className="basis-1/1">
+                  <div className="relative flex h-[450px] w-[300px] flex-col justify-between overflow-hidden rounded-xl border border-[#E6E6FF] bg-zinc-400 p-8 dark:border-[#546C87]">
+                    <div className="relative z-20 ml-auto flex flex-col items-end gap-2">
                       <a
                         href={event.href}
-                        className=" flex gap-4 text-white hover:underline text-lg items-center"
-                        target="_blank"
+                        className="flex items-center gap-4 text-lg text-white hover:underline"
                       >
                         Learn More
-                        <ArrowRight className="stroke-white -rotate-45" />
+                        <ArrowRight className="-rotate-45 stroke-white" />
                       </a>
                     </div>
                     <Image
@@ -58,23 +55,21 @@ export const DirectorySection = ({ content }: { content: any }) => {
                       height={80}
                     />
 
-                    <div className="absolute z-10 w-full h-full top-0 left-0 ">
+                    <div className="absolute left-0 top-0 z-10 h-full w-full">
                       <Image
                         src={event.image}
                         alt=""
                         width={300}
                         height={450}
-                        className="w-full h-full opacity-60 object-cover"
+                        className="h-full w-full object-cover opacity-60"
                       />
                     </div>
                   </div>
                 </CarouselItem>
-              )
+              ),
             )}
           </CarouselContent>
-          {/* @ts-ignore */}
           <CarouselPrevious />
-          {/* @ts-ignore */}
           <CarouselNext />
         </Carousel>
       </Container>

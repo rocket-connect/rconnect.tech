@@ -1,8 +1,7 @@
-import { Button } from "../ui/button";
-import { ServicesCard } from "./ServicesCard";
-import { Container } from "../shared/Container";
-import Link from "next/link";
-import { services } from "@/content/services";
+import { Button } from '../ui/button';
+import { ServicesCard } from './ServicesCard';
+import { Container } from '../shared/Container';
+import Link from 'next/link';
 
 interface sectionProps {
   content: {
@@ -19,12 +18,12 @@ interface sectionProps {
 
 export const ServicesSection = ({ content }: sectionProps) => {
   return (
-    <div className="w-full bg-gradient-to-b from-[#FCFCFF] to-white border-t border-[#E6E6FF] dark:bg-gradient-to-b dark:from-[#1F344A] dark:to-background-invert dark:border-[#1F344A]">
-      <Container className="gap-8 justify-center items-center">
+    <div className="w-full border-t border-[#E6E6FF] bg-gradient-to-b from-[#FCFCFF] to-white dark:border-[#1F344A] dark:bg-gradient-to-b dark:from-[#1F344A] dark:to-background-invert">
+      <Container className="items-center justify-center gap-8">
         <div className="mr-auto flex flex-col gap-4">
           <h2
-            id={"service-section"}
-            className="text-3xl font-bold mr-auto text-foreground dark:text-foreground-invert"
+            id={'service-section'}
+            className="text-foreground mr-auto text-3xl font-bold dark:text-foreground-invert"
           >
             {content.title}
           </h2>
