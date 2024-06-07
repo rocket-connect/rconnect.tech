@@ -42,5 +42,9 @@ export const socialProof = {
       image: '/images/company-logos/koding-akademi.svg',
       href: 'https://www.kodingakademi.id/',
     },
+    {
+      image: '/images/company-logos/devtools-america.svg',
+      href: 'https://guild.host/devtools-america/network',
+    },
   ],
 };
