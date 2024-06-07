@@ -2,6 +2,7 @@
 const nextConfig = {
   env: {
     METADATA_BASE_URL: process.env.METADATA_BASE_URL,
+    GA_KEY: process.env.GA_KEY,
   },
   images: {
     remotePatterns: [

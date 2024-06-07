@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 const previewGoogleAnalytics = {
-  analytics: "G-C14HJ0PDRJ",
+  analytics: process.env.GA_KEY || "",
 };
 
 const googleId = previewGoogleAnalytics;
