@@ -10,7 +10,7 @@ import ContactForm from "@/components/ui/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact us | Rconnect.tech",
-  description: "We connect people through open source.",
+  description: contact.hero.intro,
 };
 
 export default function Contact() {

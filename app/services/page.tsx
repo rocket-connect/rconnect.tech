@@ -11,7 +11,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Services | Rconnect.tech",
-  description: "We connect people through open source.",
+  description: services.hero.intro,
 };
 
 export default function Services() {

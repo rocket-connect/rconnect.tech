@@ -11,7 +11,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About Us | Rconnect.tech",
-  description: "We connect people through open source.",
+  description: about.hero.intro,
   openGraph: {
     images: "/images/blog-default-preview.jpg",
   },

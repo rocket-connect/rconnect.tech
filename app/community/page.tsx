@@ -12,7 +12,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Community | Rocket Connect",
-  description: "We connect people through open source.",
+  description: community.hero.intro,
 };
 
 const LazyMap = dynamic(() => import("@/components/templates/MapSection"), {
