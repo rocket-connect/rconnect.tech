@@ -25,5 +25,6 @@ jobs:
             git reset --hard
             git pull origin main
             npm install
+            rm -fr ./.next/
             npm run build
             pm2 restart rconnect.tech
