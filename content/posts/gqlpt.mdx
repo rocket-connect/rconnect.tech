@@ -1,0 +1,130 @@
+---
+title: 'GQLPT: Revolutionizing GraphQL Query Generation with AI'
+date: '2024-08-31'
+description: 'GQLPT is an innovative npm package that leverages the power of AI to generate GraphQL queries from plain text, streamlining the development process and making working with GraphQL a breeze.'
+hero: '/images/blogs/gqlpt-blog.png'
+category: 'technology'
+---
+
+GQLPT is an innovative npm package that leverages the power of AI to generate GraphQL queries from plain text. This cutting-edge tool is designed to streamline the development process and make working with GraphQL more accessible and efficient for developers of all levels.
+
+## What is GQLPT?
+
+GQLPT is a powerful npm package that allows developers to generate GraphQL queries using natural language. Instead of manually constructing complex queries, you can simply describe what data you need in plain English, and GQLPT will do the heavy lifting for you.
+
+## Key Features
+
+1. AI-Powered Query Generation: GQLPT uses advanced AI models to interpret your plain text descriptions and generate accurate GraphQL queries.
+
+2. Flexible Adapters: The package supports multiple AI services through its adapter system. Currently, it offers adapters for Anthropic and OpenAI.
+
+3. Schema Introspection: GQLPT can connect directly to your GraphQL endpoint and introspect the schema, ensuring that generated queries are always up-to-date.
+
+4. Generate and Send: With the generateAndSend method, GQLPT can not only generate queries but also send them directly to your GraphQL endpoint.
+
+5. Bring Your Own AI: GQLPT operates on a "bring your own AI" model. You need to supply your own API key for either OpenAI or Anthropic to use their respective adapters.
+
+## GQLPT in Action
+
+Here's a glimpse of the GQLPT playground in action:
+
+![GQLPT Playground](https://github.com/rocket-connect/gqlpt/raw/main/docs/screenshot.png)
+
+We encourage you to try out the GQLPT playground at [gqlpt.dev](https://www.gqlpt.dev/). It's a great way to experience the power of AI-generated GraphQL queries firsthand!
+
+## Getting Started with GQLPT
+
+Let's walk through the process of setting up and using GQLPT in your project:
+
+### Installation
+
+First, install GQLPT and the OpenAI adapter:
+
+```bash
+npm install gqlpt @gqlpt/adapter-openai
+```
+
+### Basic Usage
+
+Here's a simple example of how to use GQLPT:
+
+```typescript
+import { AdapterOpenAI } from "@gqlpt/adapter-openai";
+import { GQLPTClient } from "gqlpt";
+
+const typeDefs = /* GraphQL */ `
+  type User {
+    id: ID!
+    name: String!
+  }
+
+  type Query {
+    user(id: ID!): User
+  }
+`;
+
+const client = new GQLPTClient({
+  typeDefs,
+  adapter: new AdapterOpenAI({
+    apiKey: process.env.OPENAI_API_KEY, // Make sure to provide your OpenAI API key
+  }),
+});
+
+async function main() {
+  await client.connect();
+  const query = "Find users by id 1";
+  const response = await client.generateQueryAndVariables(query);
+  console.log(response);
+}
+
+main();
+```
+
+Note: Remember to supply your own OpenAI API key in the above example.
+
+### Using Introspection
+
+GQLPT can fetch your schema directly from your GraphQL endpoint:
+
+```typescript
+const client = new GQLPTClient({
+  url: "http://your-graphql-endpoint.com/graphql",
+  adapter: new AdapterOpenAI({ apiKey: process.env.OPENAI_API_KEY }),
+});
+
+await client.connect(); // Performs introspection
+```
+
+### Generate and Send
+
+For a complete end-to-end solution, use the generateAndSend method:
+
+```typescript
+const response = await client.generateAndSend("Find users by id 1");
+console.log(response); // Logs the server's response
+```
+
+## Real-World Benefits
+
+1. Faster Development: Spend less time writing complex queries and more time building features.
+2. Improved Accessibility: Make GraphQL more accessible to team members who might not be GraphQL experts.
+3. Reduced Errors: AI-generated queries can help reduce syntax errors and improve query accuracy.
+4. Flexibility: Easily switch between different AI providers using the adapter system.
+
+## Community and Support
+
+We value community involvement and contributions! Here's how you can get involved:
+
+- [GitHub Repository](https://github.com/rocket-connect/gqlpt): Star our repository to show your support and stay updated with the latest developments.
+- [Create Issues](https://github.com/rocket-connect/gqlpt/issues): Have ideas for improvements or found a bug? Create an issue and let us know!
+- [Contribute](https://github.com/rocket-connect/gqlpt/blob/main/CONTRIBUTING.md): We welcome contributions! Check out our contributing guidelines to get started.
+- [GQLPT Playground](https://www.gqlpt.dev/): Try out GQLPT and provide feedback.
+- [npm Package](https://www.npmjs.com/package/gqlpt): Check out our npm page for the latest versions and documentation.
+
+## Conclusion
+
+GQLPT represents a significant step forward in making GraphQL more accessible and efficient. By bridging the gap between natural language and GraphQL queries, it opens up new possibilities for rapid development and improved team collaboration.
+
+Whether you're a GraphQL veteran looking to speed up your workflow or a newcomer seeking an easier entry point, GQLPT offers a powerful solution. Give it a try and experience the future of GraphQL query generation today!
+
+Remember, GQLPT is a community-driven project. We encourage you to star our repository, submit issues if you have ideas or find bugs, and contribute to make GQLPT even better. Your involvement helps shape the future of GraphQL development!
