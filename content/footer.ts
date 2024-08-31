@@ -7,7 +7,10 @@ export const footer = {
   menu: [
     {
       name: 'Product',
-      links: [{ label: 'Debugger', href: 'https://www.graphql-debugger.com/' }],
+      links: [
+        { label: 'GraphQL Observability', href: 'https://www.graphql-debugger.com/' },
+        { label: 'GraphQL AI', href: 'https://www.gqlpt.dev' },
+      ],
     },
     {
       name: 'Community',
