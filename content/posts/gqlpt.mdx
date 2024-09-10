@@ -24,6 +24,8 @@ GQLPT is a powerful npm package that allows developers to generate GraphQL queri
 
 5. Bring Your Own AI: GQLPT operates on a "bring your own AI" model. You need to supply your own API key for either OpenAI or Anthropic to use their respective adapters.
 
+6. Automatic Type Generation: GQLPT offers seamless type generation without requiring changes to your existing code, enhancing type safety in your projects.
+
 ## GQLPT in Action
 
 Here's a glimpse of the GQLPT playground in action:
@@ -75,6 +77,18 @@ async function main() {
   const query = "Find users by id 1";
   const response = await client.generateQueryAndVariables(query);
   console.log(response);
+  // This would log something like:
+  // {
+  //   query: `
+  //     query ($id: ID!) {
+  //       user(id: $id) {
+  //         id
+  //         name
+  //       }
+  //     }
+  //   `,
+  //   variables: { id: "1" }
+  // }
 }
 
 main();
@@ -101,8 +115,91 @@ For a complete end-to-end solution, use the generateAndSend method:
 
 ```typescript
 const response = await client.generateAndSend("Find users by id 1");
-console.log(response); // Logs the server's response
+console.log(response);
+// This would log something like:
+// {
+//   data: {
+//     user: {
+//       id: "1",
+//       name: "John Doe"
+//     }
+//   }
+// }
 ```
+
+## Automatic Type Generation
+
+GQLPT offers seamless type generation without requiring changes to your existing code. This feature enhances type safety in your projects and improves the developer experience.
+
+### Installing the CLI Tool
+
+To use the type generation feature, first install the GQLPT CLI tool:
+
+```bash
+npm install -g @gqlpt/cli
+```
+
+### Generating Types
+
+Run the following command in your project root to generate types:
+
+```bash
+npx @gqlpt/cli generate ./src
+```
+
+This command will:
+1. Scan your `./src` directory for GQLPT usage
+2. Generate TypeScript types based on your plain text queries
+3. Update the types in `node_modules/gqlpt/build/types.d.ts`
+
+You don't need to manually import or reference these types in your code. GQLPT will automatically use them to provide type safety.
+
+### Example: Querying GitHub API with Automatic Type Safety
+
+Here's an example of how to use GQLPT with the GitHub GraphQL API, leveraging automatically generated types:
+
+```typescript
+import { AdapterOpenAI } from "@gqlpt/adapter-openai";
+import { GQLPTClient } from "gqlpt";
+
+const client = new GQLPTClient({
+  url: "https://api.github.com/graphql",
+  headers: {
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+  },
+  adapter: new AdapterOpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  }),
+});
+
+async function searchGitHubRepos() {
+  await client.connect();
+
+  const query = "Find repositories with the name gqlpt";
+
+  const response = await client.generateAndSend(query);
+  console.log(response);
+  // This would log something like:
+  // {
+  //   data: {
+  //     search: {
+  //       edges: [
+  //         {
+  //           node: {
+  //             name: "gqlpt",
+  //             description: "AI-powered GraphQL query generation",
+  //             url: "https://github.com/example/gqlpt"
+  //           }
+  //         },
+  //         // ... more results
+  //       ]
+  //     }
+  //   }
+  // }
+}
+```
+
+In this example, TypeScript provides full type safety and autocompletion when working with the response, based on the automatically generated types.
 
 ## Real-World Benefits
 
@@ -110,6 +207,7 @@ console.log(response); // Logs the server's response
 2. Improved Accessibility: Make GraphQL more accessible to team members who might not be GraphQL experts.
 3. Reduced Errors: AI-generated queries can help reduce syntax errors and improve query accuracy.
 4. Flexibility: Easily switch between different AI providers using the adapter system.
+5. Enhanced Type Safety: Automatic type generation improves code quality and developer experience.
 
 ## Community and Support
 
@@ -117,13 +215,13 @@ We value community involvement and contributions! Here's how you can get involve
 
 - [GitHub Repository](https://github.com/rocket-connect/gqlpt): Star our repository to show your support and stay updated with the latest developments.
 - [Create Issues](https://github.com/rocket-connect/gqlpt/issues): Have ideas for improvements or found a bug? Create an issue and let us know!
-- [Contribute](https://github.com/rocket-connect/gqlpt/blob/main/CONTRIBUTING.md): We welcome contributions! Check out our contributing guidelines to get started.
+- [Contribute](https://github.com/rocket-connect/gqlpt/): We welcome contributions! Check out our contributing guidelines to get started.
 - [GQLPT Playground](https://www.gqlpt.dev/): Try out GQLPT and provide feedback.
 - [npm Package](https://www.npmjs.com/package/gqlpt): Check out our npm page for the latest versions and documentation.
 
 ## Conclusion
 
-GQLPT represents a significant step forward in making GraphQL more accessible and efficient. By bridging the gap between natural language and GraphQL queries, it opens up new possibilities for rapid development and improved team collaboration.
+GQLPT represents a significant step forward in making GraphQL more accessible and efficient. By bridging the gap between natural language and GraphQL queries, it opens up new possibilities for rapid development and improved team collaboration. The inclusion of automatic type generation further enhances its capabilities, providing a more robust and type-safe development experience.
 
 Whether you're a GraphQL veteran looking to speed up your workflow or a newcomer seeking an easier entry point, GQLPT offers a powerful solution. Give it a try and experience the future of GraphQL query generation today!
 
