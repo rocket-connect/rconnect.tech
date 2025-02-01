@@ -8,6 +8,7 @@ export const footer = {
     {
       name: 'Product',
       links: [
+        { label: 'API Plain Text', href: 'https://www.apipt.dev/' },
         { label: 'GraphQL Observability', href: 'https://www.graphql-debugger.com/' },
         { label: 'GraphQL AI', href: 'https://www.gqlpt.dev' },
       ],
@@ -37,7 +38,7 @@ export const footer = {
       name: 'About',
       links: [
         { label: 'About Us', href: '/about' },
-        { label: 'Contact us', href: '/contact' },
+        { label: 'Contact us', href: '/contact-us' },
         { label: 'Blog', href: '/blog' },
       ],
     },
