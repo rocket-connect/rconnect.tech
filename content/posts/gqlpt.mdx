@@ -1,12 +1,35 @@
 ---
-title: 'GQLPT: Revolutionizing GraphQL Query Generation with AI'
-date: '2024-08-31'
-description: 'GQLPT is an innovative npm package that leverages the power of AI to generate GraphQL queries from plain text, streamlining the development process and making working with GraphQL a breeze.'
+title: 'GQLPT + APIPT: The Complete Solution for Natural Language API Interactions'
+date: '2025-02-19'
+description: 'Discover how GQLPT, the core technology behind APIPT, revolutionizes GraphQL query generation with AI. Learn how APIPT builds on GQLPT to provide a production-ready solution for natural language API interactions.'
 hero: '/images/blogs/gqlpt-blog.png'
 category: 'technology'
+keywords:
+  [
+    'APIPT',
+    'GQLPT',
+    'GraphQL',
+    'Natural Language Processing',
+    'API Integration',
+    'AI Query Generation',
+  ]
+relatedProducts: ['APIPT']
 ---
 
 GQLPT is an innovative npm package that leverages the power of AI to generate GraphQL queries from plain text. This cutting-edge tool is designed to streamline the development process and make working with GraphQL more accessible and efficient for developers of all levels.
+
+## GQLPT and APIPT: Production-Ready Natural Language API Integration
+
+While GQLPT provides powerful open-source capabilities for GraphQL query generation, [APIPT](https://www.apipt.dev) builds upon this foundation to deliver a complete, production-ready solution for natural language API interactions. APIPT extends GQLPT's capabilities with:
+
+- **Enterprise-Grade Security**: Built-in security controls, role-based access, and encrypted schema storage
+- **Multi-Protocol Support**: Beyond GraphQL, supporting REST APIs and SQL databases
+- **Advanced Caching**: Intelligent query caching with automatic invalidation
+- **Team Collaboration**: Built-in workspace management and access controls
+- **Vector Embeddings**: Enhanced schema understanding through semantic vectorization
+- **Zero Data Storage**: Process queries without storing sensitive API response data
+
+For production deployments and enterprise use cases, we recommend using [APIPT](https://www.apipt.dev/features) which provides these additional features while maintaining full compatibility with GQLPT's core functionality.
 
 ## What is GQLPT?
 
@@ -51,8 +74,8 @@ npm install gqlpt @gqlpt/adapter-openai
 Here's a simple example of how to use GQLPT:
 
 ```typescript
-import { AdapterOpenAI } from "@gqlpt/adapter-openai";
-import { GQLPTClient } from "gqlpt";
+import { AdapterOpenAI } from '@gqlpt/adapter-openai';
+import { GQLPTClient } from 'gqlpt';
 
 const typeDefs = /* GraphQL */ `
   type User {
@@ -74,7 +97,7 @@ const client = new GQLPTClient({
 
 async function main() {
   await client.connect();
-  const query = "Find users by id 1";
+  const query = 'Find users by id 1';
   const response = await client.generateQueryAndVariables(query);
   console.log(response);
   // This would log something like:
@@ -102,7 +125,7 @@ GQLPT can fetch your schema directly from your GraphQL endpoint:
 
 ```typescript
 const client = new GQLPTClient({
-  url: "http://your-graphql-endpoint.com/graphql",
+  url: 'http://your-graphql-endpoint.com/graphql',
   adapter: new AdapterOpenAI({ apiKey: process.env.OPENAI_API_KEY }),
 });
 
@@ -114,7 +137,7 @@ await client.connect(); // Performs introspection
 For a complete end-to-end solution, use the generateAndSend method:
 
 ```typescript
-const response = await client.generateAndSend("Find users by id 1");
+const response = await client.generateAndSend('Find users by id 1');
 console.log(response);
 // This would log something like:
 // {
@@ -148,6 +171,7 @@ npx @gqlpt/cli generate ./src
 ```
 
 This command will:
+
 1. Scan your `./src` directory for GQLPT usage
 2. Generate TypeScript types based on your plain text queries
 3. Update the types in `node_modules/gqlpt/build/types.d.ts`
@@ -159,11 +183,11 @@ You don't need to manually import or reference these types in your code. GQLPT w
 Here's an example of how to use GQLPT with the GitHub GraphQL API, leveraging automatically generated types:
 
 ```typescript
-import { AdapterOpenAI } from "@gqlpt/adapter-openai";
-import { GQLPTClient } from "gqlpt";
+import { AdapterOpenAI } from '@gqlpt/adapter-openai';
+import { GQLPTClient } from 'gqlpt';
 
 const client = new GQLPTClient({
-  url: "https://api.github.com/graphql",
+  url: 'https://api.github.com/graphql',
   headers: {
     Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
   },
@@ -175,7 +199,7 @@ const client = new GQLPTClient({
 async function searchGitHubRepos() {
   await client.connect();
 
-  const query = "Find repositories with the name gqlpt";
+  const query = 'Find repositories with the name gqlpt';
 
   const response = await client.generateAndSend(query);
   console.log(response);
@@ -209,6 +233,17 @@ In this example, TypeScript provides full type safety and autocompletion when wo
 4. Flexibility: Easily switch between different AI providers using the adapter system.
 5. Enhanced Type Safety: Automatic type generation improves code quality and developer experience.
 
+## Getting Started with Production Deployment
+
+While GQLPT is perfect for individual developers and smaller projects, organizations looking for a production-ready solution should consider APIPT. Here's how to get started:
+
+1. **Evaluate APIPT**: Visit [apipt.dev](https://www.apipt.dev) to explore the full feature set
+2. **Request a Demo**: [Book a demo](https://www.apipt.dev/request-demo) to see APIPT in action with your specific use case
+3. **Review Security**: Check out our [security features](https://www.apipt.dev/security) for enterprise-grade protection
+4. **Compare Plans**: View our [pricing plans](https://www.apipt.dev/plans) to find the right fit for your organization
+
+APIPT offers everything you love about GQLPT, enhanced with production-ready features and enterprise support. Whether you're scaling up a successful project or starting a new enterprise implementation, APIPT provides the robust foundation you need.
+
 ## Community and Support
 
 We value community involvement and contributions! Here's how you can get involved:
@@ -221,8 +256,8 @@ We value community involvement and contributions! Here's how you can get involve
 
 ## Conclusion
 
-GQLPT represents a significant step forward in making GraphQL more accessible and efficient. By bridging the gap between natural language and GraphQL queries, it opens up new possibilities for rapid development and improved team collaboration. The inclusion of automatic type generation further enhances its capabilities, providing a more robust and type-safe development experience.
+GQLPT and APIPT together represent the complete spectrum of natural language API interaction solutions. While GQLPT continues to serve as an excellent open-source tool for developers, APIPT builds upon its foundation to provide enterprise-ready features and production deployment capabilities.
 
-Whether you're a GraphQL veteran looking to speed up your workflow or a newcomer seeking an easier entry point, GQLPT offers a powerful solution. Give it a try and experience the future of GraphQL query generation today!
+For developers starting their journey with AI-powered API interactions, GQLPT offers an accessible entry point. For organizations ready to deploy in production, APIPT provides the security, scalability, and support needed for enterprise implementations.
 
-Remember, GQLPT is a community-driven project. We encourage you to star our repository, submit issues if you have ideas or find bugs, and contribute to make GQLPT even better. Your involvement helps shape the future of GraphQL development!
+Experience the power of natural language API interactions today - start with GQLPT for development and seamlessly transition to APIPT for production deployment.
