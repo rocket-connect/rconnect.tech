@@ -14,8 +14,25 @@ import { Cta } from '@/components/shared/Cta';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Blog | Rconnect.tech',
-  description: blog.hero.intro,
+  title: 'Blog',
+  description:
+    'Insights and articles about open source development, community building, and technical best practices.',
+  keywords: [
+    'tech blog',
+    'open source blog',
+    'developer blog',
+    'community management',
+    'technical articles',
+  ],
+  openGraph: {
+    title: 'Rocket Connect Blog - Open Source Insights',
+    description: 'Latest articles and insights about open source development',
+    type: 'website',
+    images: '/images/blog-default-preview.png',
+  },
+  alternates: {
+    canonical: '/blog',
+  },
 };
 
 export default function Blog() {

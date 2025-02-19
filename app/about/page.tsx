@@ -10,10 +10,24 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Us | Rconnect.tech',
-  description: about.hero.intro,
+  title: 'About Us',
+  description:
+    "Learn about Rocket Connect's mission to empower open source communities through technology and collaboration.",
+  keywords: [
+    'about us',
+    'open source mission',
+    'community building',
+    'tech company',
+    'software development',
+  ],
   openGraph: {
+    title: 'About Rocket Connect - Our Mission and Values',
+    description: 'Discover how Rocket Connect helps build thriving open source communities',
+    type: 'website',
     images: '/images/blog-default-preview.png',
+  },
+  alternates: {
+    canonical: '/about',
   },
 };
 

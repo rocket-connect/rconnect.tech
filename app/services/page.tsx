@@ -10,8 +10,25 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Services | Rconnect.tech',
-  description: services.hero.intro,
+  title: 'Services',
+  description:
+    'Comprehensive open source services including community management, developer relations, and technical documentation.',
+  keywords: [
+    'open source services',
+    'community management',
+    'developer relations',
+    'technical documentation',
+    'software training',
+  ],
+  openGraph: {
+    title: 'Open Source Services',
+    description: 'Professional services for open source success',
+    type: 'website',
+    images: '/images/blog-default-preview.png',
+  },
+  alternates: {
+    canonical: '/services',
+  },
 };
 
 export default function Services() {

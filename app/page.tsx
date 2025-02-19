@@ -10,8 +10,25 @@ import { home } from '@/content/home';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Rocket Connect',
-  description: 'We connect people through open source.',
+  title: 'Connecting People Through Open Source',
+  description:
+    'Build and grow your open source community with Rocket Connect. We provide tools, services, and expertise for open source success.',
+  keywords: [
+    'open source',
+    'community',
+    'developer relations',
+    'software development',
+    'technical documentation',
+  ],
+  openGraph: {
+    title: 'Open Source Community Platform',
+    description: 'Build and grow your open source community with Rocket Connect',
+    type: 'website',
+    images: '/images/blog-default-preview.png',
+  },
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function Home() {

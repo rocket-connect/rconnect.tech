@@ -11,8 +11,25 @@ import { DirectorySection } from '@/components/templates/DirectorySection';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Community | Rocket Connect',
-  description: community.hero.intro,
+  title: 'Community',
+  description:
+    'Join the Rocket Connect community. Connect with developers, share knowledge, and contribute to open source projects.',
+  keywords: [
+    'developer community',
+    'open source community',
+    'tech events',
+    'developer network',
+    'collaboration',
+  ],
+  openGraph: {
+    title: 'Join Our Community',
+    description: 'Connect with developers and contribute to open source',
+    type: 'website',
+    images: '/images/blog-default-preview.png',
+  },
+  alternates: {
+    canonical: '/community',
+  },
 };
 
 const LazyMap = dynamic(() => import('@/components/templates/MapSection'), {

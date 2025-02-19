@@ -9,8 +9,19 @@ import { Metadata } from 'next';
 import ContactForm from '@/components/ui/contact-form';
 
 export const metadata: Metadata = {
-  title: 'Contact us | Rconnect.tech',
-  description: contact.hero.intro,
+  title: 'Contact Us',
+  description:
+    "Get in touch with Rocket Connect. We're here to help with your open source community needs.",
+  keywords: ['contact', 'support', 'inquiries', 'open source help', 'community support'],
+  openGraph: {
+    title: 'Contact Rocket Connect',
+    description: 'Reach out to us for open source community support',
+    type: 'website',
+    images: '/images/blog-default-preview.png',
+  },
+  alternates: {
+    canonical: '/contact',
+  },
 };
 
 export default function Contact() {
