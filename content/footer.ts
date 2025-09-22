@@ -8,6 +8,10 @@ export const footer = {
     {
       name: 'Product',
       links: [
+        {
+          label: 'MCP Connect',
+          href: 'https://www.mcp.rconnect.tech/',
+        },
         { label: 'API Plain Text', href: 'https://www.apipt.dev/' },
         { label: 'GraphQL Observability', href: 'https://www.graphql-debugger.com/' },
         { label: 'GraphQL AI', href: 'https://www.gqlpt.dev' },
