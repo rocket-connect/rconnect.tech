@@ -181,10 +181,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
       <Main>
         <Header />
-        <Container className="lg:py-0">
+
+        {/* Improved Container with better spacing */}
+        <Container className="py-6 lg:py-8">
           <div className="relative mx-auto max-w-5xl">
-            {/* Back Navigation */}
-            <div className="mb-8">
+            {/* Back Navigation - better aligned with content */}
+            <div className="mb-6 lg:mb-8">
               <Link
                 href={'/blog'}
                 className="inline-flex items-center gap-2 text-sm text-slate-600 transition-colors hover:text-[#24BEE1] dark:text-slate-400 dark:hover:text-[#24BEE1]"
@@ -194,15 +196,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
               {/* Main Content */}
               <article className="lg:col-span-8">
-                {/* Article Header */}
-                <header className="mb-8">
-                  <div className="mb-6 flex items-center gap-3">
+                {/* Article Header - more compact */}
+                <header className="mb-6">
+                  <div className="mb-4 flex flex-wrap items-center gap-3">
                     <div
                       className={cn(
-                        'inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-bold uppercase',
+                        'inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-bold uppercase',
                       )}
                       style={{ color, backgroundColor: `${color}20` }}
                     >
@@ -211,53 +213,47 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     </div>
                     <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
                       <span className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
+                        <Calendar className="h-3 w-3" />
                         {formattedDate}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
+                        <Clock className="h-3 w-3" />
                         {readingTime} min read
                       </span>
                     </div>
                   </div>
 
-                  <h1 className="mb-6 text-4xl font-bold leading-tight text-foreground-main dark:text-foreground-invert lg:text-5xl">
+                  <h1 className="mb-4 text-2xl font-bold leading-tight text-foreground-main dark:text-foreground-invert lg:text-4xl">
                     {props.frontMatter.title}
                   </h1>
 
-                  <p className="mb-8 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+                  <p className="mb-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300 lg:text-xl">
                     {props.frontMatter.description}
                   </p>
                 </header>
 
-                {/* Hero Image */}
-                <div className="mb-8">
+                {/* Hero Image - smaller and more proportional */}
+                <div className="mb-6 lg:mb-8">
                   <Image
-                    className="w-full rounded-xl shadow-lg"
+                    className="w-full rounded-lg shadow-md lg:rounded-xl lg:shadow-lg"
                     alt={props.frontMatter.title}
                     width={800}
-                    height={500}
+                    height={400}
                     src={props.frontMatter.hero as string}
                     priority
                   />
                 </div>
 
-                {/* Article Content with Code Component Support */}
-                <div className="prose prose-lg mx-auto max-w-none text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:!m-0 prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!shadow-none dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1] dark:prose-pre:!border-none dark:prose-pre:!bg-transparent dark:prose-pre:!outline-none">
-                  {/* 
-                    The Code component is automatically used here via the `pre: Code` mapping in components.
-                    When MDX encounters a code block (```), it renders it using your Code component which includes:
-                    - Syntax highlighting with react-syntax-highlighter
-                    - Copy button functionality via AdminBar
-                    - Language detection
-                    - Dark theme (nightOwl)
-                  */}
-                  <MDXRemote source={props.content} components={components} />
+                {/* Article Content with improved mobile code handling */}
+                <div className="prose prose-lg mx-auto max-w-none overflow-hidden text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:!m-0 prose-pre:overflow-x-auto prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!shadow-none dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1] dark:prose-pre:!border-none dark:prose-pre:!bg-transparent dark:prose-pre:!outline-none">
+                  <div className="[&_code]:text-sm [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre_code]:whitespace-pre">
+                    <MDXRemote source={props.content} components={components} />
+                  </div>
                 </div>
 
-                {/* Article Tags */}
+                {/* Article Tags - more compact */}
                 {props.frontMatter.keywords && props.frontMatter.keywords.length > 0 && (
-                  <div className="mt-12 border-t border-slate-200 pt-8 dark:border-slate-700">
+                  <div className="mt-8 border-t border-slate-200 pt-6 dark:border-slate-700 lg:mt-12 lg:pt-8">
                     <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-400">
                       TAGS
                     </h3>
@@ -265,7 +261,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                       {props.frontMatter.keywords.map((keyword: string, index: number) => (
                         <span
                           key={index}
-                          className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1.5 text-sm text-slate-700 transition-colors duration-200 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+                          className="rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-sm text-slate-700 transition-colors duration-200 hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
                         >
                           {keyword}
                         </span>
@@ -275,13 +271,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 )}
               </article>
 
-              {/* Sidebar */}
+              {/* Sidebar - more compact */}
               <aside className="lg:col-span-4">
-                <div className="space-y-8 lg:sticky lg:top-24">
+                <div className="space-y-6 lg:sticky lg:top-24">
                   {/* Author Card */}
                   {author && (
-                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900">
-                      <h3 className="mb-6 flex items-center gap-2 text-lg font-semibold text-foreground-main dark:text-foreground-invert">
+                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900 lg:rounded-xl lg:p-6">
+                      <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground-main dark:text-foreground-invert lg:mb-6">
                         <span className="h-2 w-2 rounded-full bg-[#24BEE1]"></span>
                         About the Author
                       </h3>
@@ -295,8 +291,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     </div>
                   )}
 
-                  {/* Article Info */}
-                  <div className="hidden rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-700 dark:bg-slate-900 lg:block">
+                  {/* Article Info - more compact */}
+                  <div className="hidden rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900 lg:block lg:rounded-xl lg:p-6">
                     <h3 className="mb-4 text-lg font-semibold text-foreground-main dark:text-foreground-invert">
                       Article Info
                     </h3>
