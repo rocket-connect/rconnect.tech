@@ -139,10 +139,15 @@ export default function Blog() {
           description: blog.meta.description,
           image: blog.meta.hero,
           datePublished: blog.meta.date,
-          author: {
-            '@type': 'Person',
-            name: blog.meta.author || 'Rocket Connect Team',
-          },
+          author: Array.isArray(blog.meta.author)
+            ? blog.meta.author.map((authorId) => ({
+                '@type': 'Person',
+                name: authorId || 'Rocket Connect Team',
+              }))
+            : {
+                '@type': 'Person',
+                name: blog.meta.author || 'Rocket Connect Team',
+              },
           publisher: {
             '@type': 'Organization',
             name: 'Rocket Connect',
@@ -157,6 +162,15 @@ export default function Blog() {
       description: blog.meta.description,
       datePublished: blog.meta.date,
       url: `https://rconnect.tech/blog/${blog.slug}`,
+      author: Array.isArray(blog.meta.author)
+        ? blog.meta.author.map((authorId) => ({
+            '@type': 'Person',
+            name: authorId || 'Rocket Connect Team',
+          }))
+        : {
+            '@type': 'Person',
+            name: blog.meta.author || 'Rocket Connect Team',
+          },
     })),
     about: [
       {

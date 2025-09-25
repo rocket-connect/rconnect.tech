@@ -14,7 +14,7 @@ import { Container } from '@/components/shared/Container';
 import { ChevronLeft, Clock, Calendar, Tag } from 'lucide-react';
 import Link from 'next/link';
 import { categoryColor, cn, formatdate, metadataBase } from '@/lib/utils';
-import { getAuthor } from '@/content/authors';
+import { getAuthors } from '@/content/authors';
 import { sharedKeywords } from '@/lib/seo';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -25,7 +25,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const props = await getPost(params);
-  const author = getAuthor(props.frontMatter.author || 'team-rconnect');
+  const authors = getAuthors(props.frontMatter.author || 'team-rconnect');
 
   // Enhanced SEO keywords combining article keywords with shared keywords
   const articleKeywords = [
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     props.frontMatter.category,
     'blog',
     'article',
-    author?.name || 'Rocket Connect',
+    ...authors.map((author) => author.name),
   ];
 
   const canonicalUrl = `/blog/${params.slug}`;
@@ -44,9 +44,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: props.frontMatter.description,
     keywords: articleKeywords,
     metadataBase,
-    authors: author
-      ? [{ name: author.name, url: author.social.website || author.social.linkedin }]
-      : undefined,
+    authors: authors.map((author) => ({
+      name: author.name,
+      url: author.social.website || author.social.linkedin,
+    })),
     openGraph: {
       type: 'article',
       title: props.frontMatter.title,
@@ -61,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ],
       publishedTime: props.frontMatter.date,
       modifiedTime: props.frontMatter.lastModified || props.frontMatter.date,
-      authors: author ? [author.name] : undefined,
+      authors: authors.map((author) => author.name),
       section: props.frontMatter.category,
       tags: props.frontMatter.keywords || [],
     },
@@ -70,15 +71,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: props.frontMatter.title,
       description: props.frontMatter.description,
       images: [props.frontMatter.hero],
-      creator: author?.social.twitter
-        ? `@${author.social.twitter.split('/').pop()}`
-        : '@rconnect_tech',
+      creator:
+        authors.length === 1 && authors[0].social.twitter
+          ? `@${authors[0].social.twitter.split('/').pop()}`
+          : '@rconnect_tech',
     },
     alternates: {
       canonical: canonicalUrl,
     },
     other: {
-      'article:author': author?.name || 'Rocket Connect Team',
+      'article:author': authors.map((author) => author.name).join(', '),
       'article:published_time': props.frontMatter.date,
       'article:modified_time': props.frontMatter.lastModified || props.frontMatter.date,
       'article:section': props.frontMatter.category,
@@ -113,7 +115,7 @@ function estimateReadingTime(content: string): number {
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const props = await getPost(params);
-  const author = getAuthor(props.frontMatter.author || 'team-rconnect');
+  const authors = getAuthors(props.frontMatter.author || 'team-rconnect');
 
   // MDX Components - Code component is already included here
   const components = {
@@ -125,7 +127,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const color = categoryColor(props.frontMatter.category);
   const readingTime = estimateReadingTime(props.content);
 
-  // Structured data for article
+  // Structured data for article with multiple authors support
   const articleStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -134,19 +136,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
     image: [props.frontMatter.hero],
     datePublished: props.frontMatter.date,
     dateModified: props.frontMatter.lastModified || props.frontMatter.date,
-    author: author
-      ? {
-          '@type': 'Person',
-          name: author.name,
-          jobTitle: author.role,
-          url: author.social.website || author.social.linkedin,
-          sameAs: Object.values(author.social).filter(Boolean),
-        }
-      : {
-          '@type': 'Organization',
-          name: 'Rocket Connect',
-          url: 'https://rconnect.tech',
-        },
+    author:
+      authors.length === 1
+        ? {
+            '@type': 'Person',
+            name: authors[0].name,
+            jobTitle: authors[0].role,
+            url: authors[0].social.website || authors[0].social.linkedin,
+            sameAs: Object.values(authors[0].social).filter(Boolean),
+          }
+        : authors.map((author) => ({
+            '@type': 'Person',
+            name: author.name,
+            jobTitle: author.role,
+            url: author.social.website || author.social.linkedin,
+            sameAs: Object.values(author.social).filter(Boolean),
+          })),
     publisher: {
       '@type': 'Organization',
       name: 'Rocket Connect',
@@ -182,10 +187,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <Main>
         <Header />
 
-        {/* Improved Container with better spacing */}
         <Container className="py-6 lg:py-8">
           <div className="relative mx-auto max-w-5xl">
-            {/* Back Navigation - better aligned with content */}
+            {/* Back Navigation */}
             <div className="mb-6 lg:mb-8">
               <Link
                 href={'/blog'}
@@ -199,7 +203,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
               {/* Main Content */}
               <article className="lg:col-span-8">
-                {/* Article Header - more compact */}
+                {/* Article Header */}
                 <header className="mb-6">
                   <div className="mb-4 flex flex-wrap items-center gap-3">
                     <div
@@ -220,6 +224,30 @@ export default async function Page({ params }: { params: { slug: string } }) {
                         <Clock className="h-3 w-3" />
                         {readingTime} min read
                       </span>
+                      {/* Small author photos next to date */}
+                      <div className="flex items-center gap-1">
+                        <div className="flex -space-x-1">
+                          {authors.slice(0, 3).map((author, index) => (
+                            <Image
+                              key={author.id}
+                              src={author.avatar}
+                              alt={author.name}
+                              width={20}
+                              height={20}
+                              className="h-5 w-5 rounded-full object-cover ring-1 ring-white dark:ring-slate-900"
+                              style={{ zIndex: authors.length - index }}
+                            />
+                          ))}
+                          {authors.length > 3 && (
+                            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-200 text-xs font-medium text-slate-600 ring-1 ring-white dark:bg-slate-700 dark:text-slate-400 dark:ring-slate-900">
+                              +{authors.length - 3}
+                            </div>
+                          )}
+                        </div>
+                        <span className="text-xs">
+                          by {authors.length === 1 ? authors[0].name : `${authors.length} authors`}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -232,7 +260,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   </p>
                 </header>
 
-                {/* Hero Image - smaller and more proportional */}
+                {/* Hero Image */}
                 <div className="mb-6 lg:mb-8">
                   <Image
                     className="w-full rounded-lg shadow-md lg:rounded-xl lg:shadow-lg"
@@ -244,14 +272,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   />
                 </div>
 
-                {/* Article Content with improved mobile code handling */}
+                {/* Article Content */}
                 <div className="prose prose-lg mx-auto max-w-none overflow-hidden text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:!m-0 prose-pre:overflow-x-auto prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!shadow-none dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1] dark:prose-pre:!border-none dark:prose-pre:!bg-transparent dark:prose-pre:!outline-none">
                   <div className="[&_code]:text-sm [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre_code]:whitespace-pre">
                     <MDXRemote source={props.content} components={components} />
                   </div>
                 </div>
 
-                {/* Article Tags - more compact */}
+                {/* Article Tags */}
                 {props.frontMatter.keywords && props.frontMatter.keywords.length > 0 && (
                   <div className="mt-8 border-t border-slate-200 pt-6 dark:border-slate-700 lg:mt-12 lg:pt-8">
                     <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-400">
@@ -271,52 +299,38 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 )}
               </article>
 
-              {/* Sidebar - more compact */}
+              {/* Sidebar */}
               <aside className="lg:col-span-4">
                 <div className="space-y-6 lg:sticky lg:top-24">
-                  {/* Author Card */}
-                  {author && (
+                  {/* Authors Card */}
+                  {authors.length > 0 && (
                     <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900 lg:rounded-xl lg:p-6">
                       <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground-main dark:text-foreground-invert lg:mb-6">
                         <span className="h-2 w-2 rounded-full bg-[#24BEE1]"></span>
-                        About the Author
+                        About the Author{authors.length > 1 ? 's' : ''}
                       </h3>
-                      <AuthorCard
-                        author={author}
-                        showBio
-                        size="lg"
-                        layout="vertical"
-                        showExpertise
-                      />
+
+                      <div className="space-y-6">
+                        {authors.map((author, index) => (
+                          <div
+                            key={author.id}
+                            className={cn(
+                              index > 0 && 'border-t border-slate-200 pt-6 dark:border-slate-700',
+                            )}
+                          >
+                            <AuthorCard
+                              author={author}
+                              showBio={true}
+                              size={authors.length === 1 ? 'lg' : 'md'}
+                              layout="vertical"
+                              showExpertise={authors.length === 1}
+                              truncateBio={authors.length > 2}
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
-
-                  {/* Article Info - more compact */}
-                  <div className="hidden rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900 lg:block lg:rounded-xl lg:p-6">
-                    <h3 className="mb-4 text-lg font-semibold text-foreground-main dark:text-foreground-invert">
-                      Article Info
-                    </h3>
-                    <div className="space-y-3 text-sm">
-                      <div className="flex items-center justify-between">
-                        <span className="text-slate-600 dark:text-slate-400">Reading time</span>
-                        <span className="font-medium text-foreground-main dark:text-foreground-invert">
-                          {readingTime} min
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-slate-600 dark:text-slate-400">Published</span>
-                        <span className="font-medium text-foreground-main dark:text-foreground-invert">
-                          {formattedDate}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-slate-600 dark:text-slate-400">Category</span>
-                        <span className="font-medium capitalize text-foreground-main dark:text-foreground-invert">
-                          {props.frontMatter.category}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </aside>
             </div>

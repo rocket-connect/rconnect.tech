@@ -19,7 +19,7 @@ export const authors: Record<string, Author> = {
     id: 'dan-starns',
     name: 'Dan Starns',
     role: 'Founder & CTO',
-    bio: 'Dan is the Founder and CTO at Rocket Connect, specializing in open source AI developer tooling, community building, and API/SDK development.\n\nHe has worked on several major projects, consults for developer tooling companies, and builds open source AI solutions. Dan actively builds and consults communities while maintaining deep connections throughout the devtools ecosystem.',
+    bio: 'Dan is the Founder and CTO at Rocket Connect, specializing in open source AI developer tooling, community building, and API/SDK development.',
     avatar: '/images/authors/dan.jpg',
     social: {
       linkedin: 'https://www.linkedin.com/in/danielstarns/',
@@ -52,8 +52,61 @@ export const authors: Record<string, Author> = {
     },
     expertise: ['AI Tools', 'API Development', 'Community Management', 'Open Source'],
   },
+  'jason-koo': {
+    id: 'jason-koo',
+    name: 'Jason Koo',
+    role: 'Developer Advocate',
+    bio: 'Jason is a Developer Advocate at Neo4j with many years of experience building developer communities and driving adoption of graph databases. He specializes in creating educational content, delivering conference talks, and empowering developers to build with cutting-edge technologies.',
+    avatar: '/images/authors/jason.jpeg',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/jason-koo-usa/',
+      twitter: 'https://x.com/jalakoo',
+      github: 'https://github.com/jalakoo',
+      website: 'https://neo4j.com',
+    },
+    expertise: [
+      'Graph Databases',
+      'Developer Advocacy',
+      'Community Building',
+      'Computer Vision',
+      'Educational Content Creation',
+    ],
+  },
+  'tobias-meixner': {
+    id: 'tobias-meixner',
+    name: 'Tobias Meixner',
+    role: 'Co-Founder',
+    bio: "Tobias is the Co-Founder of HubQL and former Co-Founder & CTO of Brikl. He's passionate about organizing developer tool events and building communities, including organizing the Supabase Bangkok Meetup.",
+    avatar: '/images/authors/tobias.jpeg',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/meixnertobias/',
+      twitter: 'https://x.com/meixnertobias',
+      github: 'https://github.com/meixnertobias',
+      website: 'https://hubql.com',
+    },
+    expertise: [
+      'Developer Tools',
+      'Community Building',
+      'Event Organization',
+      'Startup Leadership',
+      'CTO Experience',
+      'Bangkok Tech Scene',
+      'Supabase',
+      'Developer Communities',
+    ],
+  },
 };
 
 export function getAuthor(authorId: string): Author | null {
   return authors[authorId] || null;
+}
+
+export function getAuthors(authorIds: string | string[]): Author[] {
+  if (typeof authorIds === 'string') {
+    authorIds = [authorIds];
+  }
+
+  return authorIds
+    .map((id) => authors[id])
+    .filter((author): author is Author => author !== undefined);
 }

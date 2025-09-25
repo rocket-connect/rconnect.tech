@@ -1,8 +1,10 @@
 // components/shared/AuthorCard.tsx
+'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Author } from '@/content/authors';
-import { Linkedin, Twitter, Github, Globe } from 'lucide-react';
+import { Linkedin, Twitter, Github, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface AuthorCardProps {
   author: Author;
@@ -10,6 +12,7 @@ interface AuthorCardProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   layout?: 'horizontal' | 'vertical';
   showExpertise?: boolean;
+  truncateBio?: boolean;
 }
 
 export const AuthorCard = ({
@@ -18,7 +21,10 @@ export const AuthorCard = ({
   size = 'md',
   layout = 'horizontal',
   showExpertise = false,
+  truncateBio = false,
 }: AuthorCardProps) => {
+  const [isBioExpanded, setIsBioExpanded] = useState(false);
+
   const sizeClasses = {
     xs: {
       container: 'flex items-center gap-2',
@@ -41,38 +47,32 @@ export const AuthorCard = ({
       expertise: 'text-xs',
     },
     md: {
-      container: 'flex items-center gap-4',
-      avatar: 'h-12 w-12 flex-shrink-0',
+      container: 'flex flex-col items-center gap-4 text-center',
+      avatar: 'h-12 w-12 flex-shrink-0 mx-auto',
       name: 'text-base font-medium',
       role: 'text-sm text-slate-600 dark:text-slate-400',
       social: 'h-4 w-4',
-      textContainer: 'min-w-0 flex-1',
+      textContainer: 'min-w-0 flex-1 space-y-2 text-center',
       bio: 'text-sm',
       expertise: 'text-xs',
     },
     lg: {
-      container:
-        layout === 'vertical'
-          ? 'flex flex-col items-center gap-4 text-center'
-          : 'flex items-start gap-5',
-      avatar: 'h-16 w-16 flex-shrink-0',
+      container: 'flex flex-col items-center gap-4 text-center',
+      avatar: 'h-16 w-16 flex-shrink-0 mx-auto',
       name: 'text-lg font-semibold',
       role: 'text-sm text-slate-600 dark:text-slate-400',
       social: 'h-4 w-4',
-      textContainer: layout === 'vertical' ? 'space-y-3' : 'min-w-0 flex-1 space-y-2',
+      textContainer: 'space-y-3 text-center',
       bio: 'text-sm',
       expertise: 'text-xs',
     },
     xl: {
-      container:
-        layout === 'vertical'
-          ? 'flex flex-col items-center gap-6 text-center'
-          : 'flex items-start gap-6',
-      avatar: 'h-20 w-20 flex-shrink-0',
+      container: 'flex flex-col items-center gap-6 text-center',
+      avatar: 'h-20 w-20 flex-shrink-0 mx-auto',
       name: 'text-xl font-bold',
       role: 'text-lg text-slate-600 dark:text-slate-400',
       social: 'h-5 w-5',
-      textContainer: layout === 'vertical' ? 'space-y-4' : 'min-w-0 flex-1 space-y-3',
+      textContainer: 'space-y-4 text-center',
       bio: 'text-base',
       expertise: 'text-sm',
     },
@@ -82,8 +82,33 @@ export const AuthorCard = ({
   const avatarSize =
     size === 'xl' ? 80 : size === 'lg' ? 64 : size === 'md' ? 48 : size === 'sm' ? 32 : 24;
 
+  // Truncate bio to first sentence/line if truncateBio is true
+  const getBioContent = () => {
+    if (!author.bio) return '';
+
+    if (truncateBio && !isBioExpanded) {
+      // Get first line or first sentence (whichever is shorter)
+      const firstLine = author.bio.split('\n')[0];
+      const firstSentence = author.bio.split('.')[0] + '.';
+      const truncated = firstLine.length < firstSentence.length ? firstLine : firstSentence;
+
+      // Only truncate if the content is actually longer
+      if (author.bio.length > truncated.length) {
+        return truncated;
+      }
+    }
+
+    return author.bio;
+  };
+
+  const shouldShowExpandButton =
+    truncateBio &&
+    author.bio &&
+    author.bio.length > (author.bio.split('\n')[0].length || author.bio.split('.')[0].length + 1);
+
   return (
     <div className={`${classes.container} group transition-all duration-200`}>
+      {/* Avatar - always at top */}
       <div className="relative">
         <Image
           src={author.avatar}
@@ -100,31 +125,48 @@ export const AuthorCard = ({
       <div className={classes.textContainer}>
         <div className="space-y-1">
           <h3
-            className={`${classes.name} truncate text-foreground-main transition-colors duration-200 group-hover:text-[#24BEE1] dark:text-foreground-invert`}
+            className={`${classes.name} text-foreground-main transition-colors duration-200 group-hover:text-[#24BEE1] dark:text-foreground-invert`}
           >
             {author.name}
           </h3>
-          <p className={`${classes.role} truncate`}>{author.role}</p>
+          <p className={`${classes.role}`}>{author.role}</p>
         </div>
 
         {showBio && author.bio && (
-          <div className={`mt-4 ${layout === 'vertical' ? 'mx-auto max-w-md' : 'max-w-lg'}`}>
-            {author.bio.split('\n\n').map((paragraph, index) => (
-              <p
-                key={index}
-                className={`${classes.bio} leading-relaxed text-slate-700 dark:text-slate-300 ${index > 0 ? 'mt-3' : ''}`}
+          <div className="mt-4">
+            {getBioContent()
+              .split('\n\n')
+              .map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={`${classes.bio} leading-relaxed text-slate-700 dark:text-slate-300 ${index > 0 ? 'mt-3' : ''}`}
+                >
+                  {paragraph}
+                </p>
+              ))}
+
+            {shouldShowExpandButton && (
+              <button
+                onClick={() => setIsBioExpanded(!isBioExpanded)}
+                className="mx-auto mt-2 flex items-center gap-1 text-sm text-[#24BEE1] transition-colors hover:text-[#1DA1F2]"
               >
-                {paragraph}
-              </p>
-            ))}
+                {isBioExpanded ? (
+                  <>
+                    Show less <ChevronUp className="h-3 w-3" />
+                  </>
+                ) : (
+                  <>
+                    Show more <ChevronDown className="h-3 w-3" />
+                  </>
+                )}
+              </button>
+            )}
           </div>
         )}
 
         {/* Social Links */}
         {size !== 'xs' && size !== 'sm' && (
-          <div
-            className={`flex items-center gap-3 ${layout === 'vertical' ? 'justify-center' : 'justify-start'} mt-4`}
-          >
+          <div className="mt-4 flex items-center justify-center gap-3">
             {author.social.linkedin && (
               <Link
                 href={author.social.linkedin}
@@ -174,9 +216,7 @@ export const AuthorCard = ({
 
         {/* Expertise Tags */}
         {showExpertise && author.expertise.length > 0 && (size === 'lg' || size === 'xl') && (
-          <div
-            className={`flex flex-wrap gap-2 ${layout === 'vertical' ? 'justify-center' : 'justify-start'} mt-4`}
-          >
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
             {author.expertise.slice(0, size === 'xl' ? 5 : 3).map((skill, index) => (
               <span
                 key={index}
