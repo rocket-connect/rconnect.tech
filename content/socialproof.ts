@@ -7,20 +7,12 @@ export const socialProof = {
       href: 'https://www.prisma.io/',
     },
     {
-      image: '/images/company-logos/meta.svg',
-      href: 'https://www.meta.com/',
-    },
-    {
       image: '/images/company-logos/hasura.svg',
       href: 'https://www.hasura.com/',
     },
     {
       image: '/images/company-logos/bobsled.svg',
       href: 'https://www.bobsled.co/',
-    },
-    {
-      image: '/images/company-logos/graphql-visualizer.svg',
-      href: 'https://graphqlvisualizer.com/',
     },
     {
       image: '/images/company-logos/devtools-asia.svg',
@@ -45,6 +37,14 @@ export const socialProof = {
     {
       image: '/images/company-logos/devtools-america.svg',
       href: 'https://guild.host/devtools-america/network',
+    },
+    {
+      image: '/images/company-logos/hypermode.svg',
+      href: 'https://hypermode.com',
+    },
+    {
+      image: '/images/company-logos/timescale.svg',
+      href: 'https://www.tigerdata.com/',
     },
   ],
 };
