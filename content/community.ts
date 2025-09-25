@@ -9,6 +9,37 @@ export const community = {
       'Join us in connecting people through open source! Our mission is to enhance the open-source ecosystem and foster community engagement, grounded in our values. Partner with us to access our extensive network and expertise. Together, we can build something great, amplify your brand, and make a meaningful impact.',
   },
 
+  // NEW: Upcoming Events Section with MCP Luma iframes
+  upcomingEvents: {
+    title: 'Upcoming Events',
+    subtitle:
+      'Join our latest MCP (Model Context Protocol) meetups and connect with the AI developer community',
+    events: [
+      {
+        id: 'mcp-bangkok',
+        title: 'MCP Bangkok: Graph Databases Meet AI with MCP Integration',
+        date: 'Thursday, 16th October 2025',
+        time: '6:00 PM - 9:00 PM',
+        location: 'True Digital Park, Bangkok',
+        description:
+          'Join us for an exciting evening exploring the cutting-edge intersection of graph databases and AI tooling! This Bangkok meetup brings together Neo4j experts and the local developer community.',
+        lumaEmbed: 'https://luma.com/embed/event/evt-bH2cC7pHKvBp40t/simple',
+        blogLink: '/blog/mcp-bangkok',
+      },
+      {
+        id: 'mcp-singapore',
+        title: 'MCP Singapore: Graph Databases Meet AI with MCP Integration',
+        date: 'Thursday, 23rd October 2025',
+        time: '6:00 PM - 9:00 PM GMT+8',
+        location: 'Lifelong Learning Institute, Singapore',
+        description:
+          'Explore the cutting-edge intersection of graph databases and AI tooling with Neo4j experts and the Singapore developer community.',
+        lumaEmbed: 'https://luma.com/embed/event/evt-oq71JJUvFYqWWsR/simple',
+        blogLink: '/blog/mcp-singapore',
+      },
+    ],
+  },
+
   activity: {
     title: 'Our Activities',
     info: 'Our team and network extend across the globe, reaching experts and resources from every corner of the world. We offer community management and foster deeper relationships, ensuring your company connects with the right people and benefits from unparalleled support and engagement. Explore our activities below to see what our team is up to.',
@@ -38,6 +69,23 @@ export const community = {
         longitude: 100.501762,
         href: '/blog/graphql-bangkok',
         color: '#ec4899',
+      },
+      // Add MCP events to the map
+      {
+        eventName: 'MCP Bangkok',
+        city: 'Bangkok',
+        lattitude: 13.756331,
+        longitude: 100.501762,
+        href: '/blog/mcp-bangkok',
+        color: '#6366f1', // Purple for MCP events
+      },
+      {
+        eventName: 'MCP Singapore',
+        city: 'Singapore',
+        lattitude: 1.352083,
+        longitude: 103.819839,
+        href: '/blog/mcp-singapore',
+        color: '#6366f1', // Purple for MCP events
       },
       {
         eventName: 'Dev Tools Bali',
@@ -147,7 +195,7 @@ export const community = {
         title: 'Panel Discussion on The Future of Software Collaboration',
         href: 'https://youtu.be/1Qfi1qpzR9w',
         image: 'https://img.youtube.com/vi/1Qfi1qpzR9w/sddefault.jpg',
-        desc: 'With a panel discussion on ‘The future of software development’ from industry experts and a hands-on workshop, you can help your team adopt the next powerful tools, Generative AI and Hubql, to accelerate your workflow.',
+        desc: 'With a panel discussion on "The future of software development" from industry experts and a hands-on workshop, you can help your team adopt the next powerful tools, Generative AI and Hubql, to accelerate your workflow.',
       },
       {
         title: 'Pichyapa Khanapattanawong: Understand your Graphql schema with visualization',

@@ -29,7 +29,7 @@ export default function Map({ content }: MapProp) {
     html: iconMarkup,
   });
   return (
-    <div className="w-full py-16">
+    <div className="w-full py-8">
       <Container className="gap-8">
         <h2 className="mr-auto text-3xl font-bold text-foreground-main dark:text-foreground-invert">
           {content.title}

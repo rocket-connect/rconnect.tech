@@ -1,3 +1,4 @@
+// app/community/page.tsx
 import dynamic from 'next/dynamic';
 import { Hero } from '@/components/shared/Hero';
 import { SocialProofSection } from '@/components/templates/SocialProofSection';
@@ -6,6 +7,7 @@ import { Header } from '@/components/shared/Header';
 import { Main } from '@/components/shared/Main';
 import { community } from '@/content/community';
 import { CommunitySection } from '@/components/templates/CommunitySection';
+import { UpcomingEventsSection } from '@/components/templates/UpcomingEventsSection'; // NEW
 import { Cta } from '@/components/shared/Cta';
 import { DirectorySection } from '@/components/templates/DirectorySection';
 import { Metadata } from 'next';
@@ -20,6 +22,9 @@ export const metadata: Metadata = {
     'tech events',
     'developer network',
     'collaboration',
+    'MCP events',
+    'Model Context Protocol',
+    'AI meetups',
   ],
   openGraph: {
     title: 'Join Our Community',
@@ -42,6 +47,9 @@ export default function Community() {
     <Main>
       <Header />
       <Hero content={community.hero} cta={true} />
+
+      <UpcomingEventsSection content={community.upcomingEvents} />
+
       <LazyMap content={community.activity} />
       <DirectorySection content={community.directory} />
       <CommunitySection content={community.featuredVideos} />
