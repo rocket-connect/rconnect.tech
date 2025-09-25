@@ -19,7 +19,6 @@ export const AuthorCard = ({
   author,
   showBio = false,
   size = 'md',
-  layout = 'horizontal',
   showExpertise = false,
   truncateBio = false,
 }: AuthorCardProps) => {
