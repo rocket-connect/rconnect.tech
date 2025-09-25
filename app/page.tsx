@@ -1,4 +1,9 @@
+// app/page.tsx
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 import { CommunitySection } from '@/components/templates/CommunitySection';
+import { BlogSection } from '@/components/templates/BlogSection';
 import { Hero } from '@/components/shared/Hero';
 import { ServicesSection } from '@/components/templates/ServicesSection';
 import { SocialProofSection } from '@/components/templates/SocialProofSection';
@@ -7,6 +12,7 @@ import { Footer } from '@/components/shared/Footer';
 import { Header } from '@/components/shared/Header';
 import { Main } from '@/components/shared/Main';
 import { home } from '@/content/home';
+import { formatdate } from '@/lib/utils';
 import { Metadata } from 'next';
 import { sharedKeywords, baseDescription, organizationStructuredData } from '@/lib/seo';
 
@@ -47,7 +53,48 @@ export const metadata: Metadata = {
   },
 };
 
+function estimateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
+function getLatestBlogs() {
+  const blogDirectory = path.join(process.cwd(), 'content/posts');
+  const fileNames = fs.readdirSync(blogDirectory);
+
+  const blogs = fileNames.map((fileName) => {
+    const slug = fileName.replace('.mdx', '');
+    const fullPath = path.join(blogDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    const { data: frontMatter, content } = matter(fileContents);
+    const formattedDate = formatdate(frontMatter.date);
+    const readingTime = estimateReadingTime(content);
+
+    return {
+      slug,
+      formattedDate,
+      meta: {
+        ...frontMatter,
+        readingTime,
+        date: formattedDate,
+        title: frontMatter.title || 'Untitled',
+        description: frontMatter.description || 'No description available',
+        hero: frontMatter.hero || '/images/default-hero.jpg',
+        category: frontMatter.category || 'General',
+        author: frontMatter.author || 'team-rconnect',
+        keywords: frontMatter.keywords || [],
+      },
+    };
+  });
+
+  return blogs;
+}
+
 export default function Home() {
+  const latestBlogs = getLatestBlogs();
+
   return (
     <>
       {/* Enhanced Structured Data for Home Page */}
@@ -137,6 +184,7 @@ export default function Home() {
         <Hero content={home.hero} cta={true} />
         <SocialProofSection />
         <ServicesSection content={home.services} />
+        <BlogSection blogs={latestBlogs} />
         <CommunitySection content={home.community} />
         <Cta />
         <Footer />
