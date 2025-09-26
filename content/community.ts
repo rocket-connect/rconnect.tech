@@ -134,6 +134,18 @@ export const community = {
     info: 'We start, foster, sponsor, and facilitate several communities in tech across the globe. You can leverage our existing communities for your efforts, connecting with vibrant tech groups and gaining access to a diverse and engaged audience. Collaborate with us to elevate your brand and make a meaningful impact in the tech world.',
     events: [
       {
+        eventName: 'MCP Bangkok',
+        href: '/blog/mcp-bangkok',
+        image: '/images/directory/devtools-bkk.jpg',
+        logo: '/images/event-logos/mcp-bangkok-logo.svg',
+      },
+      {
+        eventName: 'MCP Singapore',
+        href: '/blog/mcp-singapore',
+        image: '/images/directory/devtools-singapore.jpg',
+        logo: '/images/event-logos/mcp-singapore-logo.svg',
+      },
+      {
         eventName: 'Dev Tools LA',
         href: '/blog/devtools-la',
         image: '/images/directory/devtools-la.jpg',
