@@ -12,9 +12,8 @@ export interface TOCItem {
 export function useTableOfContents(containerSelector: string = 'article') {
   const [activeId, setActiveId] = useState<string>('');
   const [tocItems, setTocItems] = useState<TOCItem[]>([]);
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const headingElementsRef = useRef<{ [key: string]: IntersectionObserverEntry }>({});
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollingRef = useRef(false);
+  const clickScrollingRef = useRef(false);
 
   // Extract TOC items from the DOM
   useEffect(() => {
@@ -44,85 +43,111 @@ export function useTableOfContents(containerSelector: string = 'article') {
     setTocItems(items);
   }, [containerSelector]);
 
-  // Set up Intersection Observer
+  // Set up scroll listener for active heading detection
   useEffect(() => {
     if (tocItems.length === 0) return;
 
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        headingElementsRef.current[entry.target.id] = entry;
-      });
+    const updateActiveId = () => {
+      if (clickScrollingRef.current) return;
 
-      // Debounce the active heading update
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
+      // Debounce to prevent excessive updates
+      if (scrollingRef.current) return;
+      scrollingRef.current = true;
 
-      debounceTimerRef.current = setTimeout(() => {
-        // Find the most visible heading in the viewport
-        const visibleHeadings = Object.values(headingElementsRef.current).filter(
-          (entry) => entry.isIntersecting,
-        );
+      requestAnimationFrame(() => {
+        const OFFSET = 150; // Offset for fixed header
+        const scrollPosition = window.scrollY + OFFSET;
 
-        if (visibleHeadings.length > 0) {
-          // Sort by intersection ratio and position
-          visibleHeadings.sort((a, b) => {
-            if (a.intersectionRatio !== b.intersectionRatio) {
-              return b.intersectionRatio - a.intersectionRatio;
-            }
-            return a.boundingClientRect.top - b.boundingClientRect.top;
-          });
+        // Get all heading elements with their positions
+        const headingElements = tocItems
+          .map(({ id }) => {
+            const element = document.getElementById(id);
+            if (!element) return null;
 
-          setActiveId(visibleHeadings[0].target.id);
-        } else {
-          // If no headings are visible, find the one just above viewport
-          const allEntries = Object.values(headingElementsRef.current);
-          const aboveViewport = allEntries.filter((entry) => entry.boundingClientRect.top < 0);
+            const rect = element.getBoundingClientRect();
+            const absoluteTop = rect.top + window.scrollY;
 
-          if (aboveViewport.length > 0) {
-            aboveViewport.sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
-            setActiveId(aboveViewport[0].target.id);
+            return {
+              id,
+              top: absoluteTop,
+              element,
+            };
+          })
+          .filter(
+            (item): item is { id: string; top: number; element: HTMLElement } => item !== null,
+          )
+          .sort((a, b) => a.top - b.top);
+
+        if (headingElements.length === 0) {
+          scrollingRef.current = false;
+          return;
+        }
+
+        // Find the active heading:
+        // The last heading whose top is above or at the scroll position
+        let activeHeading = headingElements[0];
+
+        for (let i = 0; i < headingElements.length; i++) {
+          const heading = headingElements[i];
+
+          if (heading.top <= scrollPosition) {
+            activeHeading = heading;
+          } else {
+            // Once we find a heading below scroll position, we're done
+            break;
           }
         }
-      }, 100);
+
+        // Only update if changed to prevent unnecessary re-renders
+        setActiveId((prev) => {
+          if (prev !== activeHeading.id) {
+            return activeHeading.id;
+          }
+          return prev;
+        });
+
+        scrollingRef.current = false;
+      });
     };
 
-    observerRef.current = new IntersectionObserver(callback, {
-      rootMargin: '-80px 0px -80% 0px',
-      threshold: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
-    });
+    // Initial check
+    updateActiveId();
 
-    // Observe all headings
-    tocItems.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observerRef.current?.observe(element);
-      }
-    });
+    // Listen to scroll events with passive flag for better performance
+    window.addEventListener('scroll', updateActiveId, { passive: true });
+
+    // Also listen to resize in case layout changes
+    window.addEventListener('resize', updateActiveId, { passive: true });
 
     return () => {
-      observerRef.current?.disconnect();
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
+      window.removeEventListener('scroll', updateActiveId);
+      window.removeEventListener('resize', updateActiveId);
     };
   }, [tocItems]);
 
   const scrollToHeading = useCallback((id: string) => {
     const element = document.getElementById(id);
-    if (element) {
-      const offset = 100; // Account for fixed header
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+    if (!element) return;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+    // Mark that we're scrolling via click
+    clickScrollingRef.current = true;
 
-      // Update active state immediately
-      setActiveId(id);
-    }
+    // Update active state immediately
+    setActiveId(id);
+
+    const offset = 100; // Account for fixed header
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
+
+    // Reset click scrolling flag after scroll completes
+    setTimeout(() => {
+      clickScrollingRef.current = false;
+    }, 1000);
   }, []);
 
   return { tocItems, activeId, scrollToHeading };
