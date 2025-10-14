@@ -32,6 +32,8 @@ keywords:
 
 _Learn how to integrate Neo4j's powerful graph database with MCP Connect for seamless AI-powered data exploration_
 
+> Keen to learn more about MCP from in person experts? Checkout our upcomming [MCP Bangkok(16th October 2025)](/blog/mcp-bangkok) and MCP [Singapore(23rd October 2025)](/blog/mcp-singapore) meetups.
+
 ## What is Neo4j?
 
 - [neo4j.com](https://neo4j.com)
@@ -74,7 +76,21 @@ Neo4j is the world's leading graph database platform, designed to store and quer
 
 ## Understanding Model Context Protocol (MCP)
 
+- [anthropic.com/news/model-context-protocol](https://www.anthropic.com/news/model-context-protocol)
+
 Model Context Protocol (MCP) is an open standard created by Anthropic that enables seamless integration between AI applications and external data sources. Think of it as a universal adapter that allows AI models like Claude to securely access and interact with your databases, APIs, and tools.
+
+<img
+  src="/images/blogs/mcp-anthropic.png"
+  alt="Image taken from Anthropic blog"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
 
 **Why MCP Matters:**
 
@@ -124,7 +140,7 @@ Save these credentials—you'll need them to connect via MCP!
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -136,7 +152,7 @@ Save these credentials—you'll need them to connect via MCP!
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -178,7 +194,7 @@ uv run mcp-neo4j-cypher \
   --db-url "bolt://YOUR_SANDBOX_IP:7687" \
   --username neo4j \
   --password YOUR_SANDBOX_PASSWORD \
-  --allow-origins "http://localhost:3000,https://mcp.rconnect.tech,http://localhost:3001" \
+  --allow-origins "https://mcp.rconnect.tech,http://localhost:3001" \
   --server-port 5500
 ```
 
@@ -198,6 +214,18 @@ Find your Claude Desktop configuration file:
 
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
+
+<img
+  src="/images/blogs/claude-developer-tab-no-connections.png"
+  alt="Claude Desktop developer tab before connection"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
 
 Add this configuration:
 
@@ -226,24 +254,12 @@ Add this configuration:
 3. You should see a 🔧 tools indicator in Claude's input area
 
 <img
-  src="/images/blogs/claude-developer-tab-no-connections.png"
-  alt="Claude Desktop developer tab before connection"
-  style={{
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    margin: '0 auto',
-    width: '80%',
-    height: 'auto',
-  }}
-/>
-
-<img
   src="/images/blogs/claude-mcp-connected.png"
   alt="Claude Desktop with MCP server connected"
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -255,7 +271,7 @@ Add this configuration:
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -289,7 +305,7 @@ Show me the first 10 nodes in my database and their relationships.
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -301,7 +317,7 @@ Show me the first 10 nodes in my database and their relationships.
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -342,6 +358,18 @@ And Neo4j is relatively lightweight! Some MCP servers expose **50-90+ tools**, w
 ### Smart Tool Management: The MCP Connect Solution
 
 MCP Connect gives you **granular control** over which tools are active, dramatically reducing token consumption and costs:
+
+<img
+  src="/images/blogs/mcp-connect-tools.png"
+  alt="Showing MCP Connect tool left hand sidebar"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2px auto',
+    width: '30%',
+    height: 'auto',
+  }}
+/>
 
 **Visual Tool Control Panel**
 
@@ -391,12 +419,36 @@ Think of it like closing unused browser tabs to save memory—except you're savi
 
 **1. Protocol Inspection Panel**
 
+<img
+  src="/images/blogs/mcp-connect-inspector.png"
+  alt="Showing MCP Connect tool right hand sidebar"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2px auto',
+    width: '40%',
+    height: 'auto',
+  }}
+/>
+
 - See the **raw MCP requests and responses** in real-time
 - Debug exactly what's being sent to your Neo4j database
 - Track **execution timing** for performance optimization
 - Identify and fix issues before they reach production
 
 **2. Conversation Management**
+
+<img
+  src="/images/blogs/mcp-connect-chat-tools.png"
+  alt="Showing warning conversation managment"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2px auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
 
 - Create **multiple chat sessions** with different tool configurations
 - **Export conversations** in JSON, Markdown, or Plain Text
@@ -405,12 +457,60 @@ Think of it like closing unused browser tabs to save memory—except you're savi
 
 **3. Built-in System Tools**
 
-- **8+ utility tools** for data transformation and visualization
+<img
+  src="/images/blogs/mcp-connect-system-tools.png"
+  alt="Showing built in tools"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '30%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/neo4j-mcp-connect-viz-prompt.png"
+  alt="Prompting the chat to call graph viz tool"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/neo4j-mcp-connect-viz.png"
+  alt="Showing graph viz tool"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+- **Utility tools** for data transformation and visualization
 - SVG generation for creating graph visualizations
 - Date/time helpers for temporal queries
 - **Independent enable/disable** from Neo4j tools
 
 **4. Development Warnings**
+
+<img
+  src="/images/blogs/mcp-connect-message-limit.png"
+  alt="Showing warning of message limit"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2px auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
 
 - **Long conversation alerts** when token usage is high
 - **Many tools warning** when you have 5+ tools enabled
@@ -444,39 +544,6 @@ npx @mcpconnect/cli
 
 This starts MCP Connect on `http://localhost:3001` and automatically opens your browser.
 
-### Configure Your AI Provider
-
-1. Click the **Settings** icon (⚙️) in the header
-2. Select **Anthropic** as your provider
-3. Enter your API key (get one at [console.anthropic.com](https://console.anthropic.com))
-4. Choose **Claude 3.5 Sonnet** (recommended for graph queries)
-5. Click **Test** to verify your API key
-6. **Save** your configuration
-
-<img
-  src="/images/blogs/mcp-connect-set-llm.png"
-  alt="MCP Connect LLM configuration screen"
-  style={{
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    margin: '0 auto',
-    width: '80%',
-    height: 'auto',
-  }}
-/>
-
-<img
-  src="/images/blogs/mcp-connect-llm.png"
-  alt="MCP Connect LLM provider selection"
-  style={{
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    margin: '0 auto',
-    width: '80%',
-    height: 'auto',
-  }}
-/>
-
 ### Create Neo4j MCP Connection
 
 1. Click **"+ New Connection"** in the connections panel
@@ -496,8 +563,8 @@ Retry Attempts: 3
 4. **Save**: Click "Create Connection"
 
 <img
-  src="/images/blogs/mcp-connect-created.png"
-  alt="MCP Connect connection created successfully"
+  src="/images/blogs/mcp-connect-neo4j.png"
+  alt="MCP Connect create connection to Neo4j MCP server"
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
@@ -511,15 +578,36 @@ You should see:
 
 - ✅ Connection successful
 - 🔧 Tools discovered: `get_neo4j_schema`, `read_neo4j_cypher`, `write_neo4j_cypher`
-- 📊 Server: Neo4j MCP Cypher Server
+- 📊 Server: Neo4j Server
+
+### Configure Your AI Provider
+
+1. Click the **Settings** icon (⚙️) in the header
+2. Select **Anthropic** as your provider
+3. Enter your API key (get one at [console.anthropic.com](https://console.anthropic.com))
+4. Choose **Claude 3.5 Sonnet** (recommended for graph queries)
+5. Click **Test** to verify your API key
+6. **Save** your configuration
 
 <img
-  src="/images/blogs/mcp-connect-neo4j.png"
-  alt="MCP Connect with Neo4j tools available"
+  src="/images/blogs/mcp-connect-llm.png"
+  alt="MCP Connect LLM provider selection"
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/mcp-connect-set-llm.png"
+  alt="MCP Connect LLM configuration screen"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -561,7 +649,7 @@ Once connected, the left sidebar shows your Neo4j tools with full descriptions:
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -573,7 +661,7 @@ Once connected, the left sidebar shows your Neo4j tools with full descriptions:
   style={{
     border: '2px solid #e5e7eb',
     borderRadius: '8px',
-    margin: '0 auto',
+    margin: '2rem auto',
     width: '80%',
     height: 'auto',
   }}
@@ -584,137 +672,6 @@ Once connected, the left sidebar shows your Neo4j tools with full descriptions:
    - Modifies database content
    - Returns summary of changes made
    - Only available when server started without `--read-only` flag
-
-## Key Development Features
-
-### Tool Management Panel
-
-The sidebar provides complete, manual control over your tools:
-
-**MCP Tools (Neo4j) - 3 tools**
-
-- Individual enable/disable toggles for each tool
-- Real-time enabled/disabled count display
-- Tool descriptions and parameter hints
-- Click any tool card to toggle its state
-
-**Bulk Operations** (you control when to use these)
-
-- **Enable All**: Click to activate all 3 Neo4j tools at once
-- **Disable All**: Click to deactivate all tools (0 token overhead!)
-- **Toggle Filtered**: When searching, toggle only visible tools
-
-**Search and Filter**
-
-- Search box to quickly find tools by name or description
-- Filter results show "X of Y tools"
-- Filtered toggle affects only search results
-
-### Protocol Inspector
-
-Every Neo4j tool execution is captured with comprehensive details:
-
-**What You See:**
-
-- **Execution Timeline**: Chronological list of all Cypher queries
-- **Request Details**: Complete MCP protocol messages with parameters
-- **Response Data**: Full query results or schema information
-- **Timing Metrics**: Performance data (typically 45ms-200ms for Neo4j)
-- **Error Details**: Complete stack traces and error messages when queries fail
-
-**Click any execution to see raw JSON:**
-
-```json
-{
-  "id": "tool_exec_abc123",
-  "tool": "read_neo4j_cypher",
-  "status": "success",
-  "duration": 89,
-  "timestamp": "2025-01-13T12:34:56.789Z",
-  "request": {
-    "jsonrpc": "2.0",
-    "method": "tools/call",
-    "params": {
-      "name": "read_neo4j_cypher",
-      "arguments": {
-        "query": "MATCH (n:Person) RETURN n LIMIT 10",
-        "params": {}
-      }
-    }
-  },
-  "response": {
-    "jsonrpc": "2.0",
-    "result": {
-      "content": [
-        {
-          "type": "text",
-          "text": "[{\"n\":{\"name\":\"Tom Hanks\",\"born\":1956}}...]"
-        }
-      ]
-    }
-  }
-}
-```
-
-### Conversation Export
-
-Save your entire development session:
-
-- **JSON Format**: Complete conversation with all Neo4j queries and results
-- **Markdown Format**: Human-readable documentation with query formatting
-- **Plain Text Format**: LLM-ready format for sharing context
-
-All exports include:
-
-- Your questions and the AI's responses
-- Complete tool execution details
-- Cypher queries with parameters
-- Query results and schemas
-- Timestamps for audit trail
-
-## Why MCP Connect is Essential for Local Neo4j Development
-
-**1. Granular Token Control**
-
-- **You manually enable/disable** specific Neo4j tools per task
-- **Visual feedback** shows token overhead in real-time (X/3 tools)
-- **Warning banners** alert you when many tools are active
-- **Optimize costs** by only enabling what you're actively using
-
-**2. Privacy-First Architecture**
-
-- All Neo4j queries and results **stored locally** in your browser
-- **No server-side data transmission** - everything stays on your machine
-- Your database credentials **never leave your computer**
-- Works offline once the app is loaded
-
-**3. Professional Neo4j Workflow**
-
-- **Test Cypher queries** individually before running in production
-- **Debug protocol issues** with raw message inspection
-- **Performance profiling** shows exact query execution times
-- **Export conversations** for documentation and team sharing
-
-**4. Zero Friction Setup**
-
-- **No installation required** - works directly in browser
-- Or run locally with one command: `npx @mcpconnect/cli`
-- Connect to any Neo4j MCP server immediately
-- Manage multiple Neo4j connections simultaneously
-
-**5. Cost-Effective Development**
-
-- **Reduce API costs 50-70%** through manual tool management
-- **Visual warnings** prevent expensive token-wasting mistakes
-- **Test exhaustively** without burning your API budget
-- **Scale savings** across entire development team
-
-**6. Smart Development Warnings**
-
-- **Long conversation alerts**: When your chat history grows large
-- **Many tools warning**: When you have 5+ tools enabled at once
-- **Real-time token estimates**: See overhead before sending messages
-- **Tool status banner**: Reminds you when tools are disabled
 
 ## Essential Resources
 
