@@ -270,11 +270,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     </div>
                   </div>
 
-                  <h1 className="mb-4 text-2xl font-bold leading-tight text-foreground-main dark:text-foreground-invert lg:text-4xl">
+                  <h1 className="mb-4 text-2xl font-bold leading-tight text-foreground-main dark:text-foreground-invert lg:text-3xl">
                     {props.frontMatter.title}
                   </h1>
 
-                  <p className="mb-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300 lg:text-xl">
+                  <p className="mb-6 text-base leading-relaxed text-slate-700 dark:text-slate-300 lg:text-lg">
                     {props.frontMatter.description}
                   </p>
                 </header>
@@ -292,7 +292,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
 
                 {/* Article Content */}
-                <div className="prose prose-lg mx-auto max-w-none overflow-hidden text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:bg-transparent dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1]">
+                <div className="prose prose-base mx-auto max-w-none overflow-hidden text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:bg-transparent dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1]">
                   <MDXRemote source={props.content} components={components} />
                 </div>
 
