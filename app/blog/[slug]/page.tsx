@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.tsx
+// app/blog/[slug]/page.tsx - Complete version with Sticky TOC
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -18,6 +18,7 @@ import { getAuthors } from '@/content/authors';
 import { sharedKeywords } from '@/lib/seo';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { BlogPostClient } from './BlogPostClient';
 
 type Props = {
   params: { slug: string };
@@ -27,10 +28,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const props = await getPost(params);
   const authors = getAuthors(props.frontMatter.author || 'team-rconnect');
 
-  // Enhanced SEO keywords combining article keywords with shared keywords
   const articleKeywords = [
     ...(props.frontMatter.keywords || []),
-    ...sharedKeywords.slice(0, 10), // Include top shared keywords
+    ...sharedKeywords.slice(0, 10),
     props.frontMatter.category,
     'blog',
     'article',
@@ -117,10 +117,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const props = await getPost(params);
   const authors = getAuthors(props.frontMatter.author || 'team-rconnect');
 
-  // MDX Components with inline code handling
   const components = {
     code: ({ children, className, ...props }: any) => {
-      // Check if this is an inline code element (no className means inline)
       const isInlineCode = !className;
 
       if (isInlineCode) {
@@ -131,14 +129,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
         );
       }
 
-      // Block code - let the pre handler deal with it
       return (
         <code className={className} {...props}>
           {children}
         </code>
       );
     },
-    pre: Code, // This handles code blocks
+    pre: Code,
     YouTube,
   };
 
@@ -146,7 +143,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const color = categoryColor(props.frontMatter.category);
   const readingTime = estimateReadingTime(props.content);
 
-  // Structured data for article with multiple authors support
   const articleStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -207,7 +203,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <Header />
 
         <Container className="py-6 lg:py-8">
-          <div className="relative mx-auto max-w-5xl">
+          <div className="relative mx-auto max-w-7xl">
             {/* Back Navigation */}
             <div className="mb-6 lg:mb-8">
               <Link
@@ -219,8 +215,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
-              {/* Main Content */}
+            {/* Main Grid Layout - No overflow constraints */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
+              {/* Main Content Column */}
               <article className="lg:col-span-8">
                 {/* Article Header */}
                 <header className="mb-6">
@@ -243,7 +240,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
                         <Clock className="h-3 w-3" />
                         {readingTime} min read
                       </span>
-                      {/* Small author photos next to date */}
                       <div className="flex items-center gap-1">
                         <div className="flex -space-x-1">
                           {authors.slice(0, 3).map((author, index) => (
@@ -270,7 +266,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     </div>
                   </div>
 
-                  <h1 className="mb-4 text-2xl font-bold leading-tight text-foreground-main dark:text-foreground-invert lg:text-3xl">
+                  <h1 className="mb-4 text-2xl font-bold leading-tight text-foreground-main dark:text-foreground-invert lg:text-4xl">
                     {props.frontMatter.title}
                   </h1>
 
@@ -280,25 +276,25 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </header>
 
                 {/* Hero Image */}
-                <div className="mb-6 lg:mb-8">
+                <div className="mb-8">
                   <Image
                     className="w-full rounded-lg shadow-md lg:rounded-xl lg:shadow-lg"
                     alt={props.frontMatter.title}
-                    width={800}
-                    height={400}
+                    width={1200}
+                    height={630}
                     src={props.frontMatter.hero as string}
                     priority
                   />
                 </div>
 
                 {/* Article Content */}
-                <div className="prose prose-base mx-auto max-w-none overflow-hidden text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:bg-transparent dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1]">
+                <div className="prose prose-base mx-auto max-w-none overflow-hidden text-foreground-main lg:prose-lg prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:bg-transparent dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1]">
                   <MDXRemote source={props.content} components={components} />
                 </div>
 
                 {/* Article Tags */}
                 {props.frontMatter.keywords && props.frontMatter.keywords.length > 0 && (
-                  <div className="mt-8 border-t border-slate-200 pt-6 dark:border-slate-700 lg:mt-12 lg:pt-8">
+                  <div className="mt-12 border-t border-slate-200 pt-8 dark:border-slate-700">
                     <h3 className="mb-3 text-sm font-semibold text-slate-600 dark:text-slate-400">
                       TAGS
                     </h3>
@@ -316,43 +312,45 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 )}
               </article>
 
-              {/* Sidebar */}
+              {/* Sidebar - Sticky Container */}
               <aside className="lg:col-span-4">
-                <div className="space-y-6 lg:sticky lg:top-24">
-                  {/* Authors Card */}
-                  {authors.length > 0 && (
-                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900 lg:rounded-xl lg:p-6">
-                      <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground-main dark:text-foreground-invert lg:mb-6">
-                        <span className="h-2 w-2 rounded-full bg-[#24BEE1]"></span>
-                        About the Author{authors.length > 1 ? 's' : ''}
-                      </h3>
+                {/* Authors Card - Static */}
+                {authors.length > 0 && (
+                  <div className="mb-8 rounded-lg border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900 lg:rounded-xl lg:p-6">
+                    <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground-main dark:text-foreground-invert lg:mb-6">
+                      <span className="h-2 w-2 rounded-full bg-[#24BEE1]"></span>
+                      About the Author{authors.length > 1 ? 's' : ''}
+                    </h3>
 
-                      <div className="space-y-6">
-                        {authors.map((author, index) => (
-                          <div
-                            key={author.id}
-                            className={cn(
-                              index > 0 && 'border-t border-slate-200 pt-6 dark:border-slate-700',
-                            )}
-                          >
-                            <AuthorCard
-                              author={author}
-                              showBio={true}
-                              size={authors.length === 1 ? 'lg' : 'md'}
-                              layout="vertical"
-                              showExpertise={authors.length === 1}
-                              truncateBio={authors.length > 2}
-                            />
-                          </div>
-                        ))}
-                      </div>
+                    <div className="space-y-6">
+                      {authors.map((author, index) => (
+                        <div
+                          key={author.id}
+                          className={cn(
+                            index > 0 && 'border-t border-slate-200 pt-6 dark:border-slate-700',
+                          )}
+                        >
+                          <AuthorCard
+                            author={author}
+                            showBio={true}
+                            size={authors.length === 1 ? 'lg' : 'md'}
+                            layout="vertical"
+                            showExpertise={authors.length === 1}
+                            truncateBio={authors.length > 2}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
+
+                {/* Table of Contents - Sticky Client Component */}
+                <BlogPostClient />
               </aside>
             </div>
           </div>
         </Container>
+
         <Cta />
         <Footer />
       </Main>
