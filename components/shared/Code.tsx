@@ -20,25 +20,36 @@ const Code = (props: any) => {
   const codeTheme = theme === 'dark' ? nightOwl : oneLight;
 
   return (
-    <div className="not-prose my-4 flex flex-col gap-0 text-sm">
+    <div className="code-block-wrapper not-prose my-6 overflow-hidden rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900">
       <AdminBar code={codeContent} language={language} />
-      <SyntaxHighlighter
-        className="!m-0 !rounded-lg !bg-transparent"
-        style={codeTheme}
-        language={language}
-        showLineNumbers={false}
-        wrapLines={false}
-        customStyle={{
-          margin: 0,
-          padding: '1rem',
-          background: 'transparent',
-          border: 'none',
-          outline: 'none',
-          boxShadow: 'none',
-        }}
-      >
-        {codeContent}
-      </SyntaxHighlighter>
+      <div className="code-block-content overflow-x-auto">
+        <SyntaxHighlighter
+          className="!m-0 !bg-transparent"
+          style={codeTheme}
+          language={language}
+          showLineNumbers={false}
+          wrapLines={false}
+          customStyle={{
+            margin: 0,
+            padding: '1rem',
+            background: 'transparent !important',
+            border: 'none',
+            outline: 'none',
+            boxShadow: 'none',
+            textShadow: 'none !important',
+            filter: 'none !important',
+          }}
+          codeTagProps={{
+            style: {
+              background: 'transparent !important',
+              textShadow: 'none !important',
+              WebkitTextFillColor: 'unset !important',
+            },
+          }}
+        >
+          {codeContent}
+        </SyntaxHighlighter>
+      </div>
     </div>
   );
 };

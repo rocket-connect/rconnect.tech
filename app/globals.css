@@ -27,3 +27,246 @@ body {
   background: transparent !important;
   border: none !important;
 }
+
+/* Inline Code Styling - NO BACKTICKS VISIBLE */
+code:not(pre code) {
+  /* Spacing */
+  padding: 0.125rem 0.375rem;
+  margin: 0 0.125rem;
+
+  /* Typography - match blog text size */
+  font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875em;
+  font-weight: 500;
+
+  /* Visual */
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+
+  /* Light theme */
+  background-color: rgba(100, 108, 255, 0.08);
+  color: #6366f1;
+  border-color: rgba(100, 108, 255, 0.2);
+
+  /* Transition */
+  transition: all 0.15s ease;
+}
+
+/* Dark theme inline code */
+.dark code:not(pre code) {
+  background-color: rgba(36, 190, 225, 0.12);
+  color: #24bee1;
+  border-color: rgba(36, 190, 225, 0.3);
+}
+
+/* Hover state for inline code */
+code:not(pre code):hover {
+  background-color: rgba(100, 108, 255, 0.15);
+  border-color: rgba(100, 108, 255, 0.4);
+}
+
+.dark code:not(pre code):hover {
+  background-color: rgba(36, 190, 225, 0.2);
+  border-color: rgba(36, 190, 225, 0.5);
+}
+
+/* Hide backticks in inline code only (not in code blocks) */
+p code:not(pre code)::before,
+p code:not(pre code)::after,
+li code:not(pre code)::before,
+li code:not(pre code)::after,
+h1 code:not(pre code)::before,
+h2 code:not(pre code)::before,
+h3 code:not(pre code)::before,
+h4 code:not(pre code)::before,
+h5 code:not(pre code)::before,
+h6 code:not(pre code)::before,
+h1 code:not(pre code)::after,
+h2 code:not(pre code)::after,
+h3 code:not(pre code)::after,
+h4 code:not(pre code)::after,
+h5 code:not(pre code)::after,
+h6 code:not(pre code)::after,
+div code:not(pre code)::before,
+div code:not(pre code)::after,
+span code:not(pre code)::before,
+span code:not(pre code)::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Code Block Container Styling */
+.code-block-wrapper {
+  margin: 1.5rem 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #ffffff;
+  font-size: 0.875rem; /* Smaller base size for code blocks */
+}
+
+.dark .code-block-wrapper {
+  border-color: #374151;
+  background: #1f2937;
+}
+
+.code-block-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.75rem; /* Smaller header text */
+}
+
+.dark .code-block-header {
+  background: #111827;
+  border-bottom-color: #374151;
+}
+
+.code-block-content {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  font-size: 0.8125rem; /* 13px - smaller code font */
+}
+
+.code-block-content pre {
+  margin: 0 !important;
+  padding: 0.875rem 1rem !important; /* Slightly less padding */
+  background: transparent !important;
+  font-size: inherit !important;
+  line-height: 1.6 !important; /* Tighter line height */
+}
+
+/* Ensure code inside pre inherits the smaller size */
+.code-block-content pre code {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+/* Remove syntax highlighting overlays */
+pre code {
+  background: transparent !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-text-fill-color: unset !important;
+}
+
+.token {
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+/* Custom scrollbar for code blocks */
+.code-block-content::-webkit-scrollbar {
+  height: 8px;
+}
+
+.code-block-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.code-block-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.code-block-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Dark mode scrollbar */
+.dark .code-block-content::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark .code-block-content::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark .code-block-content::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Prose size adjustments for better readability */
+.prose {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3333333;
+}
+
+.prose h3 {
+  font-size: 1.25em;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.6;
+}
+
+.prose h4 {
+  font-size: 1.125em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.5555556;
+}
+
+.prose ul,
+.prose ol {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* Ensure code blocks in prose don't get too large */
+.prose pre {
+  font-size: 0.8125em; /* Smaller than body text */
+  line-height: 1.6;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  .prose h2 {
+    font-size: 1.625em;
+  }
+
+  .prose h3 {
+    font-size: 1.375em;
+  }
+
+  /* Keep code blocks proportionally smaller on larger screens */
+  .code-block-wrapper {
+    font-size: 0.875rem;
+  }
+
+  .code-block-content {
+    font-size: 0.8125rem;
+  }
+
+  .prose pre {
+    font-size: 0.8125em;
+  }
+}
