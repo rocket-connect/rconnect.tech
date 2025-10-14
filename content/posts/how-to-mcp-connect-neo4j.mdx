@@ -30,13 +30,14 @@ keywords:
   ]
 ---
 
-*Learn how to integrate Neo4j's powerful graph database with MCP Connect for seamless AI-powered data exploration*
+_Learn how to integrate Neo4j's powerful graph database with MCP Connect for seamless AI-powered data exploration_
 
 ## What is Neo4j?
 
 Neo4j is the world's leading graph database platform, designed to store and query highly connected data with exceptional performance. Unlike traditional relational databases that use tables and joins, Neo4j uses nodes, relationships, and properties to represent and store data in a way that mirrors real-world connections.
 
 **Key Benefits:**
+
 - **Native Graph Storage**: Purpose-built for connected data
 - **Cypher Query Language**: Intuitive, SQL-like syntax for graph queries
 - **ACID Compliance**: Enterprise-grade reliability and consistency
@@ -48,13 +49,13 @@ Neo4j is the world's leading graph database platform, designed to store and quer
 Model Context Protocol (MCP) is an open standard created by Anthropic that enables seamless integration between AI applications and external data sources. Think of it as a universal adapter that allows AI models like Claude to securely access and interact with your databases, APIs, and tools.
 
 **Why MCP Matters:**
+
 - **Standardized Integration**: One protocol for all your data sources
 - **Secure Access**: Controlled, auditable data access for AI models
 - **Real-time Context**: AI models work with live, up-to-date information
 - **Tool Capabilities**: Extend AI models with custom functionality
 
 With MCP, your AI applications can query databases, fetch documents, execute workflows, and more—all through a consistent, secure interface.
-
 
 ## Getting Started with Neo4j Sandbox
 
@@ -82,6 +83,7 @@ The fastest way to start experimenting with Neo4j is through their free sandbox 
 ### Get Your Connection Details
 
 Once your sandbox is created, you'll receive:
+
 - **Bolt URL**: `bolt://xxx.xxx.xxx.xxx:7687`
 - **Username**: `neo4j`
 - **Password**: `[auto-generated]`
@@ -111,7 +113,6 @@ Save these credentials—you'll need them to connect via MCP!
     height: 'auto',
   }}
 />
-
 
 ## Setting Up Claude Desktop with Neo4j MCP Server
 
@@ -154,6 +155,7 @@ uv run mcp-neo4j-cypher \
 ```
 
 **Important Parameters:**
+
 - `--transport http`: Uses HTTP protocol for MCP communication
 - `--db-url`: Your Neo4j Bolt connection string from the sandbox
 - `--username` & `--password`: Your Neo4j credentials
@@ -165,6 +167,7 @@ Keep this terminal window open—the server needs to stay running!
 ### Step 3: Configure Claude Desktop
 
 Find your Claude Desktop configuration file:
+
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
 
@@ -289,16 +292,19 @@ While Claude Desktop provides a great experience for using MCP servers, **[MCP C
 Every tool you connect to an AI consumes tokens in each request—even if you don't use it. Here's why this matters:
 
 **With Neo4j MCP Server**, you get 3 powerful tools:
+
 - `get_neo4j_schema` - Retrieves your database schema
-- `read_neo4j_cypher` - Executes read-only Cypher queries  
+- `read_neo4j_cypher` - Executes read-only Cypher queries
 - `write_neo4j_cypher` - Executes write Cypher queries (if enabled)
 
 Each tool definition adds approximately **200-400 tokens** to every AI request. With all 3 tools active:
+
 - **~1,000 tokens consumed per request** just for tool definitions
 - In a 10-message conversation: **10,000+ tokens on tool overhead alone**
 - Before you know it, you've burned through your API limits
 
 And Neo4j is relatively lightweight! Some MCP servers expose **50-90+ tools**, which could mean:
+
 - **20,000-40,000 tokens per request** in tool definitions
 - Your API quota exhausted in just a few conversations
 - Hundreds of dollars in unexpected costs
@@ -310,6 +316,7 @@ And Neo4j is relatively lightweight! Some MCP servers expose **50-90+ tools**, w
 MCP Connect gives you **granular control** over which tools are active, dramatically reducing token consumption and costs:
 
 **Visual Tool Control Panel**
+
 - See all available Neo4j tools in an organized sidebar
 - **One-click enable/disable** for each individual tool
 - **Bulk operations**: Enable all, disable all, or toggle selected tools
@@ -330,20 +337,23 @@ Think of it like closing unused browser tabs to save memory—except you're savi
 ### Step-by-Step Tool Management
 
 **When you first connect to Neo4j MCP:**
+
 1. All 3 tools are **enabled by default** (sidebar shows: 3/3 tools)
 2. You see a clear list of available tools with descriptions
 3. Tool categories and usage hints help you understand each tool's purpose
 
 **To optimize your workflow:**
+
 1. **Identify your task**: What are you trying to accomplish?
 2. **Disable unused tools**: Click to toggle off tools you don't need
 3. **Monitor your savings**: Watch the enabled/disabled count update
 4. **Adjust as needed**: Enable tools when your task changes
 
 **Example workflow:**
+
 ```
 1. Connect to Neo4j → See "3/3 tools enabled"
-2. Click "Disable All" → Now "0/3 tools enabled"  
+2. Click "Disable All" → Now "0/3 tools enabled"
 3. Working on schema? Enable only get_neo4j_schema → "1/3 tools enabled"
 4. Need to query? Disable schema, enable read_neo4j_cypher → Still "1/3 tools"
 5. Ready to write? Switch to write_neo4j_cypher → Still "1/3 tools"
@@ -352,24 +362,28 @@ Think of it like closing unused browser tabs to save memory—except you're savi
 ### Additional Development Benefits
 
 **1. Protocol Inspection Panel**
+
 - See the **raw MCP requests and responses** in real-time
 - Debug exactly what's being sent to your Neo4j database
 - Track **execution timing** for performance optimization
 - Identify and fix issues before they reach production
 
-**2. Conversation Management**  
+**2. Conversation Management**
+
 - Create **multiple chat sessions** with different tool configurations
 - **Export conversations** in JSON, Markdown, or Plain Text
 - Document your development process automatically
 - Share debugging sessions with your team
 
 **3. Built-in System Tools**
+
 - **8+ utility tools** for data transformation and visualization
 - SVG generation for creating graph visualizations
 - Date/time helpers for temporal queries
 - **Independent enable/disable** from Neo4j tools
 
 **4. Development Warnings**
+
 - **Long conversation alerts** when token usage is high
 - **Many tools warning** when you have 5+ tools enabled
 - **Real-time token estimates** for conversation length
@@ -441,6 +455,7 @@ This starts MCP Connect on `http://localhost:3001` and automatically opens your 
 2. Fill in the connection details:
 
 **Connection Configuration:**
+
 ```
 Name: Neo4j Cypher MCP
 URL: http://localhost:5500/mcp
@@ -465,6 +480,7 @@ Retry Attempts: 3
 />
 
 You should see:
+
 - ✅ Connection successful
 - 🔧 Tools discovered: `get_neo4j_schema`, `read_neo4j_cypher`, `write_neo4j_cypher`
 - 📊 Server: Neo4j MCP Cypher Server
@@ -505,7 +521,7 @@ Once connected, the left sidebar shows your Neo4j tools with full descriptions:
   }}
 />
 
-2. **`read_neo4j_cypher`**  
+2. **`read_neo4j_cypher`**
    - Executes read-only Cypher queries (MATCH statements)
    - Returns query results as JSON
    - Cannot modify database (write operations blocked)
@@ -548,19 +564,22 @@ Once connected, the left sidebar shows your Neo4j tools with full descriptions:
 The sidebar provides complete, manual control over your tools:
 
 **MCP Tools (Neo4j) - 3 tools**
+
 - Individual enable/disable toggles for each tool
 - Real-time enabled/disabled count display
 - Tool descriptions and parameter hints
 - Click any tool card to toggle its state
 
 **Bulk Operations** (you control when to use these)
+
 - **Enable All**: Click to activate all 3 Neo4j tools at once
 - **Disable All**: Click to deactivate all tools (0 token overhead!)
 - **Toggle Filtered**: When searching, toggle only visible tools
 
 **Search and Filter**
+
 - Search box to quickly find tools by name or description
-- Filter results show "X of Y tools" 
+- Filter results show "X of Y tools"
 - Filtered toggle affects only search results
 
 ### Protocol Inspector
@@ -568,6 +587,7 @@ The sidebar provides complete, manual control over your tools:
 Every Neo4j tool execution is captured with comprehensive details:
 
 **What You See:**
+
 - **Execution Timeline**: Chronological list of all Cypher queries
 - **Request Details**: Complete MCP protocol messages with parameters
 - **Response Data**: Full query results or schema information
@@ -575,6 +595,7 @@ Every Neo4j tool execution is captured with comprehensive details:
 - **Error Details**: Complete stack traces and error messages when queries fail
 
 **Click any execution to see raw JSON:**
+
 ```json
 {
   "id": "tool_exec_abc123",
@@ -596,10 +617,12 @@ Every Neo4j tool execution is captured with comprehensive details:
   "response": {
     "jsonrpc": "2.0",
     "result": {
-      "content": [{
-        "type": "text",
-        "text": "[{\"n\":{\"name\":\"Tom Hanks\",\"born\":1956}}...]"
-      }]
+      "content": [
+        {
+          "type": "text",
+          "text": "[{\"n\":{\"name\":\"Tom Hanks\",\"born\":1956}}...]"
+        }
+      ]
     }
   }
 }
@@ -610,10 +633,11 @@ Every Neo4j tool execution is captured with comprehensive details:
 Save your entire development session:
 
 - **JSON Format**: Complete conversation with all Neo4j queries and results
-- **Markdown Format**: Human-readable documentation with query formatting  
+- **Markdown Format**: Human-readable documentation with query formatting
 - **Plain Text Format**: LLM-ready format for sharing context
 
 All exports include:
+
 - Your questions and the AI's responses
 - Complete tool execution details
 - Cypher queries with parameters
@@ -623,36 +647,42 @@ All exports include:
 ## Why MCP Connect is Essential for Local Neo4j Development
 
 **1. Granular Token Control**
+
 - **You manually enable/disable** specific Neo4j tools per task
 - **Visual feedback** shows token overhead in real-time (X/3 tools)
 - **Warning banners** alert you when many tools are active
 - **Optimize costs** by only enabling what you're actively using
 
 **2. Privacy-First Architecture**
+
 - All Neo4j queries and results **stored locally** in your browser
 - **No server-side data transmission** - everything stays on your machine
 - Your database credentials **never leave your computer**
 - Works offline once the app is loaded
 
 **3. Professional Neo4j Workflow**
+
 - **Test Cypher queries** individually before running in production
 - **Debug protocol issues** with raw message inspection
 - **Performance profiling** shows exact query execution times
 - **Export conversations** for documentation and team sharing
 
 **4. Zero Friction Setup**
+
 - **No installation required** - works directly in browser
 - Or run locally with one command: `npx @mcpconnect/cli`
 - Connect to any Neo4j MCP server immediately
 - Manage multiple Neo4j connections simultaneously
 
 **5. Cost-Effective Development**
+
 - **Reduce API costs 50-70%** through manual tool management
 - **Visual warnings** prevent expensive token-wasting mistakes
 - **Test exhaustively** without burning your API budget
 - **Scale savings** across entire development team
 
 **6. Smart Development Warnings**
+
 - **Long conversation alerts**: When your chat history grows large
 - **Many tools warning**: When you have 5+ tools enabled at once
 - **Real-time token estimates**: See overhead before sending messages
@@ -663,18 +693,21 @@ All exports include:
 ## Essential Resources
 
 ### Tools & Platforms
+
 - **[MCP Connect Web](https://mcp.rconnect.tech)** - Browser-based Neo4j MCP development
 - **[MCP Connect CLI](https://www.npmjs.com/package/@mcpconnect/cli)** - Local development server
 - **[Neo4j Sandbox](https://sandbox.neo4j.com)** - Free graph database instances
 - **[Neo4j MCP Server](https://github.com/neo4j-contrib/mcp-neo4j)** - Official integration
 
 ### Documentation
+
 - **[Neo4j Documentation](https://neo4j.com/docs/)** - Complete database and Cypher reference
 - **[Neo4j Cypher Manual](https://neo4j.com/docs/cypher-manual/)** - Query language guide
 - **[MCP Specification](https://spec.modelcontextprotocol.io/)** - Protocol details
 - **[Claude Desktop MCP Guide](https://docs.anthropic.com/claude/docs/mcp)** - Integration docs
 
 ### Community
+
 - **[Rocket Connect Blog](https://rconnect.tech/blog)** - Latest insights and tutorials
 - **[YouTube Channel](https://www.youtube.com/@rocket-connect)** - Video tutorials and demos
 - **[Twitter/X](https://x.com/rconnect_tech)** - Updates and announcements
@@ -685,6 +718,7 @@ All exports include:
 We're passionate about connecting people through open source and building tools that make developers' lives easier. MCP Connect is part of our mission to enhance the open-source ecosystem and foster community engagement.
 
 **Get Involved:**
+
 - Try [MCP Connect](https://mcp.rconnect.tech) and share your feedback
 - Join our [YouTube community](https://www.youtube.com/@rocket-connect) for tutorials
 - Follow us on [Twitter/X](https://x.com/rconnect_tech) for updates
@@ -692,10 +726,11 @@ We're passionate about connecting people through open source and building tools 
 - Explore our [open source projects](https://github.com/rocket-connect)
 
 **Need Help?**
+
 - Check out our [blog](https://rconnect.tech/blog) for more tutorials
 - [Contact us](https://rconnect.tech/contact) for questions or collaboration
 - Report issues on [GitHub](https://github.com/rocket-connect)
 
-*Written by the Rocket Connect team. We connect people through open source by enhancing the ecosystem and fostering community engagement. Our services include Open Source Development, Community Management, Developer Relations, and Software Training.*
+_Written by the Rocket Connect team. We connect people through open source by enhancing the ecosystem and fostering community engagement. Our services include Open Source Development, Community Management, Developer Relations, and Software Training._
 
 **Ready to collaborate?** [Contact us today](https://rconnect.tech/contact) and let's build something great together!
