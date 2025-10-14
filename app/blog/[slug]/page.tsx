@@ -117,9 +117,28 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const props = await getPost(params);
   const authors = getAuthors(props.frontMatter.author || 'team-rconnect');
 
-  // MDX Components - Code component is already included here
+  // MDX Components with inline code handling
   const components = {
-    pre: Code, // This uses your existing Code component
+    code: ({ children, className, ...props }: any) => {
+      // Check if this is an inline code element (no className means inline)
+      const isInlineCode = !className;
+
+      if (isInlineCode) {
+        return (
+          <code className="inline-code" {...props}>
+            {children}
+          </code>
+        );
+      }
+
+      // Block code - let the pre handler deal with it
+      return (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      );
+    },
+    pre: Code, // This handles code blocks
     YouTube,
   };
 
@@ -273,10 +292,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
 
                 {/* Article Content */}
-                <div className="prose prose-lg mx-auto max-w-none overflow-hidden text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:!m-0 prose-pre:overflow-x-auto prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!shadow-none dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1] dark:prose-pre:!border-none dark:prose-pre:!bg-transparent dark:prose-pre:!outline-none">
-                  <div className="[&_code]:text-sm [&_pre]:max-w-full [&_pre]:overflow-x-auto [&_pre_code]:whitespace-pre">
-                    <MDXRemote source={props.content} components={components} />
-                  </div>
+                <div className="prose prose-lg mx-auto max-w-none overflow-hidden text-foreground-main prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:bg-transparent dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1]">
+                  <MDXRemote source={props.content} components={components} />
                 </div>
 
                 {/* Article Tags */}
