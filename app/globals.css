@@ -95,14 +95,15 @@ span code:not(pre code)::after {
   display: none !important;
 }
 
-/* Code Block Container Styling */
+/* Code Block Container Styling - 80% width, centered */
 .code-block-wrapper {
-  margin: 1.5rem 0;
+  margin: 1.5rem auto;
+  width: 80%;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;
   overflow: hidden;
   background: #ffffff;
-  font-size: 0.875rem; /* Smaller base size for code blocks */
+  font-size: 0.875rem;
 }
 
 .dark .code-block-wrapper {
@@ -117,7 +118,7 @@ span code:not(pre code)::after {
   padding: 0.5rem 1rem;
   background: #f9fafb;
   border-bottom: 1px solid #e5e7eb;
-  font-size: 0.75rem; /* Smaller header text */
+  font-size: 0.75rem;
 }
 
 .dark .code-block-header {
@@ -129,15 +130,15 @@ span code:not(pre code)::after {
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  font-size: 0.8125rem; /* 13px - smaller code font */
+  font-size: 0.8125rem;
 }
 
 .code-block-content pre {
   margin: 0 !important;
-  padding: 0.875rem 1rem !important; /* Slightly less padding */
+  padding: 0.875rem 1rem !important;
   background: transparent !important;
   font-size: inherit !important;
-  line-height: 1.6 !important; /* Tighter line height */
+  line-height: 1.6 !important;
 }
 
 /* Ensure code inside pre inherits the smaller size */
@@ -236,10 +237,18 @@ pre code {
 
 /* Ensure code blocks in prose don't get too large */
 .prose pre {
-  font-size: 0.8125em; /* Smaller than body text */
+  font-size: 0.8125em;
   line-height: 1.6;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
+}
+
+/* Images in prose - 80% width, centered */
+.prose img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: auto;
 }
 
 /* Responsive adjustments */

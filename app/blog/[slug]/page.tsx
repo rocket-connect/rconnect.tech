@@ -1,4 +1,4 @@
-// app/blog/[slug]/page.tsx - Complete version with Sticky TOC
+// app/blog/[slug]/page.tsx - Complete version with Image Modal
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -17,8 +17,8 @@ import { categoryColor, cn, formatdate, metadataBase } from '@/lib/utils';
 import { getAuthors } from '@/content/authors';
 import { sharedKeywords } from '@/lib/seo';
 import { Metadata } from 'next';
-import Image from 'next/image';
 import { BlogPostClient } from './BlogPostClient';
+import { BlogImageWrapper } from './BlogImageWrapper';
 
 type Props = {
   params: { slug: string };
@@ -137,6 +137,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     },
     pre: Code,
     YouTube,
+    img: ({ src, alt, ...props }: any) => <BlogImageWrapper src={src} alt={alt} {...props} />,
   };
 
   const formattedDate = formatdate(props.frontMatter.date);
@@ -215,7 +216,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               </Link>
             </div>
 
-            {/* Main Grid Layout - No overflow constraints */}
+            {/* Main Grid Layout */}
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
               {/* Main Content Column */}
               <article className="lg:col-span-8">
@@ -243,7 +244,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                       <div className="flex items-center gap-1">
                         <div className="flex -space-x-1">
                           {authors.slice(0, 3).map((author, index) => (
-                            <Image
+                            <BlogImageWrapper
                               key={author.id}
                               src={author.avatar}
                               alt={author.name}
@@ -275,10 +276,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   </p>
                 </header>
 
-                {/* Hero Image */}
-                <div className="mb-8">
-                  <Image
-                    className="w-full rounded-lg shadow-md lg:rounded-xl lg:shadow-lg"
+                {/* Hero Image - 80% width, centered */}
+                <div className="mx-auto mb-8 w-4/5">
+                  <BlogImageWrapper
+                    className="w-full cursor-pointer rounded-lg shadow-md transition-opacity hover:opacity-95 lg:rounded-xl lg:shadow-lg"
                     alt={props.frontMatter.title}
                     width={1200}
                     height={630}
