@@ -1,0 +1,671 @@
+---
+title: 'How to MCP Connect to Supabase'
+date: '2025-10-20'
+description: 'Step-by-step guide to connecting the Supabase MCP server to MCP clients like Claude Desktop and MCP Connect. Learn to configure Supabase authentication, manage databases with AI, and develop with visual protocol inspection.'
+hero: '/images/blogs/how-to-mcp-connect-supabase.png'
+category: 'technology'
+author: ['dan-starns', 'team-rconnect']
+keywords:
+  [
+    'Supabase MCP Server',
+    'MCP Client Setup',
+    'Model Context Protocol',
+    'Claude Desktop MCP',
+    'MCP Connect',
+    'Database Management MCP',
+    'Supabase AI Integration',
+    'PostgreSQL AI',
+    'Supabase Access Token',
+    'SSE Transport',
+  ]
+---
+
+_Learn how to integrate Supabase's powerful backend platform with MCP Connect for seamless AI-powered database management_
+
+> Keen to learn more about MCP from in-person experts? Check out our upcoming [MCP Bangkok (16th October 2025)](/blog/mcp-bangkok) and [MCP Singapore (23rd October 2025)](/blog/mcp-singapore) meetups.
+
+## What is Supabase?
+
+- [supabase.com](https://supabase.com)
+
+Supabase is an open-source Firebase alternative providing a complete backend-as-a-service platform. Built on PostgreSQL, it offers authentication, real-time subscriptions, storage, and serverless functions all with developer-friendly SQL capabilities.
+
+<img
+  src="/images/blogs/supabase-home.png"
+  alt="Screenshot of Supabase homepage"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+**Key Benefits:**
+
+- **PostgreSQL Foundation**: Full SQL power with built-in extensions
+- **Real-time Subscriptions**: Instant updates across clients
+- **Built-in Authentication**: Ready-to-use auth with multiple providers
+- **Row Level Security**: Database-level security policies
+- **Auto-generated APIs**: REST and GraphQL endpoints from your schema
+
+## Understanding Model Context Protocol (MCP)
+
+- [anthropic.com/news/model-context-protocol](https://www.anthropic.com/news/model-context-protocol)
+
+Model Context Protocol (MCP) is an open standard by Anthropic enabling seamless integration between AI applications and external data sources. It allows AI models like Claude to securely access and interact with your databases, APIs, and tools.
+
+<img
+  src="/images/blogs/mcp-anthropic.png"
+  alt="Model Context Protocol diagram from Anthropic"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+**Why MCP Matters:**
+
+- **Standardized Integration**: One protocol for all data sources
+- **Secure Access**: Controlled, auditable data access
+- **Real-time Context**: AI works with live information
+- **Tool Capabilities**: Extend AI with custom functionality
+
+## Prerequisites
+
+Before starting, you'll need:
+
+1. **Node.js** installed (for running the MCP gateway)
+2. A **Supabase account** (we'll create this together)
+3. **NPX** available in your terminal
+
+## Setting Up Your Supabase Project
+
+### Step 1: Create Your Account
+
+1. Go to [supabase.com](https://supabase.com)
+2. Click **"Start your project"** or **"Sign up"**
+3. Sign up using GitHub, Google, or email
+
+<img
+  src="/images/blogs/supabase-signup.png"
+  alt="Supabase sign up page"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 2: Create an Organization
+
+1. Click **"New organization"**
+2. Enter an organization name
+3. Choose a plan (Free tier works great)
+4. Click **"Create organization"**
+
+<img
+  src="/images/blogs/supabase-create-org.png"
+  alt="Creating a Supabase organization"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 3: Create Your Project
+
+1. Click **"New project"**
+2. Enter a **Project name**
+3. Generate a strong **Database Password** (save securely!)
+4. Select your **Region**
+5. Click **"Create new project"**
+
+<img
+  src="/images/blogs/supabase-create-project.png"
+  alt="Creating a Supabase project"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/supabase-project-home.png"
+  alt="Supabase project dashboard"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 4: Generate Your Access Token
+
+1. Click your **profile icon** (top right)
+2. Select **"Access Tokens"**
+3. Click **"Generate new token"**
+
+<img
+  src="/images/blogs/supabase-account-no-tokens-list.png"
+  alt="Supabase access tokens page"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+4. Enter a **Token name** (e.g., "MCP Token")
+5. Set **expiration** (or no expiration for development)
+6. Click **"Generate token"**
+
+<img
+  src="/images/blogs/supabase-create-access-token.png"
+  alt="Creating a Supabase access token"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+7. **Copy your token immediately** you won't see it again!
+
+<img
+  src="/images/blogs/supabase-access-token-created.png"
+  alt="Supabase token successfully generated"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+## Starting the Supabase MCP Server
+
+- [github.com/supabase-community/supabase-mcp](https://github.com/supabase-community/supabase-mcp)
+
+<img
+  src="/images/blogs/supabase-github-screenshot.png"
+  alt="Supabase MCP Server github"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 1: Export Your Access Token
+
+```bash
+export SUPABASE_ACCESS_TOKEN=sbp_your_token_here
+```
+
+Verify it's set:
+
+```bash
+echo $SUPABASE_ACCESS_TOKEN
+```
+
+### Step 2: Start the MCP Gateway
+
+- [github.com/supercorp-ai/supergateway](https://github.com/supercorp-ai/supergateway)
+
+**For Claude Desktop:**
+
+```bash
+npx -y supergateway \
+  --stdio "npx -y @supabase/mcp-server-supabase@latest --access-token $SUPABASE_ACCESS_TOKEN" \
+  --port 8000 \
+  --baseUrl http://localhost:8000 \
+  --ssePath /sse \
+  --messagePath /message
+```
+
+**For MCP Connect (with CORS):**
+
+```bash
+npx -y supergateway \
+  --stdio "npx -y @supabase/mcp-server-supabase@latest --access-token $SUPABASE_ACCESS_TOKEN" \
+  --port 8000 \
+  --baseUrl http://localhost:8000 \
+  --ssePath /sse \
+  --messagePath /message \
+  --cors
+```
+
+**Important**: The `--cors` flag is **required for MCP Connect** (browser-based) but should be **omitted for Claude Desktop**.
+
+Keep this terminal running!
+
+Expected output:
+
+```
+[supergateway] Starting...
+[supergateway]   - outputTransport: sse
+[supergateway]   - port: 8000
+[supergateway]   - CORS: enabled ("*")
+[supergateway] Listening on port 8000
+[supergateway] SSE endpoint: http://localhost:8000/sse
+[supergateway] Child stderr: Supabase MCP Server running on stdio
+```
+
+## Connecting to Claude Desktop
+
+### Step 1: Configure Claude Desktop
+
+Find your configuration file:
+
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%/Claude/claude_desktop_config.json`
+
+Add this configuration:
+
+```json
+{
+  "mcpServers": {
+    "supabase-mcp-local": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "http://localhost:8000/sse",
+        "--transport",
+        "sse",
+        "--allow-http"
+      ]
+    }
+  }
+}
+```
+
+<img
+  src="/images/blogs/supabase-claude-mcp-config.png"
+  alt="Claude Desktop configuration file"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 2: Restart and Test
+
+1. Quit Claude Desktop completely
+2. Relaunch the application
+3. Look for the tools indicator
+
+<img
+  src="/images/blogs/supabase-claude-see-connected.png"
+  alt="Claude Desktop with Supabase MCP connected"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/supabase-claude-see-tools.png"
+  alt="Claude Desktop showing Supabase tools"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 3: Build a Movies Database
+
+Let's create a sample schema, populate it, and query it all through natural language!
+
+**Prompt 1: Create the Schema (Migration Only)**
+
+```
+Create a migration for a simple movies table with these columns:
+id (primary key, uuid, auto-generated),
+title (text, required),
+release_year (integer),
+director (text),
+rating (decimal between 0 and 10)
+```
+
+<img
+  src="/images/blogs/supabase-claude-create-schema.png"
+  alt="Claude Desktop creating movies schema"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+**Prompt 2: Insert Sample Data**
+
+```
+Insert 5 movies into the movies table:
+The Shawshank Redemption (1994, Frank Darabont, 9.3),
+The Godfather (1972, Francis Ford Coppola, 9.2),
+The Dark Knight (2008, Christopher Nolan, 9.0),
+Pulp Fiction (1994, Quentin Tarantino, 8.9),
+Forrest Gump (1994, Robert Zemeckis, 8.8)
+```
+
+<img
+  src="/images/blogs/supabase-claude-populate-data.png"
+  alt="Claude Desktop populating movies data"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+**Prompt 3: Read the Data**
+
+```
+Show me all movies from the movies table, ordered by rating from highest to lowest
+```
+
+<img
+  src="/images/blogs/supabase-claude-query-movies.png"
+  alt="Claude Desktop querying movies data"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+## Connecting to MCP Connect
+
+### Step 1: Access MCP Connect
+
+Visit **[mcp.rconnect.tech](https://mcp.rconnect.tech)** or run locally:
+
+```bash
+npx @mcpconnect/cli
+```
+
+<img
+  src="/images/blogs/mcp-connect-supabase-home.png"
+  alt="MCP Connect home interface"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 2: Create Connection
+
+1. Click **"+ New Connection"**
+2. Fill in details:
+
+```
+Name: Supabase MCP Server
+URL: http://localhost:8000/sse
+Connection Type: SSE
+Timeout: 60000ms
+Retry Attempts: 3
+```
+
+3. Click **"Test Connection"**
+4. Click **"Create Connection"**
+
+<img
+  src="/images/blogs/mcp-connect-supabase-connect-modal.png"
+  alt="MCP Connect create connection modal"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/mcp-connect-supabase-connected.png"
+  alt="MCP Connect successfully connected"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 3: Configure AI Provider
+
+1. Click **Settings**
+2. Select **Anthropic**
+3. Enter your API key from [console.anthropic.com](https://console.anthropic.com)
+4. Choose **Claude 3.5 Sonnet**
+5. Click **Test** then **Save**
+
+<img
+  src="/images/blogs/mcp-connect-set-llm-modal.png"
+  alt="MCP Connect LLM configuration"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 4: Test Your Connection
+
+Try these prompts to verify everything works:
+
+```
+List all my Supabase projects
+```
+
+<img
+  src="/images/blogs/mcp-connect-supabase-list-projects.png"
+  alt="MCP Connect querying movies data"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+```
+Show me all movies released after 1990 with their actors and the characters they played,
+ordered by rating
+```
+
+<img
+  src="/images/blogs/mcp-connect-supabase-query-movies.png"
+  alt="MCP Connect querying movies data"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+## Why MCP Connect for Development?
+
+MCP Connect is purpose-built for development workflows with powerful capabilities:
+
+### Smart Tool Management
+
+<img
+  src="/images/blogs/mcp-connect-tools-sidebar.png"
+  alt="MCP Connect tool management sidebar"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '30%',
+    height: 'auto',
+  }}
+/>
+
+- **Visual Control**: See all 29+ Supabase tools organized
+- **One-click Toggle**: Enable/disable individual tools
+- **Token Savings**: Reduce API costs by only enabling needed tools
+- **Real-time Counters**: Track enabled vs. disabled status
+
+### The Token Challenge
+
+With 30+ tools, each consuming ~200-400 tokens:
+
+- **~8,000+ tokens per request** just for tool definitions
+- In 10 messages: **80,000+ tokens wasted**
+- MCP Connect lets you **disable unused tools** to save costs
+
+### Development Features
+
+**Protocol Inspection**
+
+<img
+  src="/images/blogs/mcp-connect-supabase-inspector.png"
+  alt="MCP Connect protocol inspector"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '40%',
+    height: 'auto',
+  }}
+/>
+
+- Raw MCP requests/responses in real-time
+- Execution timing for performance optimization
+- Debug API interactions before production
+
+**Conversation Management**
+
+<img
+  src="/images/blogs/mcp-connect-supabase-conv-buttons.png"
+  alt="Conversation management tools"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+- Multiple chat sessions with different configs
+- Export in JSON, Markdown, or Plain Text
+- Share debugging sessions with your team
+
+**Development Warnings**
+
+<img
+  src="/images/blogs/mcp-connect-supabase-warning.png"
+  alt="Token usage warnings"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+- Long conversation alerts
+- Many tools warnings (5+ enabled)
+- Real-time token estimates
+
+## Understanding Supabase Tools
+
+The MCP server organizes 30+ tools into feature groups:
+
+**Account Tools**: `list_projects`, `get_project`, `create_project`, `list_organizations`
+
+**Database Tools**: `list_tables`, `execute_sql`, `apply_migration`, `list_extensions`
+
+**Development Tools**: `get_project_url`, `get_anon_key`, `generate_typescript_types`
+
+**Edge Functions**: `list_edge_functions`, `get_edge_function`, `deploy_edge_function`
+
+**Debugging Tools**: `get_logs`, `get_advisors`
+
+**Knowledge Base**: `search_docs`
+
+**Branching** (paid): `create_branch`, `merge_branch`, `delete_branch`
+
+**Storage** (disabled by default): `list_storage_buckets`, `get_storage_config`
+
+Enable specific groups with `?features=database,docs` or read-only mode with `?read_only=true`.
+
+## Essential Resources
+
+### Tools & Platforms
+
+- **[MCP Connect Web](https://mcp.rconnect.tech)** - Browser-based development
+- **[MCP Connect CLI](https://www.npmjs.com/package/@mcpconnect/cli)** - Local server
+- **[Supabase MCP Server](https://github.com/supabase-community/supabase-mcp)** - Official integration
+- **[Supabase Dashboard](https://supabase.com/dashboard)** - Project management
+
+### Documentation
+
+- **[Supabase Docs](https://supabase.com/docs)** - Complete platform reference
+- **[Supabase MCP Docs](https://supabase.com/mcp)** - MCP-specific guide
+- **[MCP Specification](https://spec.modelcontextprotocol.io/)** - Protocol details
+- **[Claude Desktop MCP](https://docs.anthropic.com/claude/docs/mcp)** - Integration docs
+
+## Connect with Us
+
+We're passionate about connecting people through open source and building developer tools.
+
+**Get Involved:**
+
+- Try [MCP Connect](https://mcp.rconnect.tech)
+- Join [YouTube](https://www.youtube.com/@rocket-connect)
+- Follow [Twitter/X](https://x.com/rconnect_tech)
+- Connect [LinkedIn](https://www.linkedin.com/company/rocketconnect/)
+- Explore [GitHub](https://github.com/rocket-connect)
+
+**Ready to collaborate?** [Contact us](https://rconnect.tech/contact) and let's build together!
