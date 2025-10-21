@@ -1,0 +1,673 @@
+---
+title: 'GraphQL to MCP Interoperability with MCP Connect'
+date: '2025-10-21'
+description: 'Learn how to bridge GraphQL APIs with Model Context Protocol using MCP Connect. Convert your existing GraphQL endpoints to MCP-compatible interfaces with dynamic field selection, automatic schema introspection, and AI-powered query generation.'
+hero: '/images/blogs/how-to-mcp-connect-graphql.png'
+category: 'technology'
+author: ['dan-starns', 'team-rconnect']
+keywords:
+  [
+    'GraphQL MCP',
+    'Model Context Protocol',
+    'GraphQL API Integration',
+    'MCP Connect',
+    'GraphQL to MCP Bridge',
+    'API Interoperability',
+    'GraphQL Schema Conversion',
+    'Dynamic Field Selection',
+    'AI GraphQL Queries',
+    'GraphQL Introspection',
+    'MCP Development',
+    'GraphQL Authentication',
+    'API Token Management',
+    'Browser-based MCP',
+  ]
+---
+
+_Learn how to transform your Supabase GraphQL API into an MCP-compatible interface using MCP Connect - entirely in your browser_
+
+> Keen to learn more about MCP from in-person experts? Check out our upcoming [MCP Bangkok (16th October 2025)](/blog/mcp-bangkok) and [MCP Singapore (23rd October 2025)](/blog/mcp-singapore) meetups.
+
+## Why We Built This: Lessons from GQLPT
+
+After building and battle-testing [GQLPT](/blog/gqlpt) - our AI-powered GraphQL query generation tool - we discovered something important: **having AI generate GraphQL queries directly is complex, error-prone, and insecure**.
+
+With GQLPT.dev, we saw firsthand the challenges:
+
+- AI hallucinating non-existent fields
+- Incorrectly nested queries causing errors
+- Security vulnerabilities from unvalidated query strings
+- Token waste from injecting entire schemas into prompts
+
+**The MCP Connect approach is fundamentally different and superior:**
+
+- AI calls structured tools instead of writing query strings
+- Field selection happens through typed parameters, not string manipulation
+- Validation occurs at the tool level, not after query generation
+- Zero risk of injection attacks or malformed queries
+
+This guide shows you the simpler, more effective, and more secure way to connect GraphQL APIs with AI.
+
+## The GraphQL and MCP Connection
+
+If you're already using GraphQL, you're closer to Model Context Protocol (MCP) integration than you might think. Both protocols share a fundamental philosophy: **giving clients precise control over what data they receive**.
+
+GraphQL pioneered this approach for traditional APIs, while MCP extends these principles to AI interactions—enabling language models to query your data sources with the same precision and flexibility.
+
+### What Makes GraphQL MCP-Ready?
+
+GraphQL's design naturally aligns with MCP's requirements:
+
+- **Self-describing schema**: Introspection reveals all available operations
+- **Flexible queries**: Clients specify exactly what fields they need
+- **Type safety**: Strong typing ensures predictable responses
+- **Single endpoint**: One URL for all operations, just like MCP
+
+This natural alignment means **if you already have a GraphQL API, you're 80% of the way to MCP integration**. MCP Connect bridges the remaining gap entirely in the browser—no backend changes required.
+
+## Understanding Model Context Protocol (MCP)
+
+Model Context Protocol (MCP) is an open standard created by Anthropic that enables seamless integration between AI applications and external data sources. Think of it as a universal adapter that allows AI models like Claude to securely access and interact with your APIs, databases, and tools.
+
+<img
+  src="/images/blogs/mcp-anthropic.png"
+  alt="Model Context Protocol diagram from Anthropic"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+**Why MCP Matters for GraphQL:**
+
+- **Tool-based Interface**: Convert GraphQL operations into callable tools
+- **Dynamic Querying**: AI determines which fields to fetch based on user questions
+- **Schema Preservation**: Your GraphQL types become MCP tool parameters
+- **Authentication**: Standard token-based auth works seamlessly
+
+## Prerequisites
+
+Before getting started, you'll need:
+
+1. **A Supabase account** (we'll create this together)
+2. **Node.js** installed for MCP Connect CLI (optional)
+3. A modern web browser for MCP Connect Web
+
+## Part 1: Setting Up Your Supabase Project
+
+First, let's create a Supabase project with sample data. If you've already completed our [Supabase MCP guide](/blog/how-to-mcp-connect-supabase), you can skip to Part 2.
+
+### Step 1: Create Your Supabase Account
+
+1. Go to [supabase.com](https://supabase.com)
+2. Click **"Start your project"** or **"Sign up"**
+3. Sign up using GitHub, Google, or email
+
+<img
+  src="/images/blogs/supabase-signup.png"
+  alt="Supabase sign up page"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 2: Create an Organization and Project
+
+1. Click **"New organization"**
+2. Enter an organization name
+3. Choose a plan (Free tier works great)
+4. Click **"Create organization"**
+
+<img
+  src="/images/blogs/supabase-create-org.png"
+  alt="Creating a Supabase organization"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+Then create your project:
+
+1. Click **"New project"**
+2. Enter a **Project name**
+3. Generate a strong **Database Password** (save securely!)
+4. Select your **Region**
+5. Click **"Create new project"**
+
+<img
+  src="/images/blogs/supabase-create-project.png"
+  alt="Creating a Supabase project"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/supabase-project-home.png"
+  alt="Supabase project dashboard"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 3: Create Sample Data
+
+**Important**: Before proceeding, you'll need to set up your database schema. Follow our comprehensive [Supabase MCP Connection Guide](/blog/how-to-mcp-connect-supabase) to:
+
+1. Create the movies table using the SQL Editor
+2. Populate it with sample data
+3. Test your database setup
+
+Once you've completed the database setup from that guide, return here to continue with the GraphQL integration.
+
+### Step 4: Get Your API Credentials
+
+1. Navigate to **Settings** → **API**
+2. Copy your **Project URL** (e.g., `https://yourproject.supabase.co`)
+3. Copy your **publishable key** (labeled as "anon public" in the dashboard)
+
+<img
+  src="/images/blogs/supabase-settings.png"
+  alt="Supabase API settings"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+<img
+  src="/images/blogs/supabase-api-settings.png"
+  alt="Supabase API settings showing publishable key"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+**Important**: Save both values - you'll need them for GraphQL authentication.
+
+## Part 2: Understanding Supabase GraphQL
+
+Supabase automatically provides a GraphQL API for all your database tables. Here's what you need to know:
+
+### Your GraphQL Endpoint
+
+Your GraphQL API is available at:
+
+```
+https://[your-project-ref].supabase.co/graphql/v1
+```
+
+**For example**: If your project URL is `https://pcstziogkjwgbcdjecwe.supabase.co`, your GraphQL endpoint is:
+
+```
+https://pcstziogkjwgbcdjecwe.supabase.co/graphql/v1
+```
+
+### Authentication
+
+Supabase GraphQL uses the **apiKey** header for authentication with your publishable key:
+
+```bash
+curl -X POST https://yourproject.supabase.co/graphql/v1 \
+  -H "Content-Type: application/json" \
+  -H "apiKey: your-publishable-key-here" \
+  -d '{"query": "{ moviesCollection { edges { node { title director } } } }"}'
+```
+
+### Testing Your GraphQL API
+
+Before connecting to MCP, verify your GraphQL endpoint works:
+
+```bash
+curl -X POST https://pcstziogkjwgbcdjecwe.supabase.co/graphql/v1 \
+  -H "Content-Type: application/json" \
+  -H "apiKey: your-publishable-key" \
+  -d '{
+    "query": "{ moviesCollection(first: 5) { edges { node { id title director rating } } } }"
+  }'
+```
+
+You should see your movies data returned in JSON format.
+
+## Part 3: Connecting GraphQL to MCP Connect
+
+Now for the magic - we'll transform your Supabase GraphQL API into an MCP server, entirely in your browser!
+
+### Step 1: Access MCP Connect
+
+Visit **[mcp.rconnect.tech](https://mcp.rconnect.tech)** - works entirely in your browser with no installation required!
+
+<img
+  src="/images/blogs/mcp-connect-graphql-home.png"
+  alt="MCP Connect home page"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+Alternatively, run locally:
+
+```bash
+npx @mcpconnect/cli
+```
+
+### Step 2: Create Your GraphQL Connection
+
+1. Click **"+ New Connection"** in the connections panel
+2. Select **"GraphQL"** as the connection type
+
+<img
+  src="/images/blogs/mcp-connect-graphql-new-connection.png"
+  alt="Creating a new GraphQL connection in MCP Connect"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+3. Fill in your connection details:
+
+**Connection Configuration:**
+
+```
+Name: Supabase GraphQL Movies
+URL: https://[your-project-ref].supabase.co/graphql/v1
+Connection Type: GraphQL
+Authentication: API Key
+Header Name: apiKey
+API Key: your-publishable-key-here
+Timeout: 60000ms
+Retry Attempts: 3
+```
+
+**Important Notes:**
+
+- Use your **publishable key** (not service role key)
+- The header name must be **apiKey**
+- Replace `[your-project-ref]` with your actual project reference
+
+4. Click **"Test Connection"** to verify
+
+<img
+  src="/images/blogs/mcp-connect-graphql-test-connection.png"
+  alt="Testing GraphQL connection in MCP Connect"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+5. Click **"Create Connection"**
+
+### What Happens During Connection
+
+When you create a GraphQL connection, MCP Connect:
+
+1. **Sends introspection query** to your GraphQL endpoint
+2. **Parses the schema** to discover all available operations
+3. **Generates MCP tools** for each query and mutation
+4. **Creates parameter definitions** from GraphQL arguments
+5. **Stores schema locally** for dynamic query building
+
+You should see:
+
+- ✅ Connection successful
+- 🔧 Tools discovered: Multiple operations converted to tools
+- 📊 Server: GraphQL API
+- 🌐 Endpoint: Your GraphQL URL
+- 🔒 Authentication: Configured
+
+<img
+  src="/images/blogs/mcp-connect-graphql-connected-success.png"
+  alt="Successfully connected GraphQL API in MCP Connect"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 3: Configure Your AI Provider
+
+1. Click the **Settings** icon (⚙️) in the header
+2. Select **Anthropic** as your provider
+3. Enter your API key from [console.anthropic.com](https://console.anthropic.com)
+4. Choose **Claude 3.5 Sonnet** (recommended)
+5. Click **Test** to verify
+6. Click **Save**
+
+<img
+  src="/images/blogs/mcp-connect-graphql-llm-settings.png"
+  alt="Configuring AI provider in MCP Connect"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Step 4: Understanding Your GraphQL Tools
+
+Once connected, the left sidebar shows your discovered tools organized by operation type:
+
+<img
+  src="/images/blogs/mcp-connect-graphql-tools-sidebar.png"
+  alt="MCP Connect showing discovered GraphQL tools"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '0 auto',
+    width: '30%',
+    height: 'auto',
+  }}
+/>
+
+**Queries** (Read Operations)
+
+- `moviesCollection` - Query movies with filters and pagination
+- Each tool shows available arguments and return type
+
+**Mutations** (Write Operations)
+
+- `insertIntoMoviesCollection` - Create new movies
+- `updateMoviesCollection` - Update existing movies
+- `deleteFromMoviesCollection` - Delete movies
+
+**Special `_fields` Parameter**
+
+Every GraphQL tool gets a special `_fields` parameter:
+
+```javascript
+{
+  "_fields": {
+    "id": true,
+    "title": true,
+    "director": true,
+    "rating": true,
+    // AI decides which fields to include
+  }
+}
+```
+
+<img
+  src="/images/blogs/mcp-connect-graphql-tool-details.png"
+  alt="MCP Connect GraphQL tool showing _fields parameter"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+This is how the AI controls field selection without writing GraphQL queries!
+
+## Part 4: Testing Your GraphQL Integration
+
+Now let's see the magic happen! Try these prompts:
+
+### Query 1: Simple Data Retrieval
+
+```
+Show me all movies in the database with their titles, directors, and ratings
+```
+
+**What happens behind the scenes:**
+
+1. AI identifies it needs the `moviesCollection` tool
+2. AI calls tool with `_fields: { title: true, director: true, rating: true }`
+3. MCP Connect builds the GraphQL query dynamically
+4. Query executes and returns data
+5. AI formats the response naturally
+
+<img
+  src="/images/blogs/mcp-connect-graphql-query-simple.png"
+  alt="MCP Connect executing simple GraphQL query"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Query 2: Filtered Query
+
+```
+Find all movies directed by Christopher Nolan with ratings above 8.5
+```
+
+**Behind the scenes:**
+
+```javascript
+{
+  filter: {
+    director: { eq: "Christopher Nolan" },
+    rating: { gt: 8.5 }
+  },
+  _fields: {
+    title: true,
+    release_year: true,
+    rating: true
+  }
+}
+```
+
+<img
+  src="/images/blogs/mcp-connect-graphql-query-filtered.png"
+  alt="MCP Connect executing filtered GraphQL query"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+### Query 3: Mutation Example
+
+```
+Add a new movie: Inception, directed by Christopher Nolan,
+released in 2010, with a rating of 8.8
+```
+
+**Behind the scenes:**
+
+1. AI calls `insertIntoMoviesCollection`
+2. Provides object with movie data
+3. MCP Connect builds mutation query
+4. Returns created movie data
+
+<img
+  src="/images/blogs/mcp-connect-graphql-mutation.png"
+  alt="MCP Connect executing filtered GraphQL query"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2rem auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+## Why Direct Schema Injection Doesn't Work
+
+Before MCP Connect, developers tried putting GraphQL schemas directly into AI prompts. Here's why that approach fails:
+
+### The Token Explosion Problem
+
+GraphQL schemas, especially production ones, can be **massive**:
+
+```graphql
+type Query {
+  moviesCollection(
+    first: Int
+    last: Int
+    before: Cursor
+    after: Cursor
+    filter: MoviesFilter
+    orderBy: [MoviesOrderBy!]
+  ): MoviesConnection
+  # ... 50+ more collections ...
+}
+# ... hundreds more types ...
+```
+
+**Problems with schema injection:**
+
+- **Token waste**: Large portion of context consumed by schema
+- **Context pollution**: Less room for actual conversation
+- **Slow responses**: AI must parse massive schema on every request
+- **Outdated schema**: Copy-paste means schema goes stale
+
+### The Manual Query Construction Trap
+
+Even worse is asking the AI to construct full GraphQL queries:
+
+```
+❌ BAD: "Here's my schema, write a query to get movies"
+```
+
+This leads to:
+
+- AI hallucinating non-existent fields
+- Missing required arguments
+- Incorrect filter syntax
+- No type safety or validation
+
+## The MCP Connect Solution: Dynamic Tool Generation
+
+MCP Connect takes a completely different approach:
+
+### 1. Automatic Schema Introspection
+
+Instead of injecting schemas into prompts, MCP Connect:
+
+1. **Introspects your GraphQL endpoint** once during connection
+2. **Converts each operation** (query/mutation) into an MCP tool
+3. **Stores tool definitions** locally (not in AI context)
+4. **Sends only relevant tools** when AI needs them
+
+### 2. AI-Controlled Field Selection
+
+Here's the breakthrough: **The AI doesn't write GraphQL queries**. Instead:
+
+1. **AI calls MCP tools** with desired fields as parameters
+2. **MCP Connect builds the GraphQL query** dynamically
+3. **Selection set is constructed** from AI's field choices
+4. **Query executes** with precise field selection
+
+**Example flow:**
+
+```javascript
+// What the AI sees (simple tool call):
+{
+  tool: "moviesCollection",
+  arguments: {
+    first: 5,
+    _fields: {
+      title: true,
+      director: true,
+      rating: true
+    }
+  }
+}
+
+// What MCP Connect generates (full GraphQL):
+query moviesCollection($first: Int) {
+  moviesCollection(first: $first) {
+    edges {
+      node {
+        __typename
+        title
+        director
+        rating
+      }
+    }
+  }
+}
+```
+
+### 3. Token Efficiency
+
+**Traditional approach**: Thousands of tokens per request for schema
+**MCP Connect approach**: Minimal tokens for tool definitions
+
+Significant reduction in token usage!
+
+## Essential Resources
+
+### Tools & Platforms
+
+- **[MCP Connect Web](https://mcp.rconnect.tech)** - Browser-based GraphQL MCP client
+- **[MCP Connect CLI](https://www.npmjs.com/package/@mcpconnect/cli)** - Local development server
+- **[Supabase](https://supabase.com)** - Instant GraphQL APIs
+- **[Supabase GraphQL Docs](https://supabase.com/docs/guides/graphql)** - Official documentation
+
+### Documentation
+
+- **[GraphQL Spec](https://graphql.org/learn/)** - Official GraphQL documentation
+- **[GraphQL Introspection](https://graphql.org/learn/introspection/)** - Schema introspection guide
+- **[MCP Specification](https://spec.modelcontextprotocol.io/)** - Protocol details
+- **[Supabase API Reference](https://supabase.com/docs/guides/api)** - Complete API guide
+
+## Connect with Us
+
+We're passionate about connecting people through open source and building tools that make developers' lives easier. MCP Connect is part of our mission to enhance the open-source ecosystem and foster community engagement.
+
+**Get Involved:**
+
+- Try [MCP Connect](https://mcp.rconnect.tech) with your GraphQL API
+- Join our [YouTube community](https://www.youtube.com/@rocket-connect) for tutorials
+- Follow us on [Twitter/X](https://x.com/rconnect_tech) for updates
+- Connect on [LinkedIn](https://www.linkedin.com/company/rocketconnect/)
+- Explore our [open source projects](https://github.com/rocket-connect)
+
+_Written by the Rocket Connect team. We connect people through open source by enhancing the ecosystem and fostering community engagement. Our services include Open Source Development, Community Management, Developer Relations, and Software Training._
+
+**Ready to collaborate?** [Contact us today](https://rconnect.tech/contact) and let's build something great together!
+
+**Have a GraphQL API?** Share your integration story with us—we'd love to feature your use case!
