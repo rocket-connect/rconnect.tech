@@ -17,6 +17,7 @@ const transporter = createTransport({
 
 async function handler({ name, email, message }: { name: string; email: string; message: string }) {
   try {
+    throw new Error('Please reachout via socials or email');
     await transporter.sendMail({
       to: email,
       from: process.env.EMAIL_SENDER_ADDRESS,
