@@ -1,4 +1,3 @@
-// app/blog/[slug]/BlogPostClient.tsx
 'use client';
 
 import { useTableOfContents } from '@/hooks/useTableOfContents';

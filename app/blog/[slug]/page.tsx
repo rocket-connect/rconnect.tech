@@ -1,10 +1,19 @@
-// app/blog/[slug]/page.tsx - Complete version with Image Modal
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// app/blog/[slug]/page.tsx - Complete version with Image Modal and Table support
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import YouTube from '@/components/shared/Youtube';
 import Code from '@/components/shared/Code';
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableHeader,
+  TableCell,
+} from '@/components/shared/Table';
 import { AuthorCard } from '@/components/shared/AuthorCard';
 import { Cta } from '@/components/shared/Cta';
 import { Footer } from '@/components/shared/Footer';
@@ -19,6 +28,7 @@ import { sharedKeywords } from '@/lib/seo';
 import { Metadata } from 'next';
 import { BlogPostClient } from './BlogPostClient';
 import { BlogImageWrapper } from './BlogImageWrapper';
+import remarkGfm from 'remark-gfm';
 
 type Props = {
   params: { slug: string };
@@ -138,6 +148,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
     pre: Code,
     YouTube,
     img: ({ src, alt, ...props }: any) => <BlogImageWrapper src={src} alt={alt} {...props} />,
+    // Add table components for markdown table support
+    table: Table,
+    thead: TableHead,
+    tbody: TableBody,
+    tr: TableRow,
+    th: TableHeader,
+    td: TableCell,
   };
 
   const formattedDate = formatdate(props.frontMatter.date);
@@ -290,7 +307,17 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
                 {/* Article Content */}
                 <div className="prose prose-base mx-auto max-w-none overflow-hidden text-foreground-main lg:prose-lg prose-headings:text-foreground-main prose-a:text-[#24BEE1] prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-[#24BEE1] prose-blockquote:text-slate-700 prose-strong:text-foreground-main prose-code:rounded prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:text-[#24BEE1] prose-pre:bg-transparent dark:text-foreground-invert dark:prose-headings:text-foreground-invert dark:prose-a:text-[#24BEE1] dark:prose-blockquote:text-slate-300 dark:prose-strong:text-foreground-invert dark:prose-code:bg-slate-800 dark:prose-code:text-[#24BEE1]">
-                  <MDXRemote source={props.content} components={components} />
+                  {/* @ts-ignore */}
+                  <MDXRemote
+                    source={props.content}
+                    // @ts-ignore
+                    components={components}
+                    options={{
+                      mdxOptions: {
+                        remarkPlugins: [remarkGfm],
+                      },
+                    }}
+                  />
                 </div>
 
                 {/* Article Tags */}

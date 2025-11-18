@@ -1,0 +1,470 @@
+---
+title: 'Why Your AI Agent Needs Semantic Tool Discovery'
+date: '2025-11-17'
+description: 'As AI agents gain access to hundreds of tools through MCP servers, traditional tool selection breaks down. Learn how vector search and RAG can reduce prompt tokens while improving tool selection accuracy.'
+hero: '/images/blogs/semantic-tool-discovery.png'
+category: 'technical'
+author: 'dan-starns'
+keywords:
+  [
+    'AI agents',
+    'semantic search',
+    'tool discovery',
+    'MCP',
+    'Model Context Protocol',
+    'vector search',
+    'RAG',
+    'Neo4j',
+    'Claude',
+    'LLM optimization',
+    'token efficiency',
+    'AI tooling',
+    'developer productivity',
+    'graph databases',
+    'embeddings',
+  ]
+---
+
+The Model Context Protocol has unlocked something remarkable: AI agents can now seamlessly integrate with dozens, even hundreds, of tools. GitHub's MCP server alone exposes over 90 operations. Slack, Linear, databases, APIs—the ecosystem grows daily.
+
+But here's the problem: **current AI agents send every single tool definition to the LLM on every request**.
+
+When you ask Claude to "create an issue in my repo," it receives descriptions for all available tools, even though it only needs `create_issue`. That's wasted tokens. Multiply this across conversations, and costs add up while response quality can degrade from information overload.
+
+## The Challenge: Too Many Tools
+
+Let's look at a concrete example. When you connect a GitHub MCP server to an AI agent, you expose over 90 tools. Without intelligent filtering, every request includes:
+
+- Tool names and descriptions
+- Parameter schemas for each tool
+- Return type definitions
+- Required vs optional parameter flags
+
+This information repeats for every single tool in every single request, even when most tools are completely irrelevant to the user's query.
+
+## How Semantic Tool Discovery Works
+
+Traditional tool selection is binary: include everything or nothing. Semantic discovery uses vector embeddings to match user intent with relevant tools.
+
+Here's the flow:
+
+1. **Index Phase** (one-time): Generate embeddings for every tool, parameter, and return type. Store these in a vector database like Neo4j.
+
+2. **Query Phase** (every request): Embed the user's query, search for semantically similar tools, and send only the top matches to your LLM.
+
+Instead of sending all available tools when someone asks "create an issue," you send the most semantically relevant ones: `create_issue`, `update_issue`, `create_issue_comment`.
+
+## The Decomposed Approach
+
+Most tool selection systems embed only tool names and descriptions. MCP-RAG uses a **decomposed approach** that indexes tools at a granular level:
+
+```typescript
+// Instead of just:
+Tool → Embedding
+
+// We decompose:
+Tool → Embedding
+  ├─ Parameter 1 → Embedding
+  ├─ Parameter 2 → Embedding
+  └─ Return Type → Embedding
+```
+
+This granular approach means queries like "add a comment about the bug" will match not just tools with "comment" in their name, but also tools with `comment` parameters or return types.
+
+In Neo4j, this creates a graph structure:
+
+```cypher
+(ToolSet)-[:HAS_TOOL]->(Tool)
+(Tool)-[:HAS_PARAM]->(Parameter)
+(Tool)-[:RETURNS]->(ReturnType)
+```
+
+<img
+  src="https://github.com/rocket-connect/mcp-rag/raw/main/docs/neo4j-model.png"
+  alt="Neo4j Graph Model showing ToolSet, Tool, Parameter, and ReturnType nodes with their relationships"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2px auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+Each node (Tool, Parameter, ReturnType) has its own vector embedding, enabling nuanced semantic matching across the entire tool schema.
+
+## Real-World Results
+
+We benchmarked MCP-RAG against traditional tool selection using a GitHub server scenario with 90+ tools across 5 different queries in a sequential conversation. The tests simulate realistic multi-turn interactions where context accumulates across prompts.
+
+**Benchmark Methodology:** Each test runs 5 sequential prompts that trigger different tools, mirroring real-world agent conversations. Both approaches use the complete GitHub MCP Server toolset (90+ tools) to represent authentic large-scale scenarios.
+
+### Performance Comparison
+
+Both approaches achieved **100% accuracy** (5/5 tests passed), demonstrating that RAG maintains perfect tool selection while dramatically improving efficiency.
+
+| Metric                    | Base Tool Selection | RAG Tool Selection | Improvement      |
+| ------------------------- | ------------------- | ------------------ | ---------------- |
+| **Average Response Time** | 4,595 ms            | 1,742 ms           | **62.1% faster** |
+| **Total Response Time**   | 22,975 ms           | 8,710 ms           | **62.1% faster** |
+| **Min Response Time**     | 2,019 ms            | 1,532 ms           | 24.1% faster     |
+| **Max Response Time**     | 8,627 ms            | 2,190 ms           | 74.6% faster     |
+
+### Token Efficiency
+
+| Metric                  | Base Tool Selection | RAG Tool Selection | Reduction           |
+| ----------------------- | ------------------- | ------------------ | ------------------- |
+| **Total Tokens**        | 47,323              | 5,164              | **89.1% reduction** |
+| **Average Tokens/Test** | 9,465               | 1,033              | **89.1% reduction** |
+| **Prompt Tokens**       | 47,161              | 5,002              | 89.4% reduction     |
+| **Completion Tokens**   | 162                 | 162                | No change           |
+
+### Individual Test Performance
+
+| Test Case    | Base Response Time | RAG Response Time | Token Reduction |
+| ------------ | ------------------ | ----------------- | --------------- |
+| Get PR #42   | 7,808 ms           | 1,659 ms          | 91.7%           |
+| List Issues  | 2,446 ms           | 1,653 ms          | 86.1%           |
+| Create Issue | 2,019 ms           | 1,676 ms          | 88.5%           |
+| Get README   | 2,075 ms           | 2,190 ms          | 91.6%           |
+| Add Comment  | 8,627 ms           | 1,532 ms          | 87.5%           |
+
+**Key Findings:**
+
+- RAG reduces token usage by approximately 89%, translating to significant cost savings
+- Response times improve by over 60% on average, enhancing user experience
+- Perfect accuracy maintained across all test cases
+- More consistent performance with lower variance across runs
+
+These benchmark results are automatically generated from the test suite. View the latest performance data:
+
+- **[Base Tool Selection Results](https://github.com/rocket-connect/mcp-rag/blob/main/benchmarks/results/base-tool-selection/latest.md)** - Baseline approach
+- **[RAG Tool Selection Results](https://github.com/rocket-connect/mcp-rag/blob/main/benchmarks/results/rag-tool-selection/latest.md)** - RAG-powered filtering
+- **[View Test Suite](https://github.com/rocket-connect/mcp-rag/blob/main/benchmarks/src/rag.test.ts)** - Complete implementation
+
+### Sample Query Results
+
+**Query:** "Get pull request #42 from rocket-connect/mcp-rag"
+
+- Selected tool: `get_pull_request`
+- Tokens used: 785
+- Response time: 1,659ms
+
+**Query:** "List all open issues in the repository rocket-connect/mcp-rag"
+
+- Selected tool: `list_issues`
+- Tokens used: 1,309
+- Response time: 1,653ms
+
+**Query:** "Create a new issue in rocket-connect/mcp-rag with title 'Test Issue' and body 'This is a test'"
+
+- Selected tool: `create_issue`
+- Tokens used: 1,088
+- Response time: 1,676ms
+
+**Query:** "Get the contents of the README.md file from the main branch in rocket-connect/mcp-rag"
+
+- Selected tool: `get_file_contents`
+- Tokens used: 795
+- Response time: 2,190ms
+
+**Query:** "Add a comment to issue #1 in rocket-connect/mcp-rag saying 'This is a test comment'"
+
+- Selected tool: `create_issue_comment`
+- Tokens used: 1,187
+- Response time: 1,532ms
+
+Every query selected the correct tool on the first try. The system successfully matched natural language queries to specific GitHub operations through semantic similarity.
+
+## Why Vector Search Works
+
+Traditional keyword matching struggles with natural language queries:
+
+**Query:** "Let the team know about the deployment"
+
+**Keyword Match:** Looks for exact words like "team", "know", "deployment"  
+**Problem:** Misses tools like `send_message`, `post_to_channel`, `notify_users`
+
+**Vector Match:** Understands semantic similarity  
+**Success:** Correctly finds messaging and notification tools
+
+Vector embeddings capture meaning rather than just matching words. They understand that "let the team know" and "send a message" are semantically similar, even without word overlap.
+
+## Implementation: Core Components
+
+The MCP-RAG implementation consists of two main packages:
+
+### 1. Neo4j Package (`@mcp-rag/neo4j`)
+
+Handles all graph database operations through a `CypherQueryBuilder` class that generates parameterized Cypher queries:
+
+**Tool Indexing:** The `createDecomposedTools` method stores tool schemas with vector embeddings in a graph structure.
+
+**Vector Search:** The `vectorSearchDecomposed` method queries using Neo4j's native vector index with configurable similarity thresholds.
+
+**Schema Management:** Methods like `createVectorIndex` and `checkVectorIndex` manage the vector index infrastructure.
+
+Key implementation details:
+
+```typescript
+// Creates decomposed tool structure in Neo4j
+createDecomposedTools(options: {
+  toolSetName: string
+  tools: Array<{
+    name: string
+    description?: string
+    inputSchema: any
+  }>
+  embeddings: Map<string, {
+    tool: number[]
+    parameters: Record<string, number[]>
+    returnType: number[]
+  }>
+})
+
+// Vector search with similarity threshold
+vectorSearchDecomposed(options: {
+  indexName: string
+  vector: number[]
+  limit?: number
+  minScore?: number
+})
+```
+
+The query builder generates proper Cypher with parameterization to avoid injection risks and uses Neo4j integer types where needed.
+
+### 2. Client Package (`@mcp-rag/client`)
+
+Provides the high-level API as a wrapper around the AI SDK:
+
+```typescript
+import { createMCPRag } from '@mcp-rag/client';
+import { openai } from '@ai-sdk/openai';
+import neo4j from 'neo4j-driver';
+
+// Initialize with Neo4j driver and model
+const rag = createMCPRag({
+  model: openai('gpt-4'),
+  neo4j: driver,
+  tools: {
+    // Your MCP tools here
+  },
+});
+
+// Sync tools to Neo4j
+await rag.sync();
+
+// Generate text with automatic tool selection
+const result = await rag.generateText({
+  prompt: 'create an issue about the bug',
+  maxActiveTools: 10, // Default is 10
+});
+```
+
+The client uses OpenAI's `text-embedding-3-small` model (1536 dimensions) for generating embeddings, creating a consistent embedding space for all tool components.
+
+## The Sync Process
+
+The `sync()` method is where the indexing magic happens:
+
+1. **Creates Vector Index:** Sets up a Neo4j vector index for cosine similarity search with 1536 dimensions
+
+2. **Generates Embeddings:** For each tool, creates embeddings for:
+   - The tool itself (name + description)
+   - Each parameter (name + description)
+   - The return type
+
+3. **Builds Graph Structure:** Creates nodes and relationships in Neo4j using the decomposed model
+
+4. **Idempotent Design:** Uses `MERGE` operations so multiple syncs won't create duplicates
+
+The sync process is required before first use and should be called again if you modify your toolset with `addTool()` or `removeTool()`.
+
+## Vector Index Configuration
+
+The implementation creates a Neo4j vector index using cosine similarity:
+
+```cypher
+CREATE VECTOR INDEX tool_vector_index IF NOT EXISTS
+FOR (t:Tool)
+ON t.embedding
+OPTIONS {indexConfig: {
+  `vector.dimensions`: 1536,
+  `vector.similarity_function`: 'cosine'
+}}
+```
+
+The 1536 dimensions match OpenAI's `text-embedding-3-small` model, ensuring compatibility between query embeddings and indexed tool embeddings.
+
+## The generateText Flow
+
+When you call `rag.generateText()`, here's what happens:
+
+1. **Ensures Sync:** Automatically runs sync if tools haven't been indexed
+
+2. **Semantic Selection:**
+   - Generates an embedding for your prompt using the same model
+   - Performs Neo4j vector similarity search
+   - Retrieves the top N most relevant tools (default: 10)
+
+3. **Passes to AI SDK:** Calls the standard AI SDK `generateText` with only the selected tools
+
+4. **Returns Full Result:** Returns the complete AI SDK result including tool calls, token usage, and response content
+
+This means MCP-RAG is a drop-in replacement for the AI SDK—it accepts the same parameters and returns the same result structures.
+
+<img
+  src="https://github.com/rocket-connect/mcp-rag/raw/main/docs/example-tools-model.png"
+  alt="Example tools model visualization showing how semantic search selects relevant tools"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2px auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+## When to Use Semantic Tool Discovery
+
+RAG-based tool selection makes sense in specific scenarios:
+
+**Consider RAG When:**
+
+- You have 20+ tools from one or more MCP servers
+- Your tools have overlapping functionality
+- Users make natural language requests with ambiguous intent
+- You're building production agents with token/cost concerns
+- You're integrating multiple MCP servers with combined tool counts of 50+
+
+**RAG May Not Be Needed If:**
+
+- You have fewer than 10 clearly distinct tools
+- Tool selection is straightforward with no ambiguity
+- You're prototyping and token efficiency isn't a priority yet
+- Your tools have very different purposes with minimal overlap
+
+## Getting Started
+
+The MCP-RAG project is open source and available on GitHub:
+
+**Repository:** [rocket-connect/mcp-rag](https://github.com/rocket-connect/mcp-rag)
+
+The monorepo includes:
+
+1. **`packages/client`**: High-level wrapper around AI SDK with semantic tool selection
+2. **`packages/neo4j`**: Neo4j-specific Cypher query builder and graph operations
+3. **`benchmarks`**: Test suite with GitHub tool selection benchmarks comparing RAG vs baseline
+4. **`examples/github`**: Complete working example with 93 GitHub MCP tools
+
+Installation:
+
+```bash
+# Install the client package
+npm install @mcp-rag/client @ai-sdk/openai neo4j-driver ai
+
+# Set your OpenAI API key
+export OPENAI_API_KEY=your_key_here
+```
+
+You'll need:
+
+- A Neo4j instance (cloud or local via Docker)
+- An OpenAI API key for embeddings (uses `text-embedding-3-small`)
+- Your MCP tools as AI SDK tool definitions
+
+## Implementation Patterns
+
+The codebase demonstrates several key patterns:
+
+**Batch Tool Creation:** The `createDecomposedTools` method processes multiple tools in a single transaction with proper parameter prefixing to avoid name collisions.
+
+**Parameterized Queries:** All Cypher queries use Neo4j parameters instead of string interpolation to prevent injection attacks.
+
+**Debug Logging:** Extensive debug statements for both Cypher queries and parameters (with embedding truncation for readability).
+
+**Type Safety:** Uses Neo4j integer types via `neo4j.int()` for numeric parameters to avoid type mismatches.
+
+**Idempotent Operations:** Uses `MERGE` instead of `CREATE` to ensure tools can be re-indexed without duplicates.
+
+## Running the Benchmarks
+
+To see the system in action:
+
+```bash
+# Clone the repository
+git clone https://github.com/rocket-connect/mcp-rag
+
+# Install dependencies
+pnpm install
+
+# Set up environment variables
+export OPENAI_API_KEY=your_key_here
+export NEO4J_URI=neo4j://localhost:7687
+export NEO4J_PASSWORD=your_password
+
+# Run benchmarks
+cd benchmarks
+pnpm test
+```
+
+The benchmark suite outputs detailed metrics including token counts, response times, and success rates. Results are saved in `benchmarks/results/` with both latest snapshots and timestamped history.
+
+## The GitHub Example
+
+Want to see MCP-RAG with real tools? The `examples/github` directory demonstrates the complete workflow:
+
+<img
+  src="https://github.com/rocket-connect/mcp-rag/raw/main/docs/neo4j-browser-tools.png"
+  alt="GitHub MCP tools visualized in Neo4j Browser showing the graph structure"
+  style={{
+    border: '2px solid #e5e7eb',
+    borderRadius: '8px',
+    margin: '2px auto',
+    width: '80%',
+    height: 'auto',
+  }}
+/>
+
+1. Mocks all 93 tools from the GitHub MCP server
+2. Syncs them to Neo4j with embeddings
+3. Performs vector similarity search on user prompts
+4. Shows the top 10 selected tools with debug output
+5. Allows interactive testing with different queries
+
+This example is perfect for understanding how semantic search reduces context overhead in production scenarios.
+
+## What's Next
+
+The MCP ecosystem is evolving rapidly. Potential future enhancements include:
+
+**Custom Embedding Models:** Support for other embedding providers beyond OpenAI
+
+**Adaptive Tool Selection:** Dynamically adjusting the number of retrieved tools based on query complexity
+
+**Context-Aware Filtering:** Using conversation history to bias tool selection toward recently used tools
+
+**Tool Composition:** Chaining multiple tools together based on semantic relationships in the graph
+
+**Multi-Vector Search:** Combining tool embeddings with parameter and return type embeddings for more nuanced matching
+
+The intersection of vector search, graph databases, and AI agents is still in early stages, but the patterns emerging show clear benefits for managing large tool sets.
+
+## Final Thoughts
+
+As MCP servers proliferate and AI agents gain access to more capabilities, intelligent tool selection becomes increasingly important. Sending every tool definition on every request doesn't scale—it wastes tokens, increases latency, and can overwhelm the model with irrelevant context.
+
+Semantic tool discovery via vector search addresses this elegantly. The implementation is relatively straightforward: wrap the AI SDK, generate embeddings for tools at initialization, and perform similarity search on each request. The results speak for themselves: 89% reduction in tokens with 62% faster response times, all while maintaining perfect accuracy.
+
+MCP-RAG provides a production-ready foundation for building AI agents that can scale to hundreds of tools while maintaining fast responses and accurate tool selection. It's a drop-in replacement for the AI SDK that adds semantic intelligence without changing your existing workflow.
+
+## Resources
+
+- **GitHub:** [rocket-connect/mcp-rag](https://github.com/rocket-connect/mcp-rag)
+- **Twitter:** [@dan_starns](https://twitter.com/dan_starns)
+- **LinkedIn:** [Daniel Starns](https://www.linkedin.com/in/danielstarns/)
+- **Company:** [Rocket Connect](https://rconnect.tech)
+
+---
+
+_Dan Starns is the Founder & CTO of Rocket Connect, former core contributor to Neo4j, and advocate for graph databases in AI applications. He's currently based in Southeast Asia, organizing developer events and building tools to make AI agents more efficient._
