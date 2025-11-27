@@ -95,6 +95,47 @@ export const authors: Record<string, Author> = {
       'Developer Communities',
     ],
   },
+  'adam-chan': {
+    id: 'adam-chan',
+    name: 'Adam Chan',
+    role: 'Developer Advocate',
+    bio: 'Adam is a Developer Advocate at HackerSquad, passionate about bringing together developers and fostering innovation in the AI development space. He specializes in community building and organizing tech events across Asia.',
+    avatar: '/images/authors/adam.jpeg',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/itsajchan/',
+      website: 'https://hackersquad.io',
+    },
+    expertise: [
+      'Developer Advocacy',
+      'Community Building',
+      'Event Organization',
+      'AI Development',
+      'Tech Meetups',
+      'Asia Tech Scene',
+    ],
+  },
+  lubos: {
+    id: 'lubos',
+    name: 'Lubos',
+    role: 'Creator & Founder',
+    bio: 'Lubos is the creator of Hey API, a powerful tool for generating production-ready TypeScript SDKs and API clients from OpenAPI specifications. His work is trusted by companies like Google, Amazon, and PayPal.',
+    avatar: '/images/authors/lubos.jpg',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/mrlubos/',
+      github: 'https://github.com/mrlubos',
+      website: 'https://heyapi.dev',
+    },
+    expertise: [
+      'API Development',
+      'OpenAPI',
+      'TypeScript',
+      'SDK Generation',
+      'Developer Tools',
+      'Type Safety',
+      'API Automation',
+      'Plugin Ecosystems',
+    ],
+  },
 };
 
 export function getAuthor(authorId: string): Author | null {
