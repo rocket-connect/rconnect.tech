@@ -202,35 +202,11 @@ With Neo4j connected, click the **Sync** button. [MCP Connect Inspector UI](http
 
 You'll see progress as tools are processed. For 93 GitHub tools, this typically takes 30-60 seconds on first sync.
 
-<img
-  src="/images/blogs/semantic-guide-vectorize-progress.png"
-  alt="MCP Connect Inspector UI showing vectorization progress with tool count"
-  style={{
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    margin: '2rem auto',
-    width: '80%',
-    height: 'auto',
-  }}
-/>
-
 Once complete, the status shows:
 
 - ✅ **Synced**
 - **Tool count**: Number of tools indexed
 - **Hash**: A fingerprint of your schema (used to detect changes)
-
-<img
-  src="/images/blogs/semantic-guide-sync-complete.png"
-  alt="MCP Connect Inspector UI showing successful sync status with tool count and hash"
-  style={{
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    margin: '2rem auto',
-    width: '80%',
-    height: 'auto',
-  }}
-/>
 
 ### What's Being Stored?
 
@@ -253,7 +229,7 @@ In Neo4j, this creates a graph:
 Each node has its own vector embedding.
 
 <img
-  src="/images/blogs/semantic-guide-neo4j-graph-model.png"
+  src="https://github.com/rocket-connect/mcp-rag/raw/main/docs/neo4j-browser-tools.png"
   alt="Neo4j browser showing the tool graph structure with ToolSet, Tool, Parameter, and ReturnType nodes"
   style={{
     border: '2px solid #e5e7eb',
@@ -285,7 +261,7 @@ The UI shows a **Vector Search Tool Card** with:
 - Context reduction (e.g., "Reduced context by 89%")
 
 <img
-  src="/images/blogs/semantic-guide-vector-search-results.png"
+  src="/images/blogs/semantic-guide-overview.png"
   alt="MCP Connect Inspector UI chat showing vector search tool card with relevance scores and context reduction"
   style={{
     border: '2px solid #e5e7eb',
@@ -298,27 +274,13 @@ The UI shows a **Vector Search Tool Card** with:
 
 ### Try Different Queries
 
-| Query | Expected Top Tools |
-| ----- | ------------------ |
-| "Get pull request #1 from rocket-connect/mcp-rag" | `get_pull_request` |
+| Query                                               | Expected Top Tools             |
+| --------------------------------------------------- | ------------------------------ |
+| "Get pull request #1 from rocket-connect/mcp-rag"   | `get_pull_request`             |
 | "List all open issues in rocket-connect/mcpconnect" | `list_issues`, `search_issues` |
-| "Show me the recent commits on mcp-rag" | `list_commits` |
-| "What's in the README?" | `get_file_contents` |
-| "Get the repo details for rocket-connect/mcp-rag" | `get_repository` |
-
-Notice how semantic search understands intent. "What's in the README?" doesn't contain the word "file" or "contents," but vector similarity correctly identifies `get_file_contents` as relevant.
-
-<img
-  src="/images/blogs/semantic-guide-readme-query-example.png"
-  alt="MCP Connect Inspector UI showing semantic match for 'What's in the README' query finding get_file_contents tool"
-  style={{
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    margin: '2rem auto',
-    width: '80%',
-    height: 'auto',
-  }}
-/>
+| "Show me the recent commits on mcp-rag"             | `list_commits`                 |
+| "What's in the README?"                             | `get_file_contents`            |
+| "Get the repo details for rocket-connect/mcp-rag"   | `get_repository`               |
 
 ## Step 6: Compare Before and After
 
@@ -326,19 +288,19 @@ To really appreciate the improvement, compare metrics with and without semantic 
 
 ### Without Semantic Selection (Baseline)
 
-| Metric | Value |
-| ------ | ----- |
-| Tools sent to LLM | 93 |
-| Prompt tokens | ~47,000 |
-| Response time | ~4,500ms |
+| Metric            | Value    |
+| ----------------- | -------- |
+| Tools sent to LLM | 93       |
+| Prompt tokens     | ~47,000  |
+| Response time     | ~4,500ms |
 
 ### With Semantic Selection
 
-| Metric | Value |
-| ------ | ----- |
-| Tools sent to LLM | 5-10 |
-| Prompt tokens | ~1,000-2,000 |
-| Response time | ~1,700ms |
+| Metric            | Value        |
+| ----------------- | ------------ |
+| Tools sent to LLM | 5-10         |
+| Prompt tokens     | ~1,000-2,000 |
+| Response time     | ~1,700ms     |
 
 **Results:**
 
