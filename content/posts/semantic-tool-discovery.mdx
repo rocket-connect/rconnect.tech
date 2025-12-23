@@ -25,6 +25,8 @@ keywords:
   ]
 ---
 
+> **Want to try this yourself?** Check out the [MCP-RAG repository on GitHub](https://github.com/rocket-connect/mcp-rag) and see semantic tool selection in action with our free, open-source [MCP Connect Inspector UI](https://mcp.rconnect.tech). Follow our [step-by-step guide](/blog/semantic-tool-selection-guide) to set it up and watch vector search reduce your token usage by 89%.
+
 The Model Context Protocol has unlocked something remarkable: AI agents can now seamlessly integrate with dozens, even hundreds, of tools. GitHub's MCP server alone exposes over 90 operations. Slack, Linear, databases, APIs—the ecosystem grows daily.
 
 But here's the problem: **current AI agents send every single tool definition to the LLM on every request**.
@@ -182,10 +184,10 @@ Traditional keyword matching struggles with natural language queries:
 
 **Query:** "Let the team know about the deployment"
 
-**Keyword Match:** Looks for exact words like "team", "know", "deployment"  
+**Keyword Match:** Looks for exact words like "team", "know", "deployment"
 **Problem:** Misses tools like `send_message`, `post_to_channel`, `notify_users`
 
-**Vector Match:** Understands semantic similarity  
+**Vector Match:** Understands semantic similarity
 **Success:** Correctly finds messaging and notification tools
 
 Vector embeddings capture meaning rather than just matching words. They understand that "let the team know" and "send a message" are semantically similar, even without word overlap.
@@ -204,35 +206,6 @@ Handles all graph database operations through a `CypherQueryBuilder` class that 
 
 **Schema Management:** Methods like `createVectorIndex` and `checkVectorIndex` manage the vector index infrastructure.
 
-Key implementation details:
-
-```typescript
-// Creates decomposed tool structure in Neo4j
-createDecomposedTools(options: {
-  toolSetName: string
-  tools: Array<{
-    name: string
-    description?: string
-    inputSchema: any
-  }>
-  embeddings: Map<string, {
-    tool: number[]
-    parameters: Record<string, number[]>
-    returnType: number[]
-  }>
-})
-
-// Vector search with similarity threshold
-vectorSearchDecomposed(options: {
-  indexName: string
-  vector: number[]
-  limit?: number
-  minScore?: number
-})
-```
-
-The query builder generates proper Cypher with parameterization to avoid injection risks and uses Neo4j integer types where needed.
-
 ### 2. Client Package (`@mcp-rag/client`)
 
 Provides the high-level API as a wrapper around the AI SDK:
@@ -242,13 +215,13 @@ import { createMCPRag } from '@mcp-rag/client';
 import { openai } from '@ai-sdk/openai';
 import neo4j from 'neo4j-driver';
 
-// Initialize with Neo4j driver and model
 const rag = createMCPRag({
   model: openai('gpt-4'),
   neo4j: driver,
   tools: {
     // Your MCP tools here
   },
+  openaiApiKey: process.env.OPENAI_API_KEY,
 });
 
 // Sync tools to Neo4j
@@ -257,7 +230,6 @@ await rag.sync();
 // Generate text with automatic tool selection
 const result = await rag.generateText({
   prompt: 'create an issue about the bug',
-  maxActiveTools: 10, // Default is 10
 });
 ```
 
@@ -265,7 +237,7 @@ The client uses OpenAI's `text-embedding-3-small` model (1536 dimensions) for ge
 
 ## The Sync Process
 
-The `sync()` method is where the indexing magic happens:
+The `sync()` method is where the indexing happens:
 
 1. **Creates Vector Index:** Sets up a Neo4j vector index for cosine similarity search with 1536 dimensions
 
@@ -280,21 +252,95 @@ The `sync()` method is where the indexing magic happens:
 
 The sync process is required before first use and should be called again if you modify your toolset with `addTool()` or `removeTool()`.
 
-## Vector Index Configuration
+## Toolset Hashes
 
-The implementation creates a Neo4j vector index using cosine similarity:
+Hashes uniquely identify toolset versions for change detection and multi-version support.
 
-```cypher
-CREATE VECTOR INDEX tool_vector_index IF NOT EXISTS
-FOR (t:Tool)
-ON t.embedding
-OPTIONS {indexConfig: {
-  `vector.dimensions`: 1536,
-  `vector.similarity_function`: 'cosine'
-}}
+### How Hashes Work
+
+1. **Serialization** – Tools are deep-cloned (excluding `execute` functions)
+2. **Sorting** – Tools sorted by name, all nested keys sorted recursively
+3. **Hashing** – JSON string passed to hash function
+
+```typescript
+// Hash changes when tools change
+const hash1 = rag.getToolsetHash();
+rag.addTool('newTool', myTool);
+const hash2 = rag.getToolsetHash(); // Different from hash1
 ```
 
-The 1536 dimensions match OpenAI's `text-embedding-3-small` model, ensuring compatibility between query embeddings and indexed tool embeddings.
+The default hash uses a bitwise function returning `toolset-<hex>`. You can provide a custom hash function for browser environments:
+
+```typescript
+const rag = createMCPRag({
+  // ...
+  hashFunction: (input) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuffer))
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
+  },
+});
+```
+
+### Hash Properties
+
+- **Deterministic** – Same toolset always produces same hash
+- **Order-independent** – Tool/property order doesn't affect hash
+- **Change-sensitive** – Any definition change produces different hash
+
+## Migrations
+
+Migration syncs tool definitions to Neo4j, creating the graph structure for vector search.
+
+### Migration Flow
+
+1. **Check** – Determines if migration needed (hash exists in Neo4j?)
+2. **Index** – Creates vector index (1536 dimensions, cosine similarity)
+3. **Embed** – Generates embeddings for tools, parameters, return types
+4. **Store** – Creates graph structure in Neo4j
+
+### Custom Migration Hooks
+
+```typescript
+const rag = createMCPRag({
+  // ...
+  migration: {
+    shouldMigrate: async (session) => {
+      const result = await session.run('...');
+      return result.records.length === 0;
+    },
+    migrate: async (session, tools) => {
+      // Your migration code
+    },
+    onBeforeMigrate: async (statements) => {
+      console.log('Migrating:', statements.length, 'statements');
+      return statements;
+    },
+  },
+});
+```
+
+### Multi-Version Toolsets
+
+Multiple toolset versions can coexist in Neo4j:
+
+```typescript
+// Version 1
+await rag.sync();
+const v1Hash = rag.getToolsetHash();
+
+// Version 2 (both exist in DB)
+rag.addTool('newTool', myTool);
+await rag.sync();
+const v2Hash = rag.getToolsetHash();
+
+// Manage versions
+const v1Info = await rag.getToolsetByHash(v1Hash);
+await rag.deleteToolsetByHash(v1Hash); // Clean up old version
+```
 
 ## The generateText Flow
 
@@ -360,10 +406,8 @@ The monorepo includes:
 Installation:
 
 ```bash
-# Install the client package
 npm install @mcp-rag/client @ai-sdk/openai neo4j-driver ai
 
-# Set your OpenAI API key
 export OPENAI_API_KEY=your_key_here
 ```
 
@@ -373,37 +417,18 @@ You'll need:
 - An OpenAI API key for embeddings (uses `text-embedding-3-small`)
 - Your MCP tools as AI SDK tool definitions
 
-## Implementation Patterns
-
-The codebase demonstrates several key patterns:
-
-**Batch Tool Creation:** The `createDecomposedTools` method processes multiple tools in a single transaction with proper parameter prefixing to avoid name collisions.
-
-**Parameterized Queries:** All Cypher queries use Neo4j parameters instead of string interpolation to prevent injection attacks.
-
-**Debug Logging:** Extensive debug statements for both Cypher queries and parameters (with embedding truncation for readability).
-
-**Type Safety:** Uses Neo4j integer types via `neo4j.int()` for numeric parameters to avoid type mismatches.
-
-**Idempotent Operations:** Uses `MERGE` instead of `CREATE` to ensure tools can be re-indexed without duplicates.
-
 ## Running the Benchmarks
 
 To see the system in action:
 
 ```bash
-# Clone the repository
 git clone https://github.com/rocket-connect/mcp-rag
-
-# Install dependencies
 pnpm install
 
-# Set up environment variables
 export OPENAI_API_KEY=your_key_here
 export NEO4J_URI=neo4j://localhost:7687
 export NEO4J_PASSWORD=your_password
 
-# Run benchmarks
 cd benchmarks
 pnpm test
 ```
@@ -438,17 +463,11 @@ This example is perfect for understanding how semantic search reduces context ov
 
 The MCP ecosystem is evolving rapidly. Potential future enhancements include:
 
-**Custom Embedding Models:** Support for other embedding providers beyond OpenAI
-
-**Adaptive Tool Selection:** Dynamically adjusting the number of retrieved tools based on query complexity
-
-**Context-Aware Filtering:** Using conversation history to bias tool selection toward recently used tools
-
-**Tool Composition:** Chaining multiple tools together based on semantic relationships in the graph
-
-**Multi-Vector Search:** Combining tool embeddings with parameter and return type embeddings for more nuanced matching
-
-The intersection of vector search, graph databases, and AI agents is still in early stages, but the patterns emerging show clear benefits for managing large tool sets.
+- **Custom Embedding Models:** Support for other embedding providers beyond OpenAI
+- **Adaptive Tool Selection:** Dynamically adjusting the number of retrieved tools based on query complexity
+- **Context-Aware Filtering:** Using conversation history to bias tool selection toward recently used tools
+- **Tool Composition:** Chaining multiple tools together based on semantic relationships in the graph
+- **Multi-Vector Search:** Combining tool embeddings with parameter and return type embeddings for more nuanced matching
 
 ## Final Thoughts
 
@@ -458,8 +477,21 @@ Semantic tool discovery via vector search addresses this elegantly. The implemen
 
 MCP-RAG provides a production-ready foundation for building AI agents that can scale to hundreds of tools while maintaining fast responses and accurate tool selection. It's a drop-in replacement for the AI SDK that adds semantic intelligence without changing your existing workflow.
 
+## Try It Yourself
+
+Ready to see semantic tool selection in action? Our free, open-source [MCP Connect Inspector UI](https://mcp.rconnect.tech) lets you experiment with vector search directly in your browser.
+
+**[Follow our step-by-step guide](/blog/semantic-tool-selection-guide)** to:
+
+- Connect your MCP servers
+- Set up Neo4j for vector search
+- Watch semantic selection reduce tokens in real-time
+- Compare before/after metrics on your own queries
+
 ## Resources
 
+- **Try Now:** [MCP Connect Inspector UI](https://mcp.rconnect.tech)
+- **Step-by-Step Guide:** [Semantic Tool Selection in Practice](/blog/semantic-tool-selection-guide)
 - **GitHub:** [rocket-connect/mcp-rag](https://github.com/rocket-connect/mcp-rag)
 - **Twitter:** [@dan_starns](https://twitter.com/dan_starns)
 - **LinkedIn:** [Daniel Starns](https://www.linkedin.com/in/danielstarns/)
